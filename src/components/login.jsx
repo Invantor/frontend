@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import baseAPI from "../api/api";
 
+import Button from '@mui/material/Button';
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +49,7 @@ const Login = () => {
           />
         </div>
         <div>
-          <button type="submit">Login</button>
+          <Button type="submit">Login</Button>
         </div>
       </form>
     </>
