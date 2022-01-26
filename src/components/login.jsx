@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import baseAPI from "../api/api";
 
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -24,33 +26,32 @@ const Login = () => {
 
   return (
     <>
-      <div>Sign In Page</div>
-      <form onSubmit={requestToLogin}>
+      <form onSubmit={requestToLogin}>  
+        <Stack spacing={2}>
         <div>
-          <label htmlFor="username">Username</label>
-          <input
+          <TextField id="outlined-basic" label="Username" variant="outlined"
             type="text"
             name="username"
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
             }}
-          />
+            />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
-          <input
+          <TextField id="outlined-basic" label="Password" variant="outlined"
             type="password"
             name="password"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-          />
+            />
         </div>
         <div>
-          <Button type="submit">Login</Button>
+          <Button variant="outlined" type="submit">Login</Button>
         </div>
+        </Stack>
       </form>
     </>
   );
