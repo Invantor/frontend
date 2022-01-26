@@ -10,19 +10,21 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { blue } from '@mui/material/colors';
+import { indigo, red } from '@mui/material/colors';
+
+const color = red[600];
 
 const Nav = () => {
   return (
     <nav>
       <AppBar>
-        <Tab lable="Home" to="/"/>
-        <Tab lable="" to="/" component={Link}/>
-        <Tab lable="Alcohols" to="/alcohols"  component={Link}/>
-        <Tab lable="Mixers" to="/mixers"  component={Link}/>
-        <Tab lable="Drinks" to="/drinks"  component={Link}/>
-        <Tab lable="Sign In" to="/signin"  component={Link}/>
-        <Tab label="Item Three" to="/" component={Link}/>
+        <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+          <Tab color="red" label="Home" to="/" component={Link}/>
+          <Tab color="red" label="Alcohols" to="/alcohols"  component={Link}/>
+          <Tab color="red" label="Mixers" to="/mixers"  component={Link}/>
+          <Tab color="red" label="Drinks" to="/drinks"  component={Link}/>
+          <Tab color="red" label="Sign In" to="/signin"  component={Link}/>
+        </Box>
       </AppBar>
     </nav>
   );
