@@ -1,11 +1,21 @@
 import axios from "axios";
 
-// const signin = async () => {
-//   try {
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+const signin = async (username, password) => {
+  try {
+    const { status, data } = await axios.post("/api/auth/sign_in", {
+      username,
+      password,
+    });
+    if (status === 200 || status === 201) {
+      console.log(data);
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const getAlcohols = async () => {
   try {
@@ -21,6 +31,7 @@ const getAlcohols = async () => {
   }
 };
 
+
 const getMixers = async () => {
   try {
     const { status, data } = await axios.get("/api/mixers");
@@ -35,4 +46,5 @@ const getMixers = async () => {
   }
 };
 
-export default { getAlcohols, getMixers};
+export default { getAlcohols, getMixers, signin};
+
