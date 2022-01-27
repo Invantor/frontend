@@ -1,10 +1,14 @@
 import React from "react";
-import { getAlcohols } from "../services/alcoholServices";
+import api from "../api/api";
+import ShowAlcohols from '../components/showAlcohols'
 
+    
 const Alcohols = () => {
+  
+
   return (
     <>
-      <div>Alcohols Page</div>;<button onClick={getAlcohols}></button>
+      <ShowAlcohols/>
     </>
   );
 };
