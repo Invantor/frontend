@@ -25,9 +25,14 @@ const Login = () => {
       });
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const user = await api.signin(username, password);
+  };
+
   return (
     <>
-      <form onSubmit={requestToLogin}>
+      <form onSubmit={handleLogin}>
         <Stack spacing={2}>
           <div>
             <TextField
