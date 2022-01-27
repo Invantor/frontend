@@ -1,7 +1,10 @@
 import React from "react";
+import ShowMixers from '../components/showMixers'
 
 const Mixers = () => {
-  return <div>Mixers Page</div>;
+  return (
+   <ShowMixers></ShowMixers>
+  )
 };
 
 export default Mixers;
