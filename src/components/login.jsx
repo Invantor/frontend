@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import baseAPI from "../api/api";
+import api from "../api/api";
 
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,7 +11,8 @@ const Login = () => {
 
   const requestToLogin = (e) => {
     e.preventDefault();
-    baseAPI
+    api
+      .baseAPI()
       .post("/api/auth/sign_in", {
         username: username,
         password: password,
@@ -26,31 +27,39 @@ const Login = () => {
 
   return (
     <>
-      <form onSubmit={requestToLogin}>  
+      <form onSubmit={requestToLogin}>
         <Stack spacing={2}>
-        <div>
-          <TextField id="outlined-basic" label="Username" variant="outlined"
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
+          <div>
+            <TextField
+              id="outlined-basic"
+              label="Username"
+              variant="outlined"
+              type="text"
+              name="username"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
             />
-        </div>
-        <div>
-          <TextField id="outlined-basic" label="Password" variant="outlined"
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+          </div>
+          <div>
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              variant="outlined"
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
-        </div>
-        <div>
-          <Button variant="outlined" type="submit">Login</Button>
-        </div>
+          </div>
+          <div>
+            <Button variant="outlined" type="submit">
+              Login
+            </Button>
+          </div>
         </Stack>
       </form>
     </>
