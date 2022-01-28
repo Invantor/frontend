@@ -6,6 +6,7 @@ const signin = async (username, password) => {
       username,
       password,
     });
+    console.log(status);
     if (status === 200 || status === 201) {
       return data;
     } else {
