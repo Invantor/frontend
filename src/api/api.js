@@ -31,6 +31,25 @@ const getAlcohols = async () => {
   }
 };
 
+const createAlcohols = async (creatorUserId) => {
+	try {
+		const { status, data } = await axios.post("/api/quiz.create", {
+			creatorUserId,
+			title: "",
+		});
+
+		if (status === 201) {
+			return data;
+		} else {
+			return null;
+		}
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
+
+
 
 const getMixers = async () => {
   try {
