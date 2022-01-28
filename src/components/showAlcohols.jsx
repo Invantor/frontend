@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import api from "../api/api";
 import axios from "axios";
 
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import { TextField } from "@mui/material";
 
 const ShowAlcohols = () => {
@@ -29,6 +29,7 @@ const handleChange = (e) => {
     setAlcohols(data);
   }, []);
 
+<<<<<<< HEAD
 const handleSubmit = (e) => {
     e.preventDefault();
     const drinkData = {
@@ -40,6 +41,16 @@ const handleSubmit = (e) => {
     console.log(drinkData);
     setNewAlcohols({name: '', volumeInMl: ''})
   }
+=======
+  const alcoholList = alcohols.map((alcohol) => {
+    return (
+      <div key={alcohol.id}>
+        <h2>{alcohol.name}</h2>
+        <h3>{alcohol.volume_in_ml}</h3>
+      </div>
+    );
+  });
+>>>>>>> 2a03a7524c3248731bd10f8ee4c11964f1ba3308
 
   return (
     <>
@@ -60,6 +71,7 @@ const handleSubmit = (e) => {
         </div>
         <button type="submit">Submit</button>
       </form>
+<<<<<<< HEAD
       {/* <Typography> Alcohol's List </Typography> */}
       {/* <TableContainer> */}
       {/* <Table sx={{ minWidth: 650 }} aria-label="simple table"> */}
@@ -79,9 +91,30 @@ const handleSubmit = (e) => {
         {/* </TableBody> */}
       {/* </Table> */}
     {/* </TableContainer> */}
+=======
+      <Typography> Alcohol's List </Typography>
+      <TableContainer>
+        {/* <TableContainer component={Paper}> */}
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Volume in ml</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {alcohols.map((alcohol) => (
+              <TableRow key={alcohol.name}>
+                <TableCell>{alcohol.name}</TableCell>
+                <TableCell>{alcohol.volume_in_ml}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+>>>>>>> 2a03a7524c3248731bd10f8ee4c11964f1ba3308
     </>
   );
 };
 
 export default ShowAlcohols;
-

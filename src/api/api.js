@@ -6,8 +6,8 @@ const signin = async (username, password) => {
       username,
       password,
     });
+    console.log(status);
     if (status === 200 || status === 201) {
-      console.log(data);
       return data;
     } else {
       return null;
@@ -31,6 +31,7 @@ const getAlcohols = async () => {
   }
 };
 
+<<<<<<< HEAD
 // const createAlcohols = async (creatorUserId) => {
 // 	try {
 // 		const { status, data } = await axios.post("/api/alcohols.create", {
@@ -48,8 +49,25 @@ const getAlcohols = async () => {
 // 		return null;
 // 	}
 // };
+=======
+const createAlcohols = async (creatorUserId) => {
+  try {
+    const { status, data } = await axios.post("/api/quiz.create", {
+      creatorUserId,
+      title: "",
+    });
 
-
+    if (status === 201) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+>>>>>>> 2a03a7524c3248731bd10f8ee4c11964f1ba3308
 
 const getMixers = async () => {
   try {
@@ -65,5 +83,18 @@ const getMixers = async () => {
   }
 };
 
-export default { getAlcohols, getMixers, signin};
+const getDrinks = async () => {
+  try {
+    const { status, data } = await axios.get("/api/drinks");
+    if (status === 200) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
+export default { getAlcohols, getMixers, signin, getDrinks };

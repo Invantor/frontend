@@ -1,39 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 
+import GlobalContext from "../context/globalContext";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
 const Login = () => {
+  const { global, setGlobal } = useContext(GlobalContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  // const requestToLogin = (e) => {
-  //   e.preventDefault();
-  //   api
-  //     .baseAPI()
-  //     .post("/api/auth/sign_in", {
-  //       username: username,
-  //       password: password,
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-  const requestToLogin = () => {
-    let user = JSON.parse(sessionStorage.getItem('data'));
-    const token = user.data.id;
-    console.log
-  }
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     const user = await api.signin(username, password);
+    if (user) {
+      setGlobal({ ...global, user });
+      navigate("/");
+    }
   };
+
+  console.log(global);
 
   return (
     <>
@@ -41,7 +31,7 @@ const Login = () => {
         <Stack spacing={2}>
           <div>
             <TextField
-              id="outlined-basic"
+              id="outlined-basic1"
               label="Username"
               variant="outlined"
               type="text"
@@ -70,9 +60,6 @@ const Login = () => {
               Login
             </Button>
           </div>
-          <Button variant="outlined" type="submit" onClick={requestToLogin}>
-              Login
-            </Button>
         </Stack>
       </form>
     </>
