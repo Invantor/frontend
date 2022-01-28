@@ -11,7 +11,7 @@ const Home = () => {
     const mixers = await api.getMixers();
 
     setGlobal({ ...global, alcohols, mixers });
-  });
+  }, []);
 
   return (
     <>

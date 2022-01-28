@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import api from "../api/api";
 
+import Typography from "@mui/material/Typography";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+
 const ShowMixers = () => {
   const [mixers, setMixers] = useState([]);
 
@@ -9,20 +17,29 @@ const ShowMixers = () => {
     setMixers(initialData);
   }, []);
 
-  const mixersList = mixers.map((mixer) => {
-    return (
-      <div key={mixer.id}>
-        <h2>{mixer.name}</h2>
-        <h3>{mixer.volume_in_ml}</h3>
-      </div>
-    );
-  });
-
   return (
-    <div>
-      <h2>Mixer's List</h2>
-      {mixersList}
-    </div>
+    <>
+      <Typography> Mixers's List </Typography>
+      <TableContainer>
+        {/* <TableContainer component={Paper}> */}
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Volume in ml</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {mixers.map((mixer) => (
+              <TableRow key={mixer.name}>
+                <TableCell>{mixer.name}</TableCell>
+                <TableCell>{mixer.volume_in_ml}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 };
 

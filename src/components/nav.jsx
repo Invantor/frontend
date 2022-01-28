@@ -8,7 +8,7 @@ import Tab from '@mui/material/Tab';
 const Nav = () => {
   return (
     <nav>
-      <AppBar>
+      <AppBar position="sticky">
         <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
           <Tab color="red" label="Home" to="/" component={Link}/>
           <Tab color="red" label="Alcohols" to="/alcohols"  component={Link}/>
