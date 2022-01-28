@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../api/api";
 
-const ShowAlcohols = () => {
+const ShowMixers = () => {
   const [mixers, setMixers] = useState([]);
 
   useEffect(async () => {
@@ -11,7 +11,7 @@ const ShowAlcohols = () => {
 
   const mixersList = mixers.map((mixer) => {
     return (
-      <div>
+      <div key={mixer.id}>
         <h2>{mixer.name}</h2>
         <h3>{mixer.volume_in_ml}</h3>
       </div>
@@ -26,5 +26,4 @@ const ShowAlcohols = () => {
   );
 };
 
-export default ShowAlcohols;
-
+export default ShowMixers;

@@ -7,7 +7,6 @@ const signin = async (username, password) => {
       password,
     });
     if (status === 200 || status === 201) {
-      console.log(data);
       return data;
     } else {
       return null;
@@ -31,7 +30,6 @@ const getAlcohols = async () => {
   }
 };
 
-
 const getMixers = async () => {
   try {
     const { status, data } = await axios.get("/api/mixers");
@@ -46,5 +44,18 @@ const getMixers = async () => {
   }
 };
 
-export default { getAlcohols, getMixers, signin};
+const getDrinks = async () => {
+  try {
+    const { status, data } = await axios.get("/api/drinks");
+    if (status === 200) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
+export default { getAlcohols, getMixers, signin, getDrinks };

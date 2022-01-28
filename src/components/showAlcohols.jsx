@@ -11,7 +11,7 @@ const ShowAlcohols = () => {
 
   const alcoholList = alcohols.map((alcohol) => {
     return (
-      <div>
+      <div key={alcohol.id}>
         <h2>{alcohol.name}</h2>
         <h3>{alcohol.volume_in_ml}</h3>
       </div>
@@ -27,4 +27,3 @@ const ShowAlcohols = () => {
 };
 
 export default ShowAlcohols;
-
