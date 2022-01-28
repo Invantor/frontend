@@ -9,21 +9,26 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const requestToLogin = (e) => {
-    e.preventDefault();
-    api
-      .baseAPI()
-      .post("/api/auth/sign_in", {
-        username: username,
-        password: password,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const requestToLogin = (e) => {
+  //   e.preventDefault();
+  //   api
+  //     .baseAPI()
+  //     .post("/api/auth/sign_in", {
+  //       username: username,
+  //       password: password,
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+  const requestToLogin = () => {
+    let user = JSON.parse(sessionStorage.getItem('data'));
+    const token = user.data.id;
+    console.log
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -65,6 +70,9 @@ const Login = () => {
               Login
             </Button>
           </div>
+          <Button variant="outlined" type="submit" onClick={requestToLogin}>
+              Login
+            </Button>
         </Stack>
       </form>
     </>
