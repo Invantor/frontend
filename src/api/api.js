@@ -31,23 +31,23 @@ const getAlcohols = async () => {
   }
 };
 
-const createAlcohols = async (creatorUserId) => {
-	try {
-		const { status, data } = await axios.post("/api/quiz.create", {
-			creatorUserId,
-			title: "",
-		});
+// const createAlcohols = async (creatorUserId) => {
+// 	try {
+// 		const { status, data } = await axios.post("/api/alcohols.create", {
+// 			name: "",
+// 			volumeInMl: "",
+// 		});
 
-		if (status === 201) {
-			return data;
-		} else {
-			return null;
-		}
-	} catch (error) {
-		console.error(error);
-		return null;
-	}
-};
+// 		if (status === 201) {
+// 			return data;
+// 		} else {
+// 			return null;
+// 		}
+// 	} catch (error) {
+// 		console.error(error);
+// 		return null;
+// 	}
+// };
 
 
 
