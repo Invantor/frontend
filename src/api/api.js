@@ -31,25 +31,6 @@ const getAlcohols = async () => {
   }
 };
 
-<<<<<<< HEAD
-// const createAlcohols = async (creatorUserId) => {
-// 	try {
-// 		const { status, data } = await axios.post("/api/alcohols.create", {
-// 			name: "",
-// 			volumeInMl: "",
-// 		});
-
-// 		if (status === 201) {
-// 			return data;
-// 		} else {
-// 			return null;
-// 		}
-// 	} catch (error) {
-// 		console.error(error);
-// 		return null;
-// 	}
-// };
-=======
 const createAlcohols = async (creatorUserId) => {
   try {
     const { status, data } = await axios.post("/api/quiz.create", {
@@ -67,7 +48,6 @@ const createAlcohols = async (creatorUserId) => {
     return null;
   }
 };
->>>>>>> 2a03a7524c3248731bd10f8ee4c11964f1ba3308
 
 const getMixers = async () => {
   try {
