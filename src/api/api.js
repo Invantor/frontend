@@ -31,13 +31,17 @@ const getAlcohols = async () => {
   }
 };
 
-const createAlcohols = async (name, volume_in_ml, user_id) => {
+const createAlcohols = async (name, volume_in_ml, user_id, jwt) => {
   try {
-    const { status, data } = await axios.post("/api/alcohols", {
-      name: name,
-      volume_in_ml: volume_in_ml,
-      user_id: user_id,
-    });
+    const { status, data } = await axios.post(
+      "/api/alcohols",
+      {
+        name: name,
+        volume_in_ml: volume_in_ml,
+        user_id: user_id,
+      },
+      { headers: { Authorization: jwt } }
+    );
 
     if (status === 201) {
       return data;

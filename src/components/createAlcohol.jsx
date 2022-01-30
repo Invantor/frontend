@@ -27,7 +27,8 @@ const CreateAlcohols = (props) => {
     const newAlcohol = await api.createAlcohols(
       newAlcoholName,
       newVolumeInMl,
-      global.user.user_id
+      global.user.user_id,
+      global.user.jwt
     );
 
     setAlcohols([...alcohols, newAlcohol]);
