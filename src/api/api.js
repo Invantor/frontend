@@ -33,10 +33,10 @@ const getAlcohols = async () => {
 
 const createAlcohols = async (name, volume_in_ml, user_id) => {
   try {
-    const { status, data } = await axios.post("/api/alcohols.create", {
+    const { status, data } = await axios.post("/api/alcohols", {
       name: name,
       volume_in_ml: volume_in_ml,
-      user_id: user_id
+      user_id: user_id,
     });
 
     if (status === 201) {

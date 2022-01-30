@@ -27,7 +27,7 @@ const Mixers = () => {
       setMixers(initialMixers);
       setLoading(false);
     }
-  }, [mixers]);
+  }, []);
 
   // Loading function from UI (the circle that spins when its still loading)
   const isLoading = () => {

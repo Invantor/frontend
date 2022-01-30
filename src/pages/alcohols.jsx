@@ -9,19 +9,20 @@ import api from "../api/api";
 import CreateAlcohols from "../components/createAlcohol";
 import ShowAlcohols from "../components/showAlcohols";
 
-
 //   useEffect(async () => {
-  //     const data = await api.getAlcohols();
-  //     setAlcohols(data);
-  //   }, [])
-  
-  const Alcohols = () => {
-    const { global, setGlobal } = useContext(GlobalContext);
-    const [alcohols, setAlcohols] = useState([]);
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    
-    useEffect(async () => {
+//     const data = await api.getAlcohols();
+//     setAlcohols(data);
+//   }, [])
+
+const Alcohols = () => {
+  const { global, setGlobal } = useContext(GlobalContext);
+  const [alcohols, setAlcohols] = useState([]);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  console.log(alcohols);
+
+  useEffect(async () => {
     if (!global.user) {
       navigate("/signin");
       /// QUESTION FOR ANINDHA, why does the return jsx display for a split second before the redirect to signin?
@@ -33,29 +34,28 @@ import ShowAlcohols from "../components/showAlcohols";
     }
   }, []);
 
-    const isLoading = () => {
-      return (
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <CircularProgress color="secondary" />
-        </Box>
-    );
-  }
-
+  const isLoading = () => {
     return (
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <CircularProgress color="secondary" />
+      </Box>
+    );
+  };
+
+  return (
     <>
       <div>
-      {!loading ? (
-        <>
-        <CreateAlcohols/>
-        <ShowAlcohols alcohols={alcohols}/>
-        </>
-      ) : (
-        isLoading()
-      )}
-    </div>
+        {!loading ? (
+          <>
+            <CreateAlcohols setAlcohols={setAlcohols} alcohols={alcohols} />
+            <ShowAlcohols alcohols={alcohols} />
+          </>
+        ) : (
+          isLoading()
+        )}
+      </div>
     </>
   );
 };
-
 
 export default Alcohols;

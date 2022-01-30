@@ -14,33 +14,27 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { TextField } from "@mui/material";
 
-const CreateAlcohols = () => {
+const CreateAlcohols = (props) => {
+  const { global } = useContext(GlobalContext);
+  const { alcohols, setAlcohols } = props;
 
-const { global } = useContext(GlobalContext);
-const [newAlcohols, setNewAlcohols] = useState({name: '', volume_in_ml: ''});
-const [newAlcoholName, setNewAlcoholName] = useState('');
-const [newVolumeInMl, setNewVolumeInMl ] = useState('');
+  const [newAlcoholName, setNewAlcoholName] = useState("");
+  const [newVolumeInMl, setNewVolumeInMl] = useState("");
 
-  
-const handleChange = (e) => {
-  const name = e.target.name
-  const value = e.target.value
-  setNewAlcohols({...newAlcohols, [name]: value})
-}
+  alcohols.forEach((alcohol) => console.log(alcohol.name));
 
-console.log(newAlcoholName);
-console.log(newVolumeInMl);
-
-const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // const drinkData = {
-    //   name: newAlcohols.name,
-    //   volumeInMl: newAlcohols.volumeInMl,
-    //   userId: global.user.user_id
-    // };
-    api.createAlcohols(newAlcoholName, newVolumeInMl, global.user.user_id)
-    setNewAlcohols({name: '', volume_in_ml: ''})
-  }
+
+    const newAlcohol = await api.createAlcohols(
+      newAlcoholName,
+      newVolumeInMl,
+      global.user.user_id
+    );
+
+    const updatedAlcoholList = { ...alcohols, newAlcohol };
+    setAlcohols({ updatedAlcoholList });
+  };
 
   return (
     <>
@@ -48,20 +42,25 @@ const handleSubmit = (e) => {
       <form className="form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name</label>
-          <input 
-          name="name"
-          // value={newAlcohols.name}
-          value={newAlcoholName}
-          // onChange={handleChange}
-          onChange={(e) => {setNewAlcoholName(e.target.value)}}
+          <input
+            name="name"
+            // value={newAlcohols.name}
+            value={newAlcoholName}
+            // onChange={handleChange}
+            onChange={(e) => {
+              setNewAlcoholName(e.target.value);
+            }}
           />
           <label htmlFor="volume in ml">Volume in ml</label>
           <input
-          name="volumeInMl" 
-          // value={newAlcohols.volume_in_ml}
-          value={newVolumeInMl}
-          // onChange={handleChange}/>
-          onChange={(e) => {setNewVolumeInMl(e.target.value)}}/>
+            name="volumeInMl"
+            // value={newAlcohols.volume_in_ml}
+            value={newVolumeInMl}
+            // onChange={handleChange}/>
+            onChange={(e) => {
+              setNewVolumeInMl(e.target.value);
+            }}
+          />
         </div>
         <button type="submit">Submit</button>
       </form>
