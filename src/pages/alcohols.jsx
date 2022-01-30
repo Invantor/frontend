@@ -1,12 +1,10 @@
 import React from "react";
-import ShowAlcohols from '../components/showAlcohols'
-    
-const Alcohols = () => {
-  
+import ShowAlcohols from "../components/showAlcohols";
 
+const Alcohols = () => {
   return (
     <>
-      <ShowAlcohols/>
+      <ShowAlcohols />
     </>
   );
 };

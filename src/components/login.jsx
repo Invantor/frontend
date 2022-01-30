@@ -23,8 +23,6 @@ const Login = () => {
     }
   };
 
-  console.log(global);
-
   return (
     <>
       <form onSubmit={handleLogin}>
