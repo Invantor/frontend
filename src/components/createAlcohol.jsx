@@ -30,7 +30,6 @@ const CreateAlcohols = (props) => {
       global.user.user_id,
       global.user.jwt
     );
-
     setAlcohols([...alcohols, newAlcohol]);
     setNewAlcoholName("");
     setNewVolumeInMl("");
