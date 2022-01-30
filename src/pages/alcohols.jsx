@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from "@mui/material/Typography";
 
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
@@ -40,8 +44,22 @@ import ShowAlcohols from "../components/showAlcohols";
       <div>
       {!loading ? (
         <>
-        <CreateAlcohols/>
-        <ShowAlcohols alcohols={alcohols}/>
+        <Accordion>
+          <AccordionSummary>
+            <Typography>Create</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <CreateAlcohols/>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary>
+            <Typography>Show</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <ShowAlcohols alcohols={alcohols}/>
+          </AccordionDetails>
+        </Accordion>
         </>
       ) : (
         isLoading()
