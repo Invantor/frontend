@@ -23,18 +23,17 @@ const CreateAlcohols = (props) => {
     setNewAlcohols({ ...newAlcohols, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newAlcohol =  api.createAlcohols(
+    const newAlcohol = await api.createAlcohols(
       newAlcohols.name,
       newAlcohols.volumeInMl,
       global.user.user_id,
-      gobal.user.jwt
+      global.user.jwt
     );
-    
-    setAlcohols([...alcohols,newAlcohol])
-    setNewAlcohols({ name: "", volumeInMl: "" });
 
+    setAlcohols([...alcohols, newAlcohol]);
+    setNewAlcohols({ name: "", volumeInMl: "" });
   };
 
   return (

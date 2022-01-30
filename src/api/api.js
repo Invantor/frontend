@@ -39,8 +39,8 @@ const createAlcohols = async (name, volume_in_ml, user_id, jwt) => {
         name: name,
         volume_in_ml: volume_in_ml,
         user_id: user_id,
-      }
-      // { headers: { Authorization: jwt } }
+      },
+      { headers: { Authorization: jwt } }
     );
 
     if (status === 201) {
