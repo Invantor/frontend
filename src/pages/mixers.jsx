@@ -23,7 +23,7 @@ const Mixers = () => {
       setMixers(initialMixers);
       setLoading(false);
     }
-  }, []);
+  }, [mixers]);
 
   const isLoading = () => {
     return (
@@ -33,30 +33,16 @@ const Mixers = () => {
     );
   };
 
-  const renderMixers = () => {
-    return mixers.map((mixer) => {
-      <div>
-        <h1>{mixer.name}</h1>
-        <h1>{mixer.volume_in_ml}</h1>
-      </div>;
-    });
-  };
-
-  const showMixers = () => {
-    mixers.map((mixer) => {
-      return (
-        <div>
-          <h1>{mixer.name}</h1>
-          <h1>{mixer.volume_in_ml}</h1>
-        </div>
-      );
-    });
-  };
-
   return (
     <div>
-      {/* <ShowMixers /> */}
-      {!loading ? renderMixers() : isLoading()}
+      {!loading ? (
+        <>
+          <ShowMixers mixers={mixers} />
+          {/* <CreateMixer setMixer={setMixers} /> */}
+        </>
+      ) : (
+        isLoading()
+      )}
     </div>
   );
 };

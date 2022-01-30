@@ -9,13 +9,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-const ShowMixers = () => {
-  const [mixers, setMixers] = useState([]);
-
-  useEffect(async () => {
-    const initialData = await api.getMixers();
-    setMixers(initialData);
-  }, []);
+const ShowMixers = (props) => {
+  const { mixers } = props;
 
   return (
     <>
