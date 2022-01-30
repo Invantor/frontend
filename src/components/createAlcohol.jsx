@@ -30,13 +30,9 @@ const handleChange = (e) => {
 
 const handleSubmit = (e) => {
     e.preventDefault();
-    // const drinkData = {
-    //   name: newAlcohols.name,
-    //   volumeInMl: newAlcohols.volumeInMl,
-    //   userId: global.user.user_id
-    // };
-    api.createAlcohols(newAlcoholName, newVolumeInMl, global.user.user_id)
-    setNewAlcohols({name: '', volume_in_ml: ''})
+    api.createAlcohols(newAlcohols.name, newAlcohols.volumeInMl, global.user.user_id)
+    console.log(drinkData);
+    setNewAlcohols({name: '', volumeInMl: ''})
   }
 
   return (
@@ -47,18 +43,19 @@ const handleSubmit = (e) => {
           <label htmlFor="name">Name</label>
           <input 
           name="name"
-          // value={newAlcohols.name}
-          value={newAlcoholName}
-          // onChange={handleChange}
-          onChange={(e) => {setNewAlcoholName(e.target.value)}}
+          value={newAlcohols.name}
+          // value={newAlcoholName}
+          onChange={handleChange}
+          // onChange={(e) => {setNewAlcoholName(e.target.value)}}
           />
           <label htmlFor="volume in ml">Volume in ml</label>
           <input
           name="volumeInMl" 
-          // value={newAlcohols.volume_in_ml}
-          value={newVolumeInMl}
-          // onChange={handleChange}/>
-          onChange={(e) => {setNewVolumeInMl(e.target.value)}}/>
+          value={newAlcohols.volumeInMl}
+          // value={newVolumeInMl}
+          onChange={handleChange}
+          />
+          {/* onChange={(e) => {setNewVolumeInMl(e.target.value)} */}
         </div>
         <button type="submit">Submit</button>
       </form>
