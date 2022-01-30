@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
 
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
 import CreateAlcohols from "../components/createAlcohol";
 import ShowAlcohols from "../components/showAlcohols";
-
-//   useEffect(async () => {
-//     const data = await api.getAlcohols();
-//     setAlcohols(data);
-//   }, [])
 
 const Alcohols = () => {
   const { global, setGlobal } = useContext(GlobalContext);
@@ -45,8 +44,22 @@ const Alcohols = () => {
       <div>
         {!loading ? (
           <>
-            <CreateAlcohols setAlcohols={setAlcohols} alcohols={alcohols} />
-            <ShowAlcohols alcohols={alcohols} />
+            <Accordion>
+              <AccordionSummary>
+                <Typography>Create</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <CreateAlcohols />
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary>
+                <Typography>Show</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <ShowAlcohols alcohols={alcohols} />
+              </AccordionDetails>
+            </Accordion>
           </>
         ) : (
           isLoading()
