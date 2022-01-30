@@ -25,12 +25,16 @@ const CreateAlcohols = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    api.createAlcohols(
+    const newAlcohol =  api.createAlcohols(
       newAlcohols.name,
       newAlcohols.volumeInMl,
-      global.user.user_id
+      global.user.user_id,
+      gobal.user.jwt
     );
+    
+    setAlcohols([...alcohols,newAlcohol])
     setNewAlcohols({ name: "", volumeInMl: "" });
+
   };
 
   return (
