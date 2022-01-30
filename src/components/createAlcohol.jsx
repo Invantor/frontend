@@ -39,11 +39,15 @@ const CreateAlcohols = (props) => {
       <form className="form" onSubmit={handleSubmit}>
         <div>
           <Typography htmlFor="name">Name</Typography>
-          <Input name="name" value={newAlcohols.name} onChange={handleChange} />
+          <Input
+            name="name"
+            value={newAlcohols.name ?? ""}
+            onChange={handleChange}
+          />
           <Typography htmlFor="volume in ml">Volume in ml</Typography>
           <Input
             name="volumeInMl"
-            value={newAlcohols.volumeInMl}
+            value={newAlcohols.volumeInMl ?? ""}
             onChange={handleChange}
           />
         </div>
