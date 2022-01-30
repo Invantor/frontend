@@ -10,7 +10,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 const ShowMixers = (props) => {
+  // Moved up to parent component (pages/mixers.jsx) as state of all mixers is being captured in the parent component so we dont need to set a local state on this child component.
+
+  // const [mixers, setMixers] = useState([]);
   const { mixers } = props;
+
+  // Lifted State up to parent component whic his the pages/mixers.jsx component for shared state management.
+
+  // useEffect(async () => {
+  //   const initialData = await api.getMixers();
+  //   setMixers(initialData);
+  // }, []);
 
   return (
     <>

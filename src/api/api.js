@@ -63,6 +63,15 @@ const getMixers = async () => {
   }
 };
 
+const createMixer = async () => {
+  try {
+    const { status, data } = await axios.post;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 const getDrinks = async () => {
   try {
     const { status, data } = await axios.get("/api/drinks");
