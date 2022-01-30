@@ -8,12 +8,6 @@ import GlobalContext from "../context/globalContext";
 import api from "../api/api";
 import CreateAlcohols from "../components/createAlcohol";
 import ShowAlcohols from "../components/showAlcohols";
-
-
-//   useEffect(async () => {
-  //     const data = await api.getAlcohols();
-  //     setAlcohols(data);
-  //   }, [])
   
   const Alcohols = () => {
     const { global, setGlobal } = useContext(GlobalContext);

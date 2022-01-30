@@ -28,9 +28,6 @@ const handleChange = (e) => {
   setNewAlcohols({...newAlcohols, [name]: value})
 }
 
-console.log(newAlcoholName);
-console.log(newVolumeInMl);
-
 const handleSubmit = (e) => {
     e.preventDefault();
     // const drinkData = {
