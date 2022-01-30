@@ -10,7 +10,7 @@ import ShowMixers from "../components/showMixers";
 
 const Mixers = () => {
   // Imported global state to mixers component to allow for authentication checking
-  const { global, setGlobal } = useContext(GlobalContext);
+  const { global } = useContext(GlobalContext);
   // Setting mixers state at parent level as child components will need access to the same shared state. If state is defined on child level, we cant pass state back up to parent for other components to use
   const [mixers, setMixers] = useState([]);
   const navigate = useNavigate();
