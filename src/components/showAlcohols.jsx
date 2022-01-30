@@ -12,54 +12,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { TextField } from "@mui/material";
 
-const ShowAlcohols = () => {
-  const [alcohols, setAlcohols] = useState([]);
-  const [newAlcohols, setNewAlcohols] = useState({name: '', volumeInMl: ''});
-
-
-
-const handleChange = (e) => {
-  const name = e.target.name
-  const value = e.target.value
-  setNewAlcohols({...newAlcohols, [name]: value})
-}
-
-  useEffect(async () => {
-    const data = await api.getAlcohols();
-    setAlcohols(data);
-  }, []);
-
-const handleSubmit = (e) => {
-    e.preventDefault();
-    const drinkData = {
-      name: newAlcohols.name,
-      volumeInMl: newAlcohols.volumeInMl
-    };
-    api.createAlcohols
-    axios.post("/api/alcohols.create", drinkData)
-    console.log(drinkData);
-    setNewAlcohols({name: '', volumeInMl: ''})
-  }
+const ShowAlcohols = (props) => {
+ 
+const { alcohols } = props 
 
   return (
     <>
-      <Typography> Add Alcohol </Typography>
-      <form className="form" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input 
-          name="name"
-          value={newAlcohols.name}
-          onChange={handleChange}
-          />
-          <label htmlFor="volume in ml">Volume in ml</label>
-          <input
-          name="volumeInMl" 
-          value={newAlcohols.volumeInMl}
-          onChange={handleChange}/>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
       <Typography> Alcohol's List </Typography>
       <TableContainer>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

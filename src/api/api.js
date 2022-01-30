@@ -31,11 +31,12 @@ const getAlcohols = async () => {
   }
 };
 
-const createAlcohols = async (creatorUserId) => {
+const createAlcohols = async (name, volume_in_ml, user_id) => {
   try {
-    const { status, data } = await axios.post("/api/quiz.create", {
-      creatorUserId,
-      title: "",
+    const { status, data } = await axios.post("/api/alcohols.create", {
+      name: name,
+      volume_in_ml: volume_in_ml,
+      user_id: user_id
     });
 
     if (status === 201) {
@@ -86,4 +87,4 @@ const getDrinks = async () => {
   }
 };
 
-export default { getAlcohols, getMixers, signin, getDrinks };
+export default { getAlcohols, getMixers, signin, getDrinks, createAlcohols };
