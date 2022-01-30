@@ -20,8 +20,6 @@ const Alcohols = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  console.log(alcohols);
-
   useEffect(async () => {
     if (!global.user) {
       navigate("/signin");

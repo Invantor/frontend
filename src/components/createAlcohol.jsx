@@ -21,8 +21,6 @@ const CreateAlcohols = (props) => {
   const [newAlcoholName, setNewAlcoholName] = useState("");
   const [newVolumeInMl, setNewVolumeInMl] = useState("");
 
-  alcohols.forEach((alcohol) => console.log(alcohol.name));
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -32,8 +30,9 @@ const CreateAlcohols = (props) => {
       global.user.user_id
     );
 
-    const updatedAlcoholList = { ...alcohols, newAlcohol };
-    setAlcohols({ updatedAlcoholList });
+    setAlcohols([...alcohols, newAlcohol]);
+    setNewAlcoholName("");
+    setNewVolumeInMl("");
   };
 
   return (
