@@ -3,9 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
 
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
+
+import CreateMixers from "../components/createMixer";
 import ShowMixers from "../components/showMixers";
 
 const Mixers = () => {
@@ -38,6 +44,14 @@ const Mixers = () => {
     );
   };
 
+  const updateMixer = (index, updatedMixer) => {
+    const updated = mixers.map((mixer, i) => {
+      return i === index ? updatedMixer : mixer;
+    });
+
+    setMixers(updated);
+  };
+
   // Ternery Operator: if loading is false then render <ShowMixers/> and <CreateMixer/> child component
   // The ShowMixer/> component is passed the mixer's array this allows the ShowMixer's component to still behave as originally intended
   // The only thing that has changed from before is that instead of ShowMixers getting its own  mixer state locally via API call, this parent component does the API call for all its children components and then
@@ -48,8 +62,22 @@ const Mixers = () => {
     <div>
       {!loading ? (
         <>
-          <ShowMixers mixers={mixers} />
-          {/* <CreateMixer setMixer={setMixers} /> */}
+          <Accordion>
+            <AccordionSummary>
+              <Typography>Create</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <CreateMixers mixers={mixers} setMixers={setMixers} />
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary>
+              <Typography>Show</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <ShowMixers mixers={mixers} updateMixer={updateMixer} />
+            </AccordionDetails>
+          </Accordion>
         </>
       ) : (
         isLoading()
