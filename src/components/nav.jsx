@@ -13,8 +13,7 @@ const Nav = () => {
     <nav>
       <AppBar position="sticky">
         <Box
-          sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
-        >
+          sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
           <Tab color="red" label="Home" to="/" component={Link} />
           <Tab color="red" label="Alcohols" to="/alcohols" component={Link} />
           <Tab color="red" label="Mixers" to="/mixers" component={Link} />

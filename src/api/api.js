@@ -31,7 +31,7 @@ const getAlcohols = async () => {
   }
 };
 
-const createAlcohols = async (name, volume_in_ml, user_id, jwt) => {
+const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) => {
   try {
     const { status, data } = await axios.post(
       "/api/alcohols",
@@ -42,15 +42,14 @@ const createAlcohols = async (name, volume_in_ml, user_id, jwt) => {
       },
       { headers: { Authorization: jwt } }
     );
-
     if (status === 201) {
-      return data;
+      success(data);
     } else {
-      return null;
+      console.error("bad data");
+      // console.log(data);
     }
-  } catch (error) {
-    console.error(error);
-    return null;
+  } catch (e) {
+    return error(e.response.data.error);
   }
 };
 

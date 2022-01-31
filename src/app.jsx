@@ -1,13 +1,14 @@
 import useLocalStorage from "use-local-storage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/home";
 import Alcohols from "./pages/alcohols";
 import Drinks from "./pages/drinks";
+import GlobalContext from "./context/globalContext";
+import Home from "./pages/home";
 import Mixers from "./pages/mixers";
 import Nav from "./components/nav";
 import Signin from "./pages/signin";
-import GlobalContext from "./context/globalContext";
+
 
 function App() {
   const [global, setGlobal] = useLocalStorage("global", {});
@@ -25,6 +26,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </GlobalContext.Provider>
+   
   );
 }
 
