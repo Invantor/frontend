@@ -68,9 +68,23 @@ const getMixers = async () => {
   }
 };
 
-const createMixer = async () => {
+const createMixer = async (name, volume_in_ml, user_id, jwt) => {
   try {
-    const { status, data } = await axios.post;
+    const { status, data } = await axios.post(
+      "/api/mixers",
+      {
+        name: name,
+        volume_in_ml: volume_in_ml,
+        user_id: user_id,
+      },
+      { headers: { Authorization: jwt } }
+    );
+
+    if (status === 201) {
+      return data;
+    } else {
+      return null;
+    }
   } catch (error) {
     console.error(error);
     return null;
@@ -91,4 +105,11 @@ const getDrinks = async () => {
   }
 };
 
-export default { getAlcohols, getMixers, signin, getDrinks, createAlcohols };
+export default {
+  getAlcohols,
+  getMixers,
+  signin,
+  getDrinks,
+  createAlcohols,
+  createMixer,
+};
