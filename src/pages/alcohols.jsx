@@ -39,7 +39,7 @@ const Alcohols = () => {
       </Box>
     );
   };
-
+console.log(global)
   return (
     <>
       <div>
