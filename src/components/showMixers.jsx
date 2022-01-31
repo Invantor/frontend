@@ -12,9 +12,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { TextField } from "@mui/material";
 
-const ShowMixers = (props) => {
-  const { mixers } = props;
+import EditMixer from "./editMixer";
 
+const ShowMixers = ({ mixers, updateMixer }) => {
   return (
     <>
       <Typography> Mixers's List </Typography>
@@ -27,10 +27,16 @@ const ShowMixers = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {mixers.map((mixer) => (
-              <TableRow key={mixer.name}>
+            {mixers.map((mixer, i) => (
+              <TableRow key={i}>
                 <TableCell>{mixer.name}</TableCell>
                 <TableCell>{mixer.volume_in_ml}</TableCell>
+                <TableCell>
+                  <EditMixer
+                    mixer={mixer}
+                    updateMixer={(updatedMixer) => updateMixer(i, updatedMixer)}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

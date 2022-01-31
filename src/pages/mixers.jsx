@@ -44,6 +44,14 @@ const Mixers = () => {
     );
   };
 
+  const updateMixer = (index, updatedMixer) => {
+    const updated = mixers.map((mixer, i) => {
+      return i === index ? updatedMixer : mixer;
+    });
+
+    setMixers(updated);
+  };
+
   // Ternery Operator: if loading is false then render <ShowMixers/> and <CreateMixer/> child component
   // The ShowMixer/> component is passed the mixer's array this allows the ShowMixer's component to still behave as originally intended
   // The only thing that has changed from before is that instead of ShowMixers getting its own  mixer state locally via API call, this parent component does the API call for all its children components and then
@@ -67,7 +75,7 @@ const Mixers = () => {
               <Typography>Show</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <ShowMixers mixers={mixers} />
+              <ShowMixers mixers={mixers} updateMixer={updateMixer} />
             </AccordionDetails>
           </Accordion>
         </>
