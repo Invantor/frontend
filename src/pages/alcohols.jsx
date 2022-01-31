@@ -49,7 +49,7 @@ const Alcohols = () => {
                 <Typography>Create</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <CreateAlcohols />
+                <CreateAlcohols alcohols={alcohols} setAlcohols={setAlcohols} />
               </AccordionDetails>
             </Accordion>
             <Accordion>
