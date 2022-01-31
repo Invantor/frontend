@@ -16,7 +16,6 @@ import ShowAlcohols from "../components/showAlcohols";
 const Alcohols = () => {
   const { global, setGlobal } = useContext(GlobalContext);
   const [alcohols, setAlcohols] = useState([]);
-  console.log(alcohols);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -39,7 +38,6 @@ const Alcohols = () => {
       </Box>
     );
   };
-console.log(global)
   return (
     <>
       <div>
