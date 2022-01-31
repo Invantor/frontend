@@ -14,8 +14,7 @@ import { TextField } from "@mui/material";
 
 import EditMixer from "./editMixer";
 
-const ShowMixers = (props) => {
-  const { mixers, updateMixer } = props;
+const ShowMixers = ({ mixers, updateMixer }) => {
   return (
     <>
       <Typography> Mixers's List </Typography>

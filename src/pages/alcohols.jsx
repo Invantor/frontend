@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
+
 import CreateAlcohols from "../components/createAlcohol";
 import ShowAlcohols from "../components/showAlcohols";
 
@@ -38,6 +39,16 @@ const Alcohols = () => {
       </Box>
     );
   };
+
+  const updateAlcohol = (index, updatedAlcohol) => {
+    const updated = alcohols.map((alcohol, i) => {
+      return i === index ? updatedAlcohol : alcohol;
+    });
+
+    setAlcohols(updated);
+  };
+
+
   return (
     <>
       <div>
@@ -56,7 +67,7 @@ const Alcohols = () => {
                 <Typography>Show</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <ShowAlcohols alcohols={alcohols} />
+                <ShowAlcohols alcohols={alcohols} updateAlcohol={updateAlcohol} />
               </AccordionDetails>
             </Accordion>
           </>

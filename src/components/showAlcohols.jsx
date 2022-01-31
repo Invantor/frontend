@@ -12,9 +12,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { TextField } from "@mui/material";
 
-const ShowAlcohols = (props) => {
-  const { alcohols } = props;
+import EditAlcohol from "./editAlcohol";
 
+const ShowAlcohols = ({ alcohols, updateAlcohol }) => {
   return (
     <>
       <Typography> Alcohol's List </Typography>
@@ -27,10 +27,16 @@ const ShowAlcohols = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {alcohols.map((alcohol) => (
-              <TableRow key={alcohol.name}>
+            {alcohols.map((alcohol, i) => (
+              <TableRow key={i}>
                 <TableCell>{alcohol.name}</TableCell>
                 <TableCell>{alcohol.volume_in_ml}</TableCell>
+                <TableCell>
+                  <EditAlcohol
+                    alcohol={alcohol}
+                    updateAlcohol={(updatedAlcohol) => updateAlcohol(i, updatedAlcohol)}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
