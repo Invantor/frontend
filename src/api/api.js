@@ -46,7 +46,6 @@ const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) 
       success(data);
     } else {
       console.error("bad data");
-      // console.log(data);
     }
   } catch (e) {
     return error(e.response.data.error);
