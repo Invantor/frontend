@@ -26,7 +26,7 @@ const style = {
 
 const EditAlcohol = ({ alcohol, updateAlcohol }) => {
   const { global } = useContext(GlobalContext);
-
+  const [error, setError] = useState(null);
   const { id, name, volume_in_ml, critical_volume, user_id } = alcohol;
 
   const [open, setOpen] = React.useState(false);
@@ -41,15 +41,17 @@ const EditAlcohol = ({ alcohol, updateAlcohol }) => {
       volume_in_ml,
       critical_volume,
       user_id,
-      global.user.jwt
+      global.user.jwt,
+      (newAlcohol) => updateAlcohol(newAlcohol), 
+      (errorMessage) => setError(errorMessage),
+      
     );
 
-    console.log(updatedAlcohol);
-    updateAlcohol(updatedAlcohol);
+    // updateAlcohol(updatedAlcohol);
   };
-
   return (
     <div>
+      <h1>{error}</h1>
       <Button onClick={handleOpen}>Edit</Button>
       <Modal
         open={open}

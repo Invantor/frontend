@@ -41,14 +41,82 @@ const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) 
         user_id: user_id,
       },
       { headers: { Authorization: jwt } }
-    );
-    if (status === 201) {
-      success(data);
-    } else {
-      console.error("bad data");
+      );
+      if (status === 201) {
+        success(data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return error(e.response.data.error);
     }
-  } catch (e) {
-    return error(e.response.data.error);
+  };
+  
+  const editAlcohol = async (id, name, volume_in_ml, critical_volume, user_id, jwt, success, error) => {
+    try {
+      const { status, data } = await axios.put(
+        `/api/alcohols/${id}`,
+        { 
+          name, volume_in_ml,
+          critical_volume, user_id },
+        { headers: { Authorization: jwt } }
+        );
+        console.log("STATUS",status)
+        console.log("DATA",data)
+        if (status === 200) {
+          success(data);
+        } else {
+          return null;
+        }
+      } catch (e) {
+      return error(e.response.data.error);
+    }
+  }; 
+
+  // const editAlcohol = async (
+  //   id,
+  //   name,
+  //   volume_in_ml,
+  //   critical_volume,
+  //   user_id,
+  //   jwt
+  // ) => {
+  //   try {
+  //     console.log("in api call", id);
+  //     const { status, data } = await axios.put(
+  //       `/api/alcohols/${id}`,
+  //       { name, volume_in_ml, critical_volume, user_id },
+  //       { headers: { Authorization: jwt } }
+  //     );
+  
+  //     if (status === 200) {
+  //       return data;
+  //     } else {
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     return null;
+  //   }
+  // };
+
+const deleteAlcohols = async () => {
+  try {
+    const { status, data } = await axios.get(`/api/alcohols/${id}`);
+
+    // const res = await axios.delete('https://httpbin.org/delete', { data: { answer: 42 } });
+
+  //   var response = await axios.delete(`${this.apiUrl}/api/competition/${competitionId}/expel/${teamId}`,{
+  //  headers:{"Authorization": `Bearer ${this.token}`}});
+
+    if (status === 200) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 };
 
@@ -116,32 +184,6 @@ const editMixer = async (
   }
 };
 
-const editAlcohol = async (
-  id,
-  name,
-  volume_in_ml,
-  critical_volume,
-  user_id,
-  jwt
-) => {
-  try {
-    console.log("in api call", id);
-    const { status, data } = await axios.put(
-      `/api/alcohols/${id}`,
-      { name, volume_in_ml, critical_volume, user_id },
-      { headers: { Authorization: jwt } }
-    );
-
-    if (status === 200) {
-      return data;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
 
 const getDrinks = async () => {
   try {
@@ -165,5 +207,7 @@ export default {
   createAlcohols,
   createMixer,
   editMixer,
-  editAlcohol
+  editAlcohol,
+  deleteAlcohols
+
 };

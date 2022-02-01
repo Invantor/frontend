@@ -13,8 +13,13 @@ import TableRow from "@mui/material/TableRow";
 import { TextField } from "@mui/material";
 
 import EditAlcohol from "./editAlcohol";
+import DeleteAlcohol from "./deleteAlcohol";
+
 
 const ShowAlcohols = ({ alcohols, updateAlcohol }) => {
+  
+  console.log("logging alcohols:", alcohols)
+
   return (
     <>
       <Typography> Alcohol's List </Typography>
@@ -36,6 +41,7 @@ const ShowAlcohols = ({ alcohols, updateAlcohol }) => {
                     alcohol={alcohol}
                     updateAlcohol={(updatedAlcohol) => updateAlcohol(i, updatedAlcohol)}
                   />
+                  <DeleteAlcohol/>
                 </TableCell>
               </TableRow>
             ))}

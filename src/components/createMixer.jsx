@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 
-const CreateAlcohols = (props) => {
+const CreateMixers = (props) => {
   const { mixers, setMixers } = props;
 
   const { global } = useContext(GlobalContext);
@@ -60,4 +60,4 @@ const CreateAlcohols = (props) => {
   );
 };
 
-export default CreateAlcohols;
+export default CreateMixers;

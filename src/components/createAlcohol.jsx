@@ -10,15 +10,12 @@ import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import Login from "./login";
 
-const CreateMixers = (props) => {
+const CreateAlcohol = (props) => {
   const { alcohols, setAlcohols } = props;
   const [error, setError] = useState(null);
 
   const { global } = useContext(GlobalContext);
-  const [newAlcohols, setNewAlcohols] = useState({
-    name: "",
-    volume_in_ml: "",
-  });
+  const [newAlcohols, setNewAlcohols] = useState({name: "",volume_in_ml: ""});
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -36,7 +33,6 @@ const CreateMixers = (props) => {
       (newAlcohol) => setAlcohols([...alcohols, newAlcohol]), 
       (errorMessage) => setError(errorMessage)
       );
-    
 
     setNewAlcohols({ name: "", volumeInMl: "" });
   };
@@ -66,4 +62,4 @@ const CreateMixers = (props) => {
   );
 };
 
-export default CreateMixers;
+export default CreateAlcohol;
