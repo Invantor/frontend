@@ -24,13 +24,21 @@ const ShowMixers = ({ mixers, updateMixer }) => {
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Volume in ml</TableCell>
+              <TableCell>Critical Volume</TableCell>
+              <TableCell>Stock Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {mixers.map((mixer, i) => (
-              <TableRow key={i}>
+              <TableRow key={i} hover>
                 <TableCell>{mixer.name}</TableCell>
                 <TableCell>{mixer.volume_in_ml}</TableCell>
+                <TableCell>{mixer.critical_volume}</TableCell>
+                <TableCell>
+                  {mixer.critical_volume > mixer.volume_in_ml
+                    ? "Low Stock"
+                    : "In Stock"}
+                </TableCell>
                 <TableCell>
                   <EditMixer
                     mixer={mixer}

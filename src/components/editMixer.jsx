@@ -26,25 +26,31 @@ const style = {
 
 const EditMixer = ({ mixer, updateMixer }) => {
   const { global } = useContext(GlobalContext);
-
   const { id, name, volume_in_ml, critical_volume, user_id } = mixer;
+
+  const [formData, setFormData] = useState({});
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData({ ...formData, [name]: value });
+    console.log(formData);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedMixer = await api.editMixer(
       id,
-      e.target.name.value,
-      volume_in_ml,
-      critical_volume,
+      formData.name,
+      formData.volumeInMl,
+      formData.criticalVolume,
       user_id,
       global.user.jwt
     );
-
-    console.log(updatedMixer);
     updateMixer(updatedMixer);
   };
 
@@ -64,9 +70,32 @@ const EditMixer = ({ mixer, updateMixer }) => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography> */}
-          <form onSubmit={handleSubmit}>
+          {/* <form onSubmit={handleSubmit}>
             <label htmlFor="name">Name</label>
             <input id={id} type="text" name="name" defaultValue={name}></input>
+            <button>Submit</button>
+          </form> */}
+          <form className="form" onSubmit={handleSubmit}>
+            <Typography htmlFor="name">Name</Typography>
+            <Input name="name" defaultValue={name} onChange={handleChange} />
+            <Typography htmlFor="volumeInMl">Volume in ml</Typography>
+            <Input
+              name="volumeInMl"
+              defaultValue={volume_in_ml}
+              onChange={handleChange}
+            />
+            <Typography htmlFor="criticalVolume">Critical Volume</Typography>
+            <Input
+              name="criticalVolume"
+              defaultValue={critical_volume}
+              onChange={handleChange}
+            />
+            {/* <Typography htmlFor="volume_in_ml">Volume mL</Typography>
+            <Input
+              name="volume_in_ml"
+              defaultValue={name}
+              onChange={handleChange}
+            /> */}
             <button>Submit</button>
           </form>
         </Box>
