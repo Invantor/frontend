@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
 
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import Login from "./login";
 
-const CreateMixers = (props) => {
+const CreateAlcohols = (props) => {
   const { alcohols, setAlcohols } = props;
   const [error, setError] = useState(null);
 
@@ -33,17 +33,16 @@ const CreateMixers = (props) => {
       newAlcohols.volumeInMl,
       global.user.user_id,
       global.user.jwt,
-      (newAlcohol) => setAlcohols([...alcohols, newAlcohol]), 
+      (newAlcohol) => setAlcohols([...alcohols, newAlcohol]),
       (errorMessage) => setError(errorMessage)
-      );
-    
+    );
 
     setNewAlcohols({ name: "", volumeInMl: "" });
   };
 
   return (
     <>
-      { <Alert severity="error">{error}</Alert>}
+      {<Alert severity="error">{error}</Alert>}
       <Typography> Add Alcohol </Typography>
       <form className="form" onSubmit={handleSubmit}>
         <div>
@@ -66,4 +65,4 @@ const CreateMixers = (props) => {
   );
 };
 
-export default CreateMixers;
+export default CreateAlcohols;
