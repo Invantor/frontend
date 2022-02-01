@@ -104,11 +104,9 @@ const editMixer = async (
   user_id,
   jwt,
   success,
-  successMessage,
   error
 ) => {
   try {
-    console.log("in api call", id);
     const { status, data } = await axios.put(
       `/api/mixers/${id}`,
       { name, volume_in_ml, critical_volume, user_id },
@@ -116,13 +114,12 @@ const editMixer = async (
     );
 
     if (status === 200) {
-      success(data);
-      successMessage(data);
+      console.log("API Success Call", data.message);
+      success(data.data, data.message);
     } else {
-      return null;
+      return error(error);
     }
   } catch (e) {
-    console.log(e.response.data.error);
     return error(e.response.data.error);
   }
 };

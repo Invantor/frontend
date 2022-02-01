@@ -32,44 +32,58 @@ const EditMixer = ({ mixer, updateMixer }) => {
   const { global } = useContext(GlobalContext);
   const { id, name, volume_in_ml, critical_volume, user_id } = mixer;
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-    console.log(formData);
-  };
-  const handleClose = () => {
-    setOpen(false);
-    setBannerOpen(false);
-    console.log(formData);
-  };
+
   const [bannerOpen, setBannerOpen] = useState(false);
   const [bannerDisplay, setBannerDisplay] = useState({
     variant: "outlined",
-    severity: "success",
-    message: "Updated Successfully",
+    severity: "",
+    message: "",
   });
+
+  const handleBannerOpen = (severity, message) => {
+    setBannerDisplay({
+      ...bannerDisplay,
+      severity: severity,
+      message: message,
+    });
+    setBannerOpen(true);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setBannerOpen(false);
+    setError(null);
+    setSuccess(null);
+    setFormData({});
+  };
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setFormData({ ...formData, [name]: value });
-    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedMixer = await api.editMixer(
+    await api.editMixer(
       id,
       formData.name,
       formData.volumeInMl,
       formData.criticalVolume,
       user_id,
       global.user.jwt,
-      (data) => updateMixer(data.data),
-      (message) => setSuccess(message.message),
-      (errorMessage) => setError(errorMessage)
+      (data, message) => {
+        updateMixer(data);
+        handleBannerOpen("success", message);
+      },
+      (errorMessage) => {
+        handleBannerOpen("error", errorMessage);
+      }
     );
     setFormData({});
   };
