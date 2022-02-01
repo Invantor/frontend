@@ -42,9 +42,8 @@ const EditAlcohol = ({ alcohol, updateAlcohol }) => {
       critical_volume,
       user_id,
       global.user.jwt,
-      (newAlcohol) => updateAlcohol(newAlcohol), 
+      (newAlcohol) => updateAlcohol(newAlcohol),
       (errorMessage) => setError(errorMessage),
-      
     );
 
     // updateAlcohol(updatedAlcohol);

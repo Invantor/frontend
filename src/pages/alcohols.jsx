@@ -48,6 +48,11 @@ const Alcohols = () => {
     setAlcohols(updated);
   };
 
+  const deleteAlcohol = (id) => {
+    const toBeDeleted = alcohols.find(alcohol => alcohol.id === id)
+    console.log(toBeDeleted);
+    }
+
 
   return (
     <>
@@ -67,7 +72,7 @@ const Alcohols = () => {
                 <Typography>Show</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <ShowAlcohols alcohols={alcohols} updateAlcohol={updateAlcohol} />
+                <ShowAlcohols alcohols={alcohols} updateAlcohol={updateAlcohol} deleteAlcohol={deleteAlcohol()} setAlcohols={setAlcohols}  />
               </AccordionDetails>
             </Accordion>
           </>

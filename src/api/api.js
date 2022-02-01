@@ -48,6 +48,7 @@ const createAlcohols = async (
         user_id: user_id,
       },
       { headers: { Authorization: jwt } }
+<<<<<<< HEAD
       );
       if (status === 201) {
         success(data);
@@ -56,6 +57,13 @@ const createAlcohols = async (
       }
     } catch (e) {
       return error(e.response.data.error);
+=======
+    );
+    if (status === 201) {
+      success(data);
+    } else {
+      error("Bad Data");
+>>>>>>> origin/edit-mixer-v1.2
     }
   };
   
@@ -74,17 +82,19 @@ const createAlcohols = async (
         } else {
           return null;
         }
-      } catch (e) {
+      } 
+      catch (e) {
       return error(e.response.data.error);
     }
   }; 
 
-const deleteAlcohols = async () => {
+const deleteAlcohol = async (id, jwt, success, error) => {
   try {
-    const { status, data } = await axios.get(`/api/alcohols/${id}`);
+    const {status, data} = await axios.delete(
+      `/api/alcohols/${id}`,
+       { headers: { Authorization: jwt }});
 
-    // const res = await axios.delete('https://httpbin.org/delete', { data: { answer: 42 } });
-
+<<<<<<< HEAD
   //   var response = await axios.delete(`${this.apiUrl}/api/competition/${competitionId}/expel/${teamId}`,{
   //  headers:{"Authorization": `Bearer ${this.token}`}});
 
@@ -100,6 +110,15 @@ const deleteAlcohols = async () => {
   } catch (error) {
     console.error(error);
     return null;
+=======
+    if (status === ok) {
+          success(data);
+        } else {
+          return null;
+        }
+      } catch (e) {
+      return null
+>>>>>>> 6bdf2984a2a23763f29c6de052a8281a95643f2a
   }
 };
 
@@ -192,8 +211,15 @@ export default {
   editMixer,
   editAlcohol,
 <<<<<<< HEAD
+<<<<<<< HEAD
   deleteAlcohols
 
 =======
 >>>>>>> 6f5cbea9f81054dc397a2497cbf634cb69e49bbb
+=======
+  deleteAlcohol
+
+=======
+>>>>>>> origin/edit-mixer-v1.2
+>>>>>>> 6bdf2984a2a23763f29c6de052a8281a95643f2a
 };
