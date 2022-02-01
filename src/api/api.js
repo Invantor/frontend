@@ -61,8 +61,7 @@ const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) 
           critical_volume, user_id },
         { headers: { Authorization: jwt } }
         );
-        console.log("STATUS",status)
-        console.log("DATA",data)
+        
         if (status === 200) {
           success(data);
         } else {
