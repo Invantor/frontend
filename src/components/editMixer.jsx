@@ -29,15 +29,27 @@ const style = {
 };
 
 const EditMixer = ({ mixer, updateMixer }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [bannerOpen, setBannerOpen] = React.useState(true);
-
   const { global } = useContext(GlobalContext);
   const { id, name, volume_in_ml, critical_volume, user_id } = mixer;
-
   const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+    console.log(formData);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    setBannerOpen(false);
+    console.log(formData);
+  };
+  const [bannerOpen, setBannerOpen] = useState(false);
+  const [bannerDisplay, setBannerDisplay] = useState({
+    variant: "outlined",
+    severity: "success",
+    message: "Updated Successfully",
+  });
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -54,10 +66,12 @@ const EditMixer = ({ mixer, updateMixer }) => {
       formData.volumeInMl,
       formData.criticalVolume,
       user_id,
-      global.user.jwt
+      global.user.jwt,
+      (data) => updateMixer(data.data),
+      (message) => setSuccess(message.message),
+      (errorMessage) => setError(errorMessage)
     );
-
-    if (updatedMixer) updateMixer(updatedMixer);
+    setFormData({});
   };
 
   return (
@@ -70,17 +84,29 @@ const EditMixer = ({ mixer, updateMixer }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-            {name}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography> */}
-          {/* <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Name</label>
-            <input id={id} type="text" name="name" defaultValue={name}></input>
-            <button>Submit</button>
-          </form> */}
+          <Box sx={{ width: "100%" }}>
+            <Collapse in={bannerOpen}>
+              <Alert
+                variant={bannerDisplay.variant}
+                severity={bannerDisplay.severity}
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setBannerOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+                sx={{ mb: 2 }}
+              >
+                {bannerDisplay.message}
+              </Alert>
+            </Collapse>
+          </Box>
           <form className="form" onSubmit={handleSubmit}>
             <Typography htmlFor="name">Name</Typography>
             <Input name="name" defaultValue={name} onChange={handleChange} />
@@ -96,44 +122,8 @@ const EditMixer = ({ mixer, updateMixer }) => {
               defaultValue={critical_volume}
               onChange={handleChange}
             />
-            {/* <Typography htmlFor="volume_in_ml">Volume mL</Typography>
-            <Input
-              name="volume_in_ml"
-              defaultValue={name}
-              onChange={handleChange}
-            /> */}
             <button>Submit</button>
           </form>
-          <Box sx={{ width: "100%" }}>
-            <Collapse in={bannerOpen}>
-              <Alert
-                action={
-                  <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                      setBannerOpen(false);
-                    }}
-                  >
-                    <CloseIcon fontSize="inherit" />
-                  </IconButton>
-                }
-                sx={{ mb: 2 }}
-              >
-                Close me!
-              </Alert>
-            </Collapse>
-            <Button
-              disabled={bannerOpen}
-              variant="outlined"
-              onClick={() => {
-                setBannerOpen(true);
-              }}
-            >
-              Re-open
-            </Button>
-          </Box>
         </Box>
       </Modal>
     </div>

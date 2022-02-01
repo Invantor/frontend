@@ -31,7 +31,14 @@ const getAlcohols = async () => {
   }
 };
 
-const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) => {
+const createAlcohols = async (
+  name,
+  volume_in_ml,
+  user_id,
+  jwt,
+  success,
+  error
+) => {
   try {
     const { status, data } = await axios.post(
       "/api/alcohols",
@@ -45,7 +52,7 @@ const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) 
     if (status === 201) {
       success(data);
     } else {
-      console.error("bad data");
+      error("Bad Data");
     }
   } catch (e) {
     return error(e.response.data.error);
@@ -95,7 +102,10 @@ const editMixer = async (
   volume_in_ml,
   critical_volume,
   user_id,
-  jwt
+  jwt,
+  success,
+  successMessage,
+  error
 ) => {
   try {
     console.log("in api call", id);
@@ -106,13 +116,14 @@ const editMixer = async (
     );
 
     if (status === 200) {
-      return data;
+      success(data);
+      successMessage(data);
     } else {
       return null;
     }
-  } catch (error) {
-    console.error(error);
-    return null;
+  } catch (e) {
+    console.log(e.response.data.error);
+    return error(e.response.data.error);
   }
 };
 
@@ -165,5 +176,5 @@ export default {
   createAlcohols,
   createMixer,
   editMixer,
-  editAlcohol
+  editAlcohol,
 };
