@@ -48,7 +48,6 @@ const createAlcohols = async (
         user_id: user_id,
       },
       { headers: { Authorization: jwt } }
-<<<<<<< HEAD
       );
       if (status === 201) {
         success(data);
@@ -57,13 +56,6 @@ const createAlcohols = async (
       }
     } catch (e) {
       return error(e.response.data.error);
-=======
-    );
-    if (status === 201) {
-      success(data);
-    } else {
-      error("Bad Data");
->>>>>>> origin/edit-mixer-v1.2
     }
   };
   
@@ -192,9 +184,6 @@ export default {
   createMixer,
   editMixer,
   editAlcohol,
-<<<<<<< HEAD
   deleteAlcohol
 
-=======
->>>>>>> origin/edit-mixer-v1.2
 };
