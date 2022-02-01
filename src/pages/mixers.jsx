@@ -52,6 +52,11 @@ const Mixers = () => {
     setMixers(updated);
   };
 
+  const deleteMixer = (id) => {
+    const toBeDeleted = mixers.find(mixer => mixer.id === id)
+    console.log(toBeDeleted);
+  }
+
   // Ternery Operator: if loading is false then render <ShowMixers/> and <CreateMixer/> child component
   // The ShowMixer/> component is passed the mixer's array this allows the ShowMixer's component to still behave as originally intended
   // The only thing that has changed from before is that instead of ShowMixers getting its own  mixer state locally via API call, this parent component does the API call for all its children components and then
@@ -75,7 +80,7 @@ const Mixers = () => {
               <Typography>Show</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <ShowMixers mixers={mixers} updateMixer={updateMixer} />
+              <ShowMixers mixers={mixers} updateMixer={updateMixer} deleteMixer={deleteMixer()} setMixers={setMixers} />
             </AccordionDetails>
           </Accordion>
         </>

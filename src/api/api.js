@@ -85,7 +85,7 @@ const deleteAlcohol = async (id, jwt, success, error) => {
     const {status, data} = await axios.delete(
       `/api/alcohols/${id}`,
        { headers: { Authorization: jwt }});
-       
+
     if (status === ok) {
           success(data);
         } else {
@@ -161,6 +161,23 @@ const editMixer = async (
   }
 };
 
+const deleteMixer = async (id, jwt, success, error) => {
+  try {
+    const {status, data} = await axios.delete(
+      `/api/mixers/${id}`,
+       { headers: { Authorization: jwt }});
+       
+    if (status === ok) {
+          success(data);
+        } else {
+          return null;
+        }
+      } catch (e) {
+      return null
+
+  }
+};
+
 
 const getDrinks = async () => {
   try {
@@ -185,5 +202,6 @@ export default {
   createMixer,
   editMixer,
   editAlcohol,
-  deleteAlcohol
+  deleteAlcohol,
+  deleteMixer,
 };

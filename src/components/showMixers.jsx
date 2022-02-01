@@ -13,8 +13,9 @@ import TableRow from "@mui/material/TableRow";
 import { TextField } from "@mui/material";
 
 import EditMixer from "./editMixer";
+import DeleteMixer from "./deleteMixer";
 
-const ShowMixers = ({ mixers, updateMixer }) => {
+const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
   return (
     <>
       <Typography> Mixers's List </Typography>
@@ -44,6 +45,10 @@ const ShowMixers = ({ mixers, updateMixer }) => {
                     mixer={mixer}
                     updateMixer={(updatedMixer) => updateMixer(i, updatedMixer)}
                   />
+                  <DeleteMixer 
+                    mixer={mixer} 
+                    mixers={mixers}
+                    setMixers={setMixers}/>
                 </TableCell>
               </TableRow>
             ))}
