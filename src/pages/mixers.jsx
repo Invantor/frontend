@@ -11,8 +11,8 @@ import Typography from "@mui/material/Typography";
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
 
-import CreateMixers from "../components/createMixer";
-import ShowMixers from "../components/showMixers";
+import CreateMixers from "../components/mixers/createMixer";
+import ShowMixers from "../components/mixers/showMixers";
 
 const Mixers = () => {
   // Imported global state to mixers component to allow for authentication checking

@@ -13,8 +13,8 @@ import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
 
-import api from "../api/api";
-import GlobalContext from "../context/globalContext";
+import api from "../../api/api";
+import GlobalContext from "../../context/globalContext";
 
 const style = {
   position: "absolute",

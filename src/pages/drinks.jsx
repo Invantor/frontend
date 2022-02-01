@@ -1,5 +1,5 @@
 import React from "react";
-import ShowDrinks from "../components/showDrinks";
+import ShowDrinks from "../components/drinks/showDrinks";
 
 const Drinks = () => {
   return (

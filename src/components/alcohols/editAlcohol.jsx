@@ -9,8 +9,8 @@ import Modal from "@mui/material/Modal";
 import { Stack } from "@mui/material";
 import { Input } from "@mui/material";
 
-import api from "../api/api";
-import GlobalContext from "../context/globalContext";
+import api from "../../api/api";
+import GlobalContext from "../../context/globalContext";
 
 const style = {
   position: "absolute",

@@ -11,8 +11,8 @@ import Typography from "@mui/material/Typography";
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
 
-import CreateAlcohols from "../components/createAlcohol";
-import ShowAlcohols from "../components/showAlcohols";
+import CreateAlcohols from "../components/alcohols/createAlcohol";
+import ShowAlcohols from "../components/alcohols/showAlcohols";
 
 const Alcohols = () => {
   const { global } = useContext(GlobalContext);
