@@ -59,20 +59,27 @@ const createAlcohols = async (
     }
   };
   
-  const editAlcohol = async (id, name, volume_in_ml, critical_volume, user_id, jwt, success, error) => {
+  const editAlcohol = async (
+    id, 
+    name, 
+    volume_in_ml, 
+    critical_volume, 
+    user_id, 
+    jwt, 
+    success, 
+    error
+    ) => {
     try {
       const { status, data } = await axios.put(
         `/api/alcohols/${id}`,
-        { 
-          name, volume_in_ml,
-          critical_volume, user_id },
+        { name, volume_in_ml, critical_volume, user_id },
         { headers: { Authorization: jwt } }
         );
         
         if (status === 200) {
-          success(data);
+          success(data.data, data.message);
         } else {
-          return null;
+          return error(error);
         }
       } 
       catch (e) {

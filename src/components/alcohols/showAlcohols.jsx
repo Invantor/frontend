@@ -27,6 +27,8 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Volume in ml</TableCell>
+              <TableCell>Critical Volume</TableCell>
+              <TableCell>Stock Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -34,6 +36,12 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
               <TableRow key={i}>
                 <TableCell>{alcohol.name}</TableCell>
                 <TableCell>{alcohol.volume_in_ml}</TableCell>
+                <TableCell>{alcohol.critical_volume}</TableCell>
+                <TableCell>
+                  {alcohol.critical_volume > alcohol.volume_in_ml
+                    ? "Low Stock"
+                    : "In Stock"}
+                </TableCell>
                 <TableCell>
                   <EditAlcohol
                     alcohol={alcohol}
