@@ -67,28 +67,25 @@ const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) 
         } else {
           return null;
         }
-      } catch (e) {
+      } 
+      catch (e) {
       return error(e.response.data.error);
     }
   }; 
 
-const deleteAlcohols = async () => {
+const deleteAlcohol = async (id, jwt, success, error) => {
   try {
-    const { status, data } = await axios.get(`/api/alcohols/${id}`);
+    const {status, data} = await axios.delete(
+      `/api/alcohols/${id}`,
+       { headers: { Authorization: jwt }});
 
-    // const res = await axios.delete('https://httpbin.org/delete', { data: { answer: 42 } });
-
-  //   var response = await axios.delete(`${this.apiUrl}/api/competition/${competitionId}/expel/${teamId}`,{
-  //  headers:{"Authorization": `Bearer ${this.token}`}});
-
-    if (status === 200) {
-      return data;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.error(error);
-    return null;
+    if (status === ok) {
+          success(data);
+        } else {
+          return null;
+        }
+      } catch (e) {
+      return null
   }
 };
 
@@ -180,6 +177,6 @@ export default {
   createMixer,
   editMixer,
   editAlcohol,
-  deleteAlcohols
+  deleteAlcohol
 
 };

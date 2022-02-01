@@ -16,9 +16,7 @@ import EditAlcohol from "./editAlcohol";
 import DeleteAlcohol from "./deleteAlcohol";
 
 
-const ShowAlcohols = ({ alcohols, updateAlcohol }) => {
-  
-  console.log("logging alcohols:", alcohols)
+const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
 
   return (
     <>
@@ -41,7 +39,10 @@ const ShowAlcohols = ({ alcohols, updateAlcohol }) => {
                     alcohol={alcohol}
                     updateAlcohol={(updatedAlcohol) => updateAlcohol(i, updatedAlcohol)}
                   />
-                  <DeleteAlcohol/>
+                  <DeleteAlcohol 
+                    alcohol={alcohol} 
+                    alcohols={alcohols}
+                    setAlcohols={setAlcohols}/>
                 </TableCell>
               </TableRow>
             ))}

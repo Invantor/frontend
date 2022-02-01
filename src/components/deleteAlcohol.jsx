@@ -12,11 +12,9 @@ import { Input } from "@mui/material";
 import api from "../api/api";
 import GlobalContext from "../context/globalContext";
 
-const DeleteAlcohol = ({ alcohol, updateAlcohol }) => {
+const DeleteAlcohol = ({ alcohol, alcohols, deleteAlcohol, setAlcohols }) => {
   const { global } = useContext(GlobalContext);
-  
-
-  // const { id, name, volume_in_ml, critical_volume, user_id } = alcohol;
+  const { id } = alcohol;
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -24,14 +22,13 @@ const DeleteAlcohol = ({ alcohol, updateAlcohol }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const deletedAlcohol = await api.deleteAlcohol(
+    const removeAlcohol = await api.deleteAlcohol(
       id,
-      e.target.name.value,
-      user_id,
       global.user.jwt
     );
+    setAlcohols(alcohols.filter((a) => a.id != alcohol.id))
   }
-
+  console.log(alcohol)
   return (
     <div>
       <Button onClick={handleOpen}>Delete</Button>
@@ -43,8 +40,6 @@ const DeleteAlcohol = ({ alcohol, updateAlcohol }) => {
       >
         <Box>
           <form onSubmit={handleSubmit}>
-            {/* <label htmlFor="name">Name</label> */}
-            {/* <input id={id} type="text" name="name" defaultValue={name}></input> */}
             <button>Submit</button>
           </form>
         </Box>
