@@ -85,7 +85,7 @@ const deleteAlcohol = async (id, jwt, success, error) => {
     const {status, data} = await axios.delete(
       `/api/alcohols/${id}`,
        { headers: { Authorization: jwt }});
-
+       
     if (status === ok) {
           success(data);
         } else {
@@ -93,6 +93,7 @@ const deleteAlcohol = async (id, jwt, success, error) => {
         }
       } catch (e) {
       return null
+
   }
 };
 
@@ -185,5 +186,4 @@ export default {
   editMixer,
   editAlcohol,
   deleteAlcohol
-
 };
