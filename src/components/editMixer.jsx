@@ -8,6 +8,10 @@ import { TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { Stack } from "@mui/material";
 import { Input } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import Collapse from "@mui/material/Collapse";
+import CloseIcon from "@mui/icons-material/Close";
 
 import api from "../api/api";
 import GlobalContext from "../context/globalContext";
@@ -25,14 +29,15 @@ const style = {
 };
 
 const EditMixer = ({ mixer, updateMixer }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [bannerOpen, setBannerOpen] = React.useState(true);
+
   const { global } = useContext(GlobalContext);
   const { id, name, volume_in_ml, critical_volume, user_id } = mixer;
 
   const [formData, setFormData] = useState({});
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -51,7 +56,8 @@ const EditMixer = ({ mixer, updateMixer }) => {
       user_id,
       global.user.jwt
     );
-    updateMixer(updatedMixer);
+
+    if (updatedMixer) updateMixer(updatedMixer);
   };
 
   return (
@@ -98,6 +104,36 @@ const EditMixer = ({ mixer, updateMixer }) => {
             /> */}
             <button>Submit</button>
           </form>
+          <Box sx={{ width: "100%" }}>
+            <Collapse in={bannerOpen}>
+              <Alert
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setBannerOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+                sx={{ mb: 2 }}
+              >
+                Close me!
+              </Alert>
+            </Collapse>
+            <Button
+              disabled={bannerOpen}
+              variant="outlined"
+              onClick={() => {
+                setBannerOpen(true);
+              }}
+            >
+              Re-open
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </div>
