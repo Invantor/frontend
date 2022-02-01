@@ -114,7 +114,6 @@ const editMixer = async (
     );
 
     if (status === 200) {
-      console.log("API Success Call", data.message);
       success(data.data, data.message);
     } else {
       return error(error);

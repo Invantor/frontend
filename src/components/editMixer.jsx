@@ -37,7 +37,7 @@ const EditMixer = ({ mixer, updateMixer }) => {
   const [bannerOpen, setBannerOpen] = useState(false);
   const [bannerDisplay, setBannerDisplay] = useState({
     variant: "outlined",
-    severity: "",
+    severity: "success",
     message: "",
   });
 
@@ -57,8 +57,6 @@ const EditMixer = ({ mixer, updateMixer }) => {
   const handleClose = () => {
     setOpen(false);
     setBannerOpen(false);
-    setError(null);
-    setSuccess(null);
     setFormData({});
   };
 
@@ -136,7 +134,9 @@ const EditMixer = ({ mixer, updateMixer }) => {
               defaultValue={critical_volume}
               onChange={handleChange}
             />
-            <button>Submit</button>
+            <div>
+              <Button type="submit">Submit</Button>
+            </div>
           </form>
         </Box>
       </Modal>
