@@ -8,6 +8,10 @@ import { TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { Stack } from "@mui/material";
 import { Input } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import Collapse from "@mui/material/Collapse";
+import CloseIcon from "@mui/icons-material/Close";
 
 import api from "../api/api";
 import GlobalContext from "../context/globalContext";
@@ -27,31 +31,59 @@ const style = {
 const EditMixer = ({ mixer, updateMixer }) => {
   const { global } = useContext(GlobalContext);
   const { id, name, volume_in_ml, critical_volume, user_id } = mixer;
-
   const [formData, setFormData] = useState({});
+  const [open, setOpen] = useState(false);
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [bannerOpen, setBannerOpen] = useState(false);
+  const [bannerDisplay, setBannerDisplay] = useState({
+    variant: "outlined",
+    severity: "success",
+    message: "",
+  });
+
+  const handleBannerOpen = (severity, message) => {
+    setBannerDisplay({
+      ...bannerDisplay,
+      severity: severity,
+      message: message,
+    });
+    setBannerOpen(true);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setBannerOpen(false);
+    setFormData({});
+  };
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setFormData({ ...formData, [name]: value });
-    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedMixer = await api.editMixer(
+    await api.editMixer(
       id,
       formData.name,
       formData.volumeInMl,
       formData.criticalVolume,
       user_id,
-      global.user.jwt
+      global.user.jwt,
+      (data, message) => {
+        updateMixer(data);
+        handleBannerOpen("success", message);
+      },
+      (errorMessage) => {
+        handleBannerOpen("error", errorMessage);
+      }
     );
-    updateMixer(updatedMixer);
+    setFormData({});
   };
 
   return (
@@ -64,17 +96,29 @@ const EditMixer = ({ mixer, updateMixer }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-            {name}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography> */}
-          {/* <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Name</label>
-            <input id={id} type="text" name="name" defaultValue={name}></input>
-            <button>Submit</button>
-          </form> */}
+          <Box sx={{ width: "100%" }}>
+            <Collapse in={bannerOpen}>
+              <Alert
+                variant={bannerDisplay.variant}
+                severity={bannerDisplay.severity}
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setBannerOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+                sx={{ mb: 2 }}
+              >
+                {bannerDisplay.message}
+              </Alert>
+            </Collapse>
+          </Box>
           <form className="form" onSubmit={handleSubmit}>
             <Typography htmlFor="name">Name</Typography>
             <Input name="name" defaultValue={name} onChange={handleChange} />
@@ -90,13 +134,9 @@ const EditMixer = ({ mixer, updateMixer }) => {
               defaultValue={critical_volume}
               onChange={handleChange}
             />
-            {/* <Typography htmlFor="volume_in_ml">Volume mL</Typography>
-            <Input
-              name="volume_in_ml"
-              defaultValue={name}
-              onChange={handleChange}
-            /> */}
-            <button>Submit</button>
+            <div>
+              <Button type="submit">Submit</Button>
+            </div>
           </form>
         </Box>
       </Modal>
