@@ -31,7 +31,14 @@ const getAlcohols = async () => {
   }
 };
 
-const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) => {
+const createAlcohols = async (
+  name,
+  volume_in_ml,
+  user_id,
+  jwt,
+  success,
+  error
+) => {
   try {
     const { status, data } = await axios.post(
       "/api/alcohols",
@@ -41,6 +48,7 @@ const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) 
         user_id: user_id,
       },
       { headers: { Authorization: jwt } }
+<<<<<<< HEAD
       );
       if (status === 201) {
         success(data);
@@ -49,6 +57,13 @@ const createAlcohols = async (name, volume_in_ml, user_id, jwt, success, error) 
       }
     } catch (e) {
       return error(e.response.data.error);
+=======
+    );
+    if (status === 201) {
+      success(data);
+    } else {
+      error("Bad Data");
+>>>>>>> origin/edit-mixer-v1.2
     }
   };
   
@@ -132,10 +147,11 @@ const editMixer = async (
   volume_in_ml,
   critical_volume,
   user_id,
-  jwt
+  jwt,
+  success,
+  error
 ) => {
   try {
-    console.log("in api call", id);
     const { status, data } = await axios.put(
       `/api/mixers/${id}`,
       { name, volume_in_ml, critical_volume, user_id },
@@ -143,13 +159,12 @@ const editMixer = async (
     );
 
     if (status === 200) {
-      return data;
+      success(data.data, data.message);
     } else {
-      return null;
+      return error(error);
     }
-  } catch (error) {
-    console.error(error);
-    return null;
+  } catch (e) {
+    return error(e.response.data.error);
   }
 };
 
@@ -177,6 +192,9 @@ export default {
   createMixer,
   editMixer,
   editAlcohol,
+<<<<<<< HEAD
   deleteAlcohol
 
+=======
+>>>>>>> origin/edit-mixer-v1.2
 };
