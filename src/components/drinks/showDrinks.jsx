@@ -1,30 +1,56 @@
 import React, { useState, useEffect } from "react";
 import api from "../../api/api";
+import axios from "axios";
 
-const ShowDrinks = () => {
-  const [drinks, setDrinks] = useState([]);
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { TextField } from "@mui/material";
 
-  useEffect(async () => {
-    const initialData = await api.getDrinks();
-    setDrinks(initialData);
-  }, []);
+// import EditDrink from "./editDrink";
+// import DeleteDrink from "./deleteDrink";
 
-  console.log(drinks);
-  const drinksList = drinks.map((drink) => {
-    return (
-      <div key={drink.id}>
-        <h2>{drink.name}</h2>
-        <h3>{drink.volume_in_ml}</h3>
-        <h3>{`${drink.alcohol_id.name}`}</h3>
-      </div>
-    );
-  });
+
+const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
 
   return (
-    <div>
-      <h2>Drinks List</h2>
-      {drinksList}
-    </div>
+    <>
+      <Typography> Drink's List </Typography>
+      <TableContainer>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Alcohol amount</TableCell>
+              <TableCell>Mixer amount</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {drinks.map((drink, i) => (
+              <TableRow key={i}>
+                <TableCell>{drink.name}</TableCell>
+                <TableCell>{drink.alcohol_amount}</TableCell>
+                <TableCell>{drink.mixer_amount}</TableCell>
+                  {/* <EditDrink */}
+                    {/* drink={drink} */}
+                    {/* updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)} */}
+                  {/* /> */}
+                  {/* <DeleteDrink  */}
+                    {/* drink={drink}  */}
+                    {/* drinks={drinks} */}
+                    {/* setDrinks={setDrinks}/> */}
+                {/* </TableCell> */}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 };
 
