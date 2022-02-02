@@ -38,17 +38,17 @@ function App() {
 
   return (
     <>
-    <GlobalContext.Provider value={{ global, setGlobal }}>
+      <GlobalContext.Provider value={{ global, setGlobal }}>
         {Object.keys(global).length != 0 && <Nav />}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/alcohols" element={<Alcohols alcohols={alcohols} setAlcohols={setAlcohols} loading={loading}/>} />
+          <Route path="/alcohols" element={<Alcohols alcohols={alcohols} setAlcohols={setAlcohols} loading={loading} />} />
           <Route path="/mixers" element={<Mixers mixers={mixers} setMixers={setMixers} />} />
-          <Route path="/drinks" element={<Drinks alcohols={alcohols} setAlcohols={setAlcohols} mixers={mixers} setMixers={setMixers}/>} />
+          <Route path="/drinks" element={<Drinks alcohols={alcohols} setAlcohols={setAlcohols} mixers={mixers} setMixers={setMixers} />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
-    </GlobalContext.Provider>
+      </GlobalContext.Provider>
     </>
   );
 }

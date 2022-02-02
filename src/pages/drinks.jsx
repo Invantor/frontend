@@ -71,8 +71,7 @@ const Drinks = ({alcohols, setAlcohols, mixers, setMixers}) => {
                 <Typography>Show</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <ShowDrinks drinks={drinks} 
-                // updateDrink={updateDrink} deleteDrink={deleteDrink()} setDrinks={setDrinks}  
+                <ShowDrinks drinks={drinks} setDrinks={setDrinks}  
                 />
               </AccordionDetails>
             </Accordion>
