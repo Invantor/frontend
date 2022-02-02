@@ -196,7 +196,6 @@ const getDrinks = async () => {
   }
 };
 
-<<<<<<< HEAD
 const createDrink = async (
   name, 
   alcohol_amount,
@@ -220,12 +219,6 @@ const createDrink = async (
     );
 
     if (status === 201) {
-=======
-const getUsers = async () => {
-  try {
-    const { status, data } = await axios.get("/api/auth/users");
-    if (status === 200) {
->>>>>>> 26a8b95bd50e44e28bb12c1805618f666655c6cf
       return data;
     } else {
       return null;
@@ -236,8 +229,20 @@ const getUsers = async () => {
   }
 };
 
-<<<<<<< HEAD
-=======
+const getUsers = async () => {
+  try {
+    const { status, data } = await axios.get("/api/auth/users");
+    if (status === 200) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 const editUserStatus = async (id, is_active, jwt, success, error) => {
   try {
     const { status, data } = await axios.put(
@@ -256,7 +261,6 @@ const editUserStatus = async (id, is_active, jwt, success, error) => {
   }
 };
 
->>>>>>> 26a8b95bd50e44e28bb12c1805618f666655c6cf
 export default {
   getAlcohols,
   getMixers,
