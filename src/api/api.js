@@ -1,19 +1,19 @@
 import axios from "axios";
 
-const signin = async (username, password) => {
+const signin = async (username, password, error) => {
   try {
     const { status, data } = await axios.post("/api/auth/sign_in", {
       username,
       password,
     });
-    console.log(status);
-    if (status === 200 || status === 201) {
+
+    if (status === 200) {
       return data;
     } else {
-      return null;
+      return error(error);
     }
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    return error(e.response.data.error);
   }
 };
 
@@ -48,59 +48,57 @@ const createAlcohols = async (
         user_id: user_id,
       },
       { headers: { Authorization: jwt } }
-      );
-      if (status === 201) {
-        success(data);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return error(e.response.data.error);
+    );
+    if (status === 201) {
+      success(data);
+    } else {
+      return null;
     }
-  };
-  
-  const editAlcohol = async (
-    id, 
-    name, 
-    volume_in_ml, 
-    critical_volume, 
-    user_id, 
-    jwt, 
-    success, 
-    error
-    ) => {
-    try {
-      const { status, data } = await axios.put(
-        `/api/alcohols/${id}`,
-        { name, volume_in_ml, critical_volume, user_id },
-        { headers: { Authorization: jwt } }
-        );
-        
-        if (status === 200) {
-          success(data.data, data.message);
-        } else {
-          return error(error);
-        }
-      } 
-      catch (e) {
-      return error(e.response.data.error);
+  } catch (e) {
+    return error(e.response.data.error);
+  }
+};
+
+const editAlcohol = async (
+  id,
+  name,
+  volume_in_ml,
+  critical_volume,
+  user_id,
+  jwt,
+  success,
+  error
+) => {
+  try {
+    const { status, data } = await axios.put(
+      `/api/alcohols/${id}`,
+      { name, volume_in_ml, critical_volume, user_id },
+      { headers: { Authorization: jwt } }
+    );
+
+    if (status === 200) {
+      success(data.data, data.message);
+    } else {
+      return error(error);
     }
-  }; 
+  } catch (e) {
+    return error(e.response.data.error);
+  }
+};
 
 const deleteAlcohol = async (id, jwt, success, error) => {
   try {
-    const {status, data} = await axios.delete(
-      `/api/alcohols/${id}`,
-       { headers: { Authorization: jwt }});
+    const { status, data } = await axios.delete(`/api/alcohols/${id}`, {
+      headers: { Authorization: jwt },
+    });
 
     if (status === ok) {
-          success(data);
-        } else {
-          return null;
-        }
-      } catch (e) {
-      return null
-
+      success(data);
+    } else {
+      return null;
+    }
+  } catch (e) {
+    return null;
   }
 };
 
@@ -170,21 +168,19 @@ const editMixer = async (
 
 const deleteMixer = async (id, jwt, success, error) => {
   try {
-    const {status, data} = await axios.delete(
-      `/api/mixers/${id}`,
-       { headers: { Authorization: jwt }});
-       
-    if (status === ok) {
-          success(data);
-        } else {
-          return null;
-        }
-      } catch (e) {
-      return null
+    const { status, data } = await axios.delete(`/api/mixers/${id}`, {
+      headers: { Authorization: jwt },
+    });
 
+    if (status === ok) {
+      success(data);
+    } else {
+      return null;
+    }
+  } catch (e) {
+    return null;
   }
 };
-
 
 const getDrinks = async () => {
   try {
@@ -200,6 +196,7 @@ const getDrinks = async () => {
   }
 };
 
+<<<<<<< HEAD
 const createDrink = async (
   name, 
   alcohol_amount,
@@ -223,6 +220,12 @@ const createDrink = async (
     );
 
     if (status === 201) {
+=======
+const getUsers = async () => {
+  try {
+    const { status, data } = await axios.get("/api/auth/users");
+    if (status === 200) {
+>>>>>>> 26a8b95bd50e44e28bb12c1805618f666655c6cf
       return data;
     } else {
       return null;
@@ -233,6 +236,27 @@ const createDrink = async (
   }
 };
 
+<<<<<<< HEAD
+=======
+const editUserStatus = async (id, is_active, jwt, success, error) => {
+  try {
+    const { status, data } = await axios.put(
+      `/api/auth/users/${id}`,
+      { is_active },
+      { headers: { Authorization: jwt } }
+    );
+
+    if (status === 200) {
+      console.log(data);
+    } else {
+      return error(error);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+>>>>>>> 26a8b95bd50e44e28bb12c1805618f666655c6cf
 export default {
   getAlcohols,
   getMixers,
@@ -245,4 +269,6 @@ export default {
   editAlcohol,
   deleteAlcohol,
   deleteMixer,
+  getUsers,
+  editUserStatus,
 };
