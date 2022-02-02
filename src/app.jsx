@@ -8,7 +8,7 @@ import Home from "./pages/home";
 import Mixers from "./pages/mixers";
 import Nav from "./components/nav";
 import Signin from "./pages/signin";
-
+import AdminPage from "./pages/admin";
 
 function App() {
   const [global, setGlobal] = useLocalStorage("global", {});
@@ -23,10 +23,10 @@ function App() {
           <Route path="/mixers" element={<Mixers />} />
           <Route path="/drinks" element={<Drinks />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </GlobalContext.Provider>
-   
   );
 }
 

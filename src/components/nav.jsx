@@ -13,7 +13,6 @@ const Nav = () => {
   const navigate = useNavigate();
   const logOut = () => {
     setGlobal({});
-
     navigate("/signin");
   };
   return (
@@ -32,6 +31,9 @@ const Nav = () => {
             <Tab color="red" label="Alcohols" to="/alcohols" component={Link} />
             <Tab color="red" label="Mixers" to="/mixers" component={Link} />
             <Tab color="red" label="Drinks" to="/drinks" component={Link} />
+            {global.user.admin === true ? (
+              <Tab color="red" label="Admin" to="/admin" component={Link} />
+            ) : null}
           </Box>
           <Box>
             <Tab

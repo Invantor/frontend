@@ -196,6 +196,38 @@ const getDrinks = async () => {
   }
 };
 
+const getUsers = async () => {
+  try {
+    const { status, data } = await axios.get("/api/auth/users");
+    if (status === 200) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const editUserStatus = async (id, is_active, jwt, success, error) => {
+  try {
+    const { status, data } = await axios.put(
+      `/api/auth/users/${id}`,
+      { is_active },
+      { headers: { Authorization: jwt } }
+    );
+
+    if (status === 200) {
+      console.log(data);
+    } else {
+      return error(error);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export default {
   getAlcohols,
   getMixers,
@@ -207,4 +239,6 @@ export default {
   editAlcohol,
   deleteAlcohol,
   deleteMixer,
+  getUsers,
+  editUserStatus,
 };

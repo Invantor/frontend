@@ -14,6 +14,8 @@ const Home = () => {
       navigate("/signin");
       /// QUESTION FOR ANINDHA, why does the return jsx display for a split second before the redirect to signin?
     }
+
+    console.log(global);
   }, []);
 
   return (
