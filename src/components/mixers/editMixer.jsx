@@ -4,17 +4,12 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
-import { Stack } from "@mui/material";
 import { Input } from "@mui/material";
-import Alert from "@mui/material/Alert";
-import IconButton from "@mui/material/IconButton";
-import Collapse from "@mui/material/Collapse";
-import CloseIcon from "@mui/icons-material/Close";
 
 import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";
+import Banner from "../banner";
 
 const style = {
   position: "absolute",
@@ -96,29 +91,7 @@ const EditMixer = ({ mixer, updateMixer }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Box sx={{ width: "100%" }}>
-            <Collapse in={bannerOpen}>
-              <Alert
-                variant={bannerDisplay.variant}
-                severity={bannerDisplay.severity}
-                action={
-                  <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                      setBannerOpen(false);
-                    }}
-                  >
-                    <CloseIcon fontSize="inherit" />
-                  </IconButton>
-                }
-                sx={{ mb: 2 }}
-              >
-                {bannerDisplay.message}
-              </Alert>
-            </Collapse>
-          </Box>
+          <Banner bannerOpen={bannerOpen} bannerDisplay={bannerDisplay} />
           <form className="form" onSubmit={handleSubmit}>
             <Typography htmlFor="name">Name</Typography>
             <Input name="name" defaultValue={name} onChange={handleChange} />
