@@ -8,33 +8,10 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 
-import GlobalContext from "../context/globalContext";
-import api from "../api/api";
-
 import CreateMixers from "../components/mixers/createMixer";
 import ShowMixers from "../components/mixers/showMixers";
 
-const Mixers = () => {
-  // Imported global state to mixers component to allow for authentication checking
-  const { global } = useContext(GlobalContext);
-  // Setting mixers state at parent level as child components will need access to the same shared state. If state is defined on child level, we cant pass state back up to parent for other components to use
-  const [mixers, setMixers] = useState([]);
-  const navigate = useNavigate();
-  // utility function state that just toggles the loading circle while loading
-  const [loading, setLoading] = useState(true);
-
-  useEffect(async () => {
-    if (!global.user) {
-      navigate("/signin");
-      /// QUESTION FOR ANINDHA, why does the return jsx display for a split second before the redirect to signin?
-    } else {
-      // API call that was moved from the showmixers component up to the mixers component to allow for state to be managed in a parent component for children components to use
-      const initialMixers = await api.getMixers();
-      setMixers(initialMixers);
-      setLoading(false);
-    }
-  }, []);
-
+const Mixers = ({mixers, setMixers}) => {
   // Loading function from UI (the circle that spins when its still loading)
   const isLoading = () => {
     return (

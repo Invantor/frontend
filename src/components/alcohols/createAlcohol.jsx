@@ -10,10 +10,8 @@ import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import Login from "../login";
 
-const CreateAlcohols = (props) => {
-  const { alcohols, setAlcohols } = props;
+const CreateAlcohols = ({ alcohols, setAlcohols }) => {
   const [error, setError] = useState(null);
-
   const { global } = useContext(GlobalContext);
   const [newAlcohols, setNewAlcohols] = useState({name: "",volume_in_ml: ""});
 

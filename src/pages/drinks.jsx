@@ -11,10 +11,10 @@ import Typography from "@mui/material/Typography";
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
 
-// import CreateDrinks from "../components/drinks/createDrink";
+import CreateDrinks from "../components/drinks/createDrink";
 import ShowDrinks from "../components/drinks/showDrinks";
 
-const Drinks = () => {
+const Drinks = ({alcohols, setAlcohols, mixers, setMixers}) => {
   const { global } = useContext(GlobalContext);
   const [drinks, setDrinks] = useState([]);
   const navigate = useNavigate();
@@ -44,12 +44,11 @@ const Drinks = () => {
     const updated = drinks.map((drink, i) => {
       return i === index ? updatedDrink : drink;
     });
-
     setDrinks(updated);
   };
 
   const deleteDrink = (id) => {
-    const toBeDeleted = drinks.find(drink => alcohol.id === id)
+    const toBeDeleted = drinks.find(drink => drink.id === id)
     console.log(toBeDeleted);
     }
 
@@ -64,7 +63,7 @@ const Drinks = () => {
                 <Typography>Create</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                {/* <CreateDrinks drinks={drinks} setDrinks={setDrinks} /> */}
+                <CreateDrinks drinks={drinks} setDrinks={setDrinks} alcohols={alcohols} setAlcohols={setAlcohols} mixers={mixers} setMixers={setMixers} />
               </AccordionDetails>
             </Accordion>
             <Accordion>
