@@ -21,22 +21,20 @@ function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-useEffect(async () => {
+  useEffect(async () => {
     if (!global.user) {
       navigate("/signin");
-      /// QUESTION FOR ANINDHA, why does the return jsx display for a split second before the redirect to signin?
     } else {
       // API call that was moved from the showmixers component up to the mixers component to allow for state to be managed in a parent component for children components to use
       const initialAlcohols = await api.getAlcohols();
+      const initialMixers = await api.getMixers();
+      setMixers(initialMixers)
       setAlcohols(initialAlcohols);
       setLoading(false);
     }
   }, []);
 
-// useEffect(async () => {
-//       const initialAlcohols = await api.getAlcohols();
-//       setAlcohols(initialAlcohols);
-//   }, []);
+
 
   return (
     <>
@@ -44,7 +42,7 @@ useEffect(async () => {
         {Object.keys(global).length != 0 && <Nav />}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/alcohols" element={<Alcohols alcohols={alcohols} setAlcohols={setAlcohols} />} />
+          <Route path="/alcohols" element={<Alcohols alcohols={alcohols} setAlcohols={setAlcohols} loading={loading}/>} />
           <Route path="/mixers" element={<Mixers mixers={mixers} setMixers={setMixers} />} />
           <Route path="/drinks" element={<Drinks alcohols={alcohols} setAlcohols={setAlcohols} mixers={mixers} setMixers={setMixers}/>} />
           <Route path="/signin" element={<Signin />} />
