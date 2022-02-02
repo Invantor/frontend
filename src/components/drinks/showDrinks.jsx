@@ -13,7 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import { TextField } from "@mui/material";
 
 // import EditDrink from "./editDrink";
-// import DeleteDrink from "./deleteDrink";
+import DeleteDrink from "./deleteDrink";
 
 
 const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
@@ -40,10 +40,10 @@ const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
                     {/* drink={drink} */}
                     {/* updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)} */}
                   {/* /> */}
-                  {/* <DeleteDrink  */}
-                    {/* drink={drink}  */}
-                    {/* drinks={drinks} */}
-                    {/* setDrinks={setDrinks}/> */}
+                  <DeleteDrink 
+                    drink={drink} 
+                    drinks={drinks}
+                    setDrinks={setDrinks}/>
                 {/* </TableCell> */}
               </TableRow>
             ))}
