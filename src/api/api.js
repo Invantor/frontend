@@ -207,7 +207,9 @@ const createDrink = async (
   mixer_id,
   mixer_amount, 
   user_id,
-  jwt) => {
+  jwt,
+  success,
+  error) => {
   try {
     const { status, data } = await axios.post(
       "/api/drinks",
@@ -223,15 +225,14 @@ const createDrink = async (
     );
 
     if (status === 201) {
-      return data;
-    } else {
-      return null;
+        success(data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return error(e.response.data.error);
     }
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+  };
 
 export default {
   getAlcohols,

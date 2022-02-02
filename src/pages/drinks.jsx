@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
 
-// import CreateDrinks from "../components/drinks/createDrink";
+import CreateDrinks from "../components/drinks/createDrink";
 import ShowDrinks from "../components/drinks/showDrinks";
 
 const Drinks = () => {
@@ -64,7 +64,7 @@ const Drinks = () => {
                 <Typography>Create</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                {/* <CreateDrinks drinks={drinks} setDrinks={setDrinks} /> */}
+                <CreateDrinks drinks={drinks} setDrinks={setDrinks} />
               </AccordionDetails>
             </Accordion>
             <Accordion>
