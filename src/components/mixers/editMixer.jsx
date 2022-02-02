@@ -91,7 +91,11 @@ const EditMixer = ({ mixer, updateMixer }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Banner bannerOpen={bannerOpen} bannerDisplay={bannerDisplay} />
+          <Banner
+            bannerOpen={bannerOpen}
+            bannerDisplay={bannerDisplay}
+            setBannerOpen={setBannerOpen}
+          />
           <form className="form" onSubmit={handleSubmit}>
             <Typography htmlFor="name">Name</Typography>
             <Input name="name" defaultValue={name} onChange={handleChange} />

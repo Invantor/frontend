@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Banner = ({ bannerOpen, bannerDisplay }) => {
+const Banner = ({ bannerOpen, bannerDisplay, setBannerOpen }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Collapse in={bannerOpen}>
