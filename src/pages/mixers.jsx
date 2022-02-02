@@ -14,11 +14,11 @@ import api from "../api/api";
 import CreateMixers from "../components/mixers/createMixer";
 import ShowMixers from "../components/mixers/showMixers";
 
-const Mixers = () => {
+const Mixers = ({mixers, setMixers}) => {
   // Imported global state to mixers component to allow for authentication checking
   const { global } = useContext(GlobalContext);
   // Setting mixers state at parent level as child components will need access to the same shared state. If state is defined on child level, we cant pass state back up to parent for other components to use
-  const [mixers, setMixers] = useState([]);
+ 
   const navigate = useNavigate();
   // utility function state that just toggles the loading circle while loading
   const [loading, setLoading] = useState(true);

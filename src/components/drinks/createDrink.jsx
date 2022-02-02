@@ -5,6 +5,7 @@ import GlobalContext from "../../context/globalContext";
 import api from "../../api/api";
 
 import Alert from "@mui/material/Alert";
+import Box from '@mui/material/Box';
 import Button from "@mui/material/Button";
 import FormControl from '@mui/material/FormControl';
 import Input from "@mui/material/Input";
@@ -20,9 +21,8 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import Login from "../login";
 
-const CreateDrinks = ({ drinks, setDrinks }) => {
+const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
   const [error, setError] = useState(null);
-
   const { global } = useContext(GlobalContext);
   const [newDrinks, setNewDrinks] = useState({
     name: "",
@@ -62,77 +62,65 @@ const CreateDrinks = ({ drinks, setDrinks }) => {
     user_id: ""});
   };
 
-  return (
-    <>
-      {<Alert severity="error">{error}</Alert>}
+  console.log("alcohols", alcohols);
 
-      {/*  ################### */}
-
-      <TableContainer>
-      <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>  
-            </TableRow>
-      </TableHead>
-      <TableBody>
-      {drinks.map((drink, i) => (
-        <TableRow key={i}>
-                <TableCell>{drink.name}</TableCell>
-              </TableRow>
-            ))}
-      </TableBody>
-      </TableContainer>
-      <Typography> Add Drink </Typography>
-      <form className="form" onSubmit={handleSubmit}>
-        <InputLabel id="demo-simple-select-label">Name</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={name}
-          label="name"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        {/*  ################### */}
-        <div>
-          <Typography htmlFor="name">Name</Typography>
-          <Input
-            name="name"
-            value={newDrinks.name}
-            onChange={handleChange}
-          />
-          <Typography htmlFor="alcohol_id">alcohol_id</Typography>
-          <Input
-            name="alcohol_id"
-            value={newDrinks.alcohol_id}
-            onChange={handleChange}
-          />
-          <Typography htmlFor="alcohol_amount">alcohol_amount</Typography>
-          <Input
-            name="alcohol_amount"
-            value={newDrinks.alcohol_amount}
-            onChange={handleChange}
-          />
-          <Typography htmlFor="mixer_id">mixer_id</Typography>
-          <Input
-            name="mixer_id"
-            value={newDrinks.mixer_id}
-            onChange={handleChange}
-          />
-          <Typography htmlFor="mixer_amount">mixer_amount</Typography>
-          <Input
-            name="mixer_amount"
-            value={newDrinks.mixer_amount}
-            onChange={handleChange}
-          />
-        </div>
-        <Button type="submit">Submit</Button>
-      </form>
-    </>
-  );
+    return (
+      <>
+        {<Alert severity="error">{error}</Alert>}
+        <Box sx={{ minWidth: 120 }}>
+        <Typography> Add Drink </Typography>
+        {/* <FormControl fullWidth onSubmit={handleSubmit}> */}
+        <form className="form" onSubmit={handleSubmit}>
+          <div>
+            <Typography htmlFor="name">Name</Typography>
+            <Input
+              name="name"
+              value={newDrinks.name}
+              onChange={handleChange}
+              />
+            <Typography id="demo-simple-select-label">Alcohol</Typography>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={name}
+              label="Name2"
+              onChange={handleChange}
+              >
+              {alcohols.map((alcohol, i) => (
+                <MenuItem>{alcohol.name}</MenuItem>
+              ))}
+            </Select>
+            <Typography htmlFor="alcohol_amount">alcohol_amount</Typography>
+            <Input
+              name="alcohol_amount"
+              value={newDrinks.alcohol_amount}
+              onChange={handleChange}
+              />
+            <Typography htmlFor="mixer_id">Mixer list</Typography>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={name}
+              label="Name2"
+              onChange={handleChange}
+              >
+              {mixers.map((mixer, i) => (
+                <MenuItem>{mixer.name}</MenuItem>
+              ))}
+            </Select>
+            <Typography htmlFor="mixer_amount">mixer_amount</Typography>
+            <Input
+              name="mixer_amount"
+              value={newDrinks.mixer_amount}
+              onChange={handleChange}
+              />
+          </div>
+          <Button type="submit">Submit</Button>
+        {/* </FormControl> */}
+        </form>
+      </Box>
+      </>
+    );
 };
 
 export default CreateDrinks;
