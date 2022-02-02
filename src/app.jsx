@@ -14,7 +14,6 @@ import Signin from "./pages/signin";
 
 import api from "./api/api";
 
-
 function App() {
   const [global, setGlobal] = useLocalStorage("global", {});
   const [alcohols, setAlcohols] = useState([]);
