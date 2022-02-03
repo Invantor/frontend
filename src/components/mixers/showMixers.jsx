@@ -12,6 +12,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import TextField from "@mui/material/TextField";
+import { Stack } from "@mui/material";
 
 import EditMixer from "./editMixer";
 import DeleteMixer from "./deleteMixer";
@@ -39,6 +40,8 @@ const commonStyles = {
 const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
+  console.log(mixers);
+
   return (
     <>
       <Typography> Mixers's List </Typography>
@@ -58,7 +61,10 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
         </Box>
       </Box>
       <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{ minWidth: 650, bgcolor: "primary" }}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -71,7 +77,6 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
             {mixers
               .filter((mixer) => {
                 if (searchTerm == "") {
-                  console.log(mixer);
                   return mixer;
                 } else if (
                   mixer.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -90,17 +95,19 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
                       : "In Stock"}
                   </TableCell>
                   <TableCell>
-                    <EditMixer
-                      mixer={mixer}
-                      updateMixer={(updatedMixer) =>
-                        updateMixer(i, updatedMixer)
-                      }
-                    />
-                    <DeleteMixer
-                      mixer={mixer}
-                      mixers={mixers}
-                      setMixers={setMixers}
-                    />
+                    <Stack spacing={2} direction="row">
+                      <EditMixer
+                        mixer={mixer}
+                        updateMixer={(updatedMixer) =>
+                          updateMixer(i, updatedMixer)
+                        }
+                      />
+                      <DeleteMixer
+                        mixer={mixer}
+                        mixers={mixers}
+                        setMixers={setMixers}
+                      />
+                    </Stack>
                   </TableCell>
                 </TableRow>
               ))}

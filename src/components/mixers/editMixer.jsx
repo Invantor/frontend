@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Input } from "@mui/material";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";
@@ -83,7 +84,14 @@ const EditMixer = ({ mixer, updateMixer }) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Edit</Button>
+      <Button
+        sx={{ borderRadius: 16, display: "inline" }}
+        variant="outlined"
+        color="success"
+        onClick={handleOpen}
+      >
+        <EditOutlinedIcon />
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

@@ -8,6 +8,7 @@ import { TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { Stack } from "@mui/material";
 import { Input } from "@mui/material";
+import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 
 import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";
@@ -27,8 +28,16 @@ const DeleteMixer = ({ mixer, mixers, deleteMixer, setMixers }) => {
   };
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Delete</Button>
+    <>
+      <Button
+        sx={{ borderRadius: 16, display: "inline" }}
+        variant="outlined"
+        color="error"
+        onClick={handleOpen}
+        onClick={handleOpen}
+      >
+        <RemoveOutlinedIcon />
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -41,7 +50,7 @@ const DeleteMixer = ({ mixer, mixers, deleteMixer, setMixers }) => {
           </form>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 };
 
