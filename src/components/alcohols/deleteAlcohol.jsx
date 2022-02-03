@@ -28,7 +28,7 @@ const DeleteAlcohol = ({ alcohol, alcohols, deleteAlcohol, setAlcohols }) => {
     );
     setAlcohols(alcohols.filter((a) => a.id != alcohol.id))
   }
-  console.log(alcohol)
+  // console.log(alcohol)
   return (
     <div>
       <Button onClick={handleOpen}>Delete</Button>

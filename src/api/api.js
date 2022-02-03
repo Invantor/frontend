@@ -198,8 +198,8 @@ const getDrinks = async () => {
 
 const createDrink = async (
   name, 
-  alcohol_amount,
   alcohol_id,
+  alcohol_amount,
   mixer_id,
   mixer_amount, 
   user_id,
@@ -270,12 +270,12 @@ const editUserStatus = async (id, is_active, jwt, success, error) => {
     );
 
     if (status === 200) {
-      console.log(data);
+      // console.log(data);
     } else {
       return error(error);
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 
