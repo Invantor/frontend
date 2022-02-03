@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import * as React from "react";
 import Switch from "@mui/material/Switch";
 
-import api from "../api/api";
-import GlobalContext from "../context/globalContext";
+import api from "../../api/api";
+import GlobalContext from "../../context/globalContext";
 
 const UserActiveToggle = (props) => {
   const { global } = useContext(GlobalContext);
