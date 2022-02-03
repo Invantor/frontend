@@ -28,9 +28,9 @@ const DeleteDrink = ({ drink, drinks, deleteDrink, setDrinks }) => {
     );
     setDrinks(drinks.filter((d) => d.id != drink.id))
   }
-  console.log(drink)
+  
   return (
-    <div>
+    <td>
       <Button onClick={handleOpen}>Delete</Button>
       <Modal
         open={open}
@@ -44,7 +44,7 @@ const DeleteDrink = ({ drink, drinks, deleteDrink, setDrinks }) => {
           </form>
         </Box>
       </Modal>
-    </div>
+    </td>
   );
 };
 
