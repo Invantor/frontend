@@ -28,13 +28,11 @@ function App() {
       // API call that was moved from the showmixers component up to the mixers component to allow for state to be managed in a parent component for children components to use
       const initialAlcohols = await api.getAlcohols();
       const initialMixers = await api.getMixers();
-      setMixers(initialMixers)
+      setMixers(initialMixers);
       setAlcohols(initialAlcohols);
       setLoading(false);
     }
   }, []);
-
-
 
   return (
     <>
@@ -42,9 +40,33 @@ function App() {
         {Object.keys(global).length != 0 && <Nav />}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/alcohols" element={<Alcohols alcohols={alcohols} setAlcohols={setAlcohols} loading={loading} />} />
-          <Route path="/mixers" element={<Mixers mixers={mixers} setMixers={setMixers} />} />
-          <Route path="/drinks" element={<Drinks alcohols={alcohols} setAlcohols={setAlcohols} mixers={mixers} setMixers={setMixers} />} />
+          <Route
+            path="/alcohols"
+            element={
+              <Alcohols
+                alcohols={alcohols}
+                setAlcohols={setAlcohols}
+                loading={loading}
+              />
+            }
+          />
+          <Route
+            path="/mixers"
+            element={
+              <Mixers mixers={mixers} setMixers={setMixers} loading={loading} />
+            }
+          />
+          <Route
+            path="/drinks"
+            element={
+              <Drinks
+                alcohols={alcohols}
+                setAlcohols={setAlcohols}
+                mixers={mixers}
+                setMixers={setMixers}
+              />
+            }
+          />
           <Route path="/signin" element={<Signin />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>

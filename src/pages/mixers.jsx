@@ -11,8 +11,9 @@ import Typography from "@mui/material/Typography";
 import CreateMixers from "../components/mixers/createMixer";
 import ShowMixers from "../components/mixers/showMixers";
 
-const Mixers = ({mixers, setMixers}) => {
+const Mixers = ({ mixers, setMixers, loading }) => {
   // Loading function from UI (the circle that spins when its still loading)
+
   const isLoading = () => {
     return (
       <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -30,9 +31,9 @@ const Mixers = ({mixers, setMixers}) => {
   };
 
   const deleteMixer = (id) => {
-    const toBeDeleted = mixers.find(mixer => mixer.id === id)
+    const toBeDeleted = mixers.find((mixer) => mixer.id === id);
     console.log(toBeDeleted);
-  }
+  };
 
   // Ternery Operator: if loading is false then render <ShowMixers/> and <CreateMixer/> child component
   // The ShowMixer/> component is passed the mixer's array this allows the ShowMixer's component to still behave as originally intended
@@ -57,7 +58,12 @@ const Mixers = ({mixers, setMixers}) => {
               <Typography>Show</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <ShowMixers mixers={mixers} updateMixer={updateMixer} deleteMixer={deleteMixer()} setMixers={setMixers} />
+              <ShowMixers
+                mixers={mixers}
+                updateMixer={updateMixer}
+                deleteMixer={deleteMixer()}
+                setMixers={setMixers}
+              />
             </AccordionDetails>
           </Accordion>
         </>

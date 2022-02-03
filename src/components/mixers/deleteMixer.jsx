@@ -22,13 +22,10 @@ const DeleteMixer = ({ mixer, mixers, deleteMixer, setMixers }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const removeMixer = await api.deleteMixer(
-      id,
-      global.user.jwt
-    );
-    setMixers(mixers.filter((a) => a.id != mixer.id))
-  }
-  console.log(mixer)
+    const removeMixer = await api.deleteMixer(id, global.user.jwt);
+    setMixers(mixers.filter((a) => a.id != mixer.id));
+  };
+
   return (
     <div>
       <Button onClick={handleOpen}>Delete</Button>
