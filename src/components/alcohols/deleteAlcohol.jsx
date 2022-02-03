@@ -8,6 +8,7 @@ import { TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { Stack } from "@mui/material";
 import { Input } from "@mui/material";
+import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 
 import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";
@@ -22,16 +23,20 @@ const DeleteAlcohol = ({ alcohol, alcohols, deleteAlcohol, setAlcohols }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const removeAlcohol = await api.deleteAlcohol(
-      id,
-      global.user.jwt
-    );
-    setAlcohols(alcohols.filter((a) => a.id != alcohol.id))
-  }
-  // console.log(alcohol)
+    const removeAlcohol = await api.deleteAlcohol(id, global.user.jwt);
+    setAlcohols(alcohols.filter((a) => a.id != alcohol.id));
+  };
+
   return (
-    <div>
-      <Button onClick={handleOpen}>Delete</Button>
+    <>
+      <Button
+        sx={{ borderRadius: 16, display: "inline" }}
+        variant="outlined"
+        color="error"
+        onClick={handleOpen}
+      >
+        <RemoveOutlinedIcon />
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -44,7 +49,7 @@ const DeleteAlcohol = ({ alcohol, alcohols, deleteAlcohol, setAlcohols }) => {
           </form>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 };
 

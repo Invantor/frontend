@@ -34,7 +34,6 @@ const DeleteMixer = ({ mixer, mixers, deleteMixer, setMixers }) => {
         variant="outlined"
         color="error"
         onClick={handleOpen}
-        onClick={handleOpen}
       >
         <RemoveOutlinedIcon />
       </Button>

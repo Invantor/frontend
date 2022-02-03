@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import api from "../../api/api";
 import axios from "axios";
 
-import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,19 +10,61 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { TextField } from "@mui/material";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import TextField from "@mui/material/TextField";
+import { Stack } from "@mui/material";
 
 import EditAlcohol from "./editAlcohol";
 import DeleteAlcohol from "./deleteAlcohol";
 
+const styles = {
+  searchContainer: { display: "flex", borderColor: "error.main" },
+  searchIcon: { paddingTop: "2rem" },
+  searchField: {
+    borderColor: "error.main",
+    paddingTop: "0.5rem",
+    marginTop: "0.5rem",
+    width: "30%",
+  },
+};
+
+const commonStyles = {
+  bgcolor: "background.paper",
+  m: 1,
+  width: "90%",
+  height: "4rem",
+  display: "flex",
+  justifyContent: "center",
+};
 
 const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  console.log(alcohols);
 
   return (
     <>
-      <Typography> Alcohol's List </Typography>
+      <Typography> Alcohols's List </Typography>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ ...commonStyles, justifyContent: "center" }}>
+          <SearchOutlinedIcon sx={styles.searchIcon} />
+          <TextField
+            sx={styles.searchField}
+            id="filled-basic"
+            label="Search..."
+            variant="filled"
+            size="small"
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
+        </Box>
+      </Box>
       <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{ minWidth: 650, bgcolor: "primary" }}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -32,28 +74,43 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {alcohols.map((alcohol, i) => (
-              <TableRow key={i}>
-                <TableCell>{alcohol.name}</TableCell>
-                <TableCell>{alcohol.volume_in_ml}</TableCell>
-                <TableCell>{alcohol.critical_volume}</TableCell>
-                <TableCell>
-                  {alcohol.critical_volume > alcohol.volume_in_ml
-                    ? "Low Stock"
-                    : "In Stock"}
-                </TableCell>
-                <TableCell>
-                  <EditAlcohol
-                    alcohol={alcohol}
-                    updateAlcohol={(updatedAlcohol) => updateAlcohol(i, updatedAlcohol)}
-                  />
-                  <DeleteAlcohol 
-                    alcohol={alcohol} 
-                    alcohols={alcohols}
-                    setAlcohols={setAlcohols}/>
-                </TableCell>
-              </TableRow>
-            ))}
+            {alcohols
+              .filter((alcohol) => {
+                if (searchTerm == "") {
+                  return alcohol;
+                } else if (
+                  alcohol.name.toLowerCase().includes(searchTerm.toLowerCase())
+                ) {
+                  return alcohol;
+                }
+              })
+              .map((alcohol, i) => (
+                <TableRow key={i} hover>
+                  <TableCell>{alcohol.name}</TableCell>
+                  <TableCell>{alcohol.volume_in_ml}</TableCell>
+                  <TableCell>{alcohol.critical_volume}</TableCell>
+                  <TableCell>
+                    {alcohol.critical_volume > alcohol.volume_in_ml
+                      ? "Low Stock"
+                      : "In Stock"}
+                  </TableCell>
+                  <TableCell>
+                    <Stack spacing={2} direction="row">
+                      <EditAlcohol
+                        alcohol={alcohol}
+                        updateAlcohol={(updatedAlcohol) =>
+                          updateAlcohol(i, updatedAlcohol)
+                        }
+                      />
+                      <DeleteAlcohol
+                        alcohol={alcohol}
+                        alcohols={alcohols}
+                        setAlcohols={setAlcohols}
+                      />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
