@@ -4,24 +4,16 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../context/globalContext";
 import api from "../api/api";
 
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import UserActiveToggle from "../components/userActiveToggle";
+import ShowUsers from "../components/users/showUsers";
+import CreateUser from "../components/users/createUser";
 
 const AdminPage = () => {
   const { global } = useContext(GlobalContext);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
 
   useEffect(async () => {
-    if (global.user.admin != true || !global.user) {
+    if (global.user.admin != true) {
       navigate("/");
     } else {
       const users = await api.getUsers();
@@ -33,40 +25,10 @@ const AdminPage = () => {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell align="left">Username</TableCell>
-            <TableCell align="left">Admin Status</TableCell>
-            <TableCell align="left">Active</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users.map((user) => (
-            <TableRow
-              hover
-              key={user.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {user.id}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {user.username}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {`${user.admin}`}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                <UserActiveToggle user={user} />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      <CreateUser />
+      <ShowUsers />
+    </div>
   );
 };
 
