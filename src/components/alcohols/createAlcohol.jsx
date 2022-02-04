@@ -34,7 +34,6 @@ const CreateAlcohols = (props) => {
       (errorMessage) => setError(errorMessage)
     );
 
-    setAlcohols([...alcohols, newAlcohol]);
     setNewAlcohols({ name: "", volumeInMl: "" });
   };
 
