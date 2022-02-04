@@ -126,7 +126,7 @@ const createMixer = async (
 ) => {
   try {
     const { status, data } = await axios.post(
-      "/api/mixers",
+      "/api/alcohols",
       {
         name: name,
         volume_in_ml: volume_in_ml,
@@ -135,7 +135,7 @@ const createMixer = async (
       { headers: { Authorization: jwt } }
     );
     if (status === 201) {
-      success(data);
+      success(data.message, data.data);
     } else {
       return null;
     }

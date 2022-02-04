@@ -7,6 +7,7 @@ import api from "../../api/api";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
+import Banner from "../banner";
 
 const CreateMixers = (props) => {
   const { mixers, setMixers } = props;
@@ -16,6 +17,22 @@ const CreateMixers = (props) => {
     name: "",
     volume_in_ml: "",
   });
+
+  const [bannerOpen, setBannerOpen] = useState(false);
+  const [bannerDisplay, setBannerDisplay] = useState({
+    variant: "outlined",
+    severity: "success",
+    message: "",
+  });
+
+  const handleBannerOpen = (severity, message) => {
+    setBannerDisplay({
+      ...bannerDisplay,
+      severity: severity,
+      message: message,
+    });
+    setBannerOpen(true);
+  };
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -30,8 +47,11 @@ const CreateMixers = (props) => {
       newMixers.volumeInMl,
       global.user.user_id,
       global.user.jwt,
-      (newMixer) => setMixers([...mixers, newMixer]),
-      (errorMessage) => setError(errorMessage)
+      (message, data) => {
+        setMixers([...mixers, data]);
+        handleBannerOpen("success", message);
+      },
+      (errorMessage) => handleBannerOpen("error", errorMessage)
     );
 
     setNewMixers({ name: "", volumeInMl: "" });
@@ -39,6 +59,11 @@ const CreateMixers = (props) => {
 
   return (
     <>
+      <Banner
+        bannerOpen={bannerOpen}
+        bannerDisplay={bannerDisplay}
+        setBannerOpen={setBannerOpen}
+      />
       <Typography> Add Mixer </Typography>
       <form className="form" onSubmit={handleSubmit}>
         <div>
