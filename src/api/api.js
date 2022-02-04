@@ -116,7 +116,14 @@ const getMixers = async () => {
   }
 };
 
-const createMixer = async (name, volume_in_ml, user_id, jwt, success, error) => {
+const createMixer = async (
+  name,
+  volume_in_ml,
+  user_id,
+  jwt,
+  success,
+  error
+) => {
   try {
     const { status, data } = await axios.post(
       "/api/mixers",
@@ -128,14 +135,12 @@ const createMixer = async (name, volume_in_ml, user_id, jwt, success, error) => 
       { headers: { Authorization: jwt } }
     );
     if (status === 201) {
-      success(data.data, data.message);
+      success(data);
     } else {
       return null;
     }
   } catch (e) {
-    console.error(e)
-    console.log(e)
-    // return error(e.response.data.error);
+    return error(e.response.data.error);
   }
 };
 
