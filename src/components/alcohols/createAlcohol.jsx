@@ -7,6 +7,7 @@ import api from "../../api/api";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
+import Banner from "../banner";
 
 const CreateAlcohols = (props) => {
   const { alcohols, setAlcohols } = props;
@@ -16,6 +17,22 @@ const CreateAlcohols = (props) => {
     name: "",
     volume_in_ml: "",
   });
+
+  const [bannerOpen, setBannerOpen] = useState(false);
+  const [bannerDisplay, setBannerDisplay] = useState({
+    variant: "outlined",
+    severity: "success",
+    message: "",
+  });
+
+  const handleBannerOpen = (severity, message) => {
+    setBannerDisplay({
+      ...bannerDisplay,
+      severity: severity,
+      message: message,
+    });
+    setBannerOpen(true);
+  };
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -30,8 +47,11 @@ const CreateAlcohols = (props) => {
       newAlcohols.volumeInMl,
       global.user.user_id,
       global.user.jwt,
-      (newAlcohol) => setAlcohols([...alcohols, newAlcohol]),
-      (errorMessage) => setError(errorMessage)
+      (message, data) => {
+        setAlcohols([...alcohols, data]);
+        handleBannerOpen("success", message);
+      },
+      (errorMessage) => handleBannerOpen("error", errorMessage)
     );
 
     setNewAlcohols({ name: "", volumeInMl: "" });
@@ -39,6 +59,11 @@ const CreateAlcohols = (props) => {
 
   return (
     <>
+      <Banner
+        bannerOpen={bannerOpen}
+        bannerDisplay={bannerDisplay}
+        setBannerOpen={setBannerOpen}
+      />
       <Typography> Add Alcohol </Typography>
       <form className="form" onSubmit={handleSubmit}>
         <div>

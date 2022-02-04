@@ -40,8 +40,6 @@ const commonStyles = {
 const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  console.log(alcohols);
-
   return (
     <>
       <Typography> Alcohols's List </Typography>

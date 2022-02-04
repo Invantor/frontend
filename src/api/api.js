@@ -50,7 +50,7 @@ const createAlcohol = async (
       { headers: { Authorization: jwt } }
     );
     if (status === 201) {
-      success(data);
+      success(data.message, data.data);
     } else {
       return null;
     }
@@ -202,18 +202,18 @@ const getDrinks = async () => {
 };
 
 const createDrink = async (
-  name, 
+  name,
   alcohol_id,
   alcohol_amount,
   mixer_id,
-  mixer_amount, 
+  mixer_amount,
   user_id,
   jwt,
   success,
-  error) => {
-
-    try {
-      const { status, data } = await axios.post(
+  error
+) => {
+  try {
+    const { status, data } = await axios.post(
       "/api/drinks",
       {
         name: name,
@@ -221,22 +221,22 @@ const createDrink = async (
         alcohol_amount: alcohol_amount,
         mixer_id: mixer_id,
         mixer_amount: mixer_amount,
-        user_id: user_id
+        user_id: user_id,
       },
       { headers: { Authorization: jwt } }
     );
 
     if (status === 201) {
-        success(data);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return error(e.response.data.error);
+      success(data);
+    } else {
+      return null;
     }
-  };
+  } catch (e) {
+    return error(e.response.data.error);
+  }
+};
 
-  const deleteDrink = async (id, jwt, success, error) => {
+const deleteDrink = async (id, jwt, success, error) => {
   try {
     const { status, data } = await axios.delete(`/api/drinks/${id}`, {
       headers: { Authorization: jwt },
