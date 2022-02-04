@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import GlobalContext from "../../context/globalContext";
 import api from "../../api/api";
 
-import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
@@ -35,12 +34,12 @@ const CreateAlcohols = (props) => {
       (errorMessage) => setError(errorMessage)
     );
 
+    setAlcohols([...alcohols, newAlcohol]);
     setNewAlcohols({ name: "", volumeInMl: "" });
   };
 
   return (
     <>
-      {<Alert severity="error">{error}</Alert>}
       <Typography> Add Alcohol </Typography>
       <form className="form" onSubmit={handleSubmit}>
         <div>
