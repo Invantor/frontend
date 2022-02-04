@@ -31,7 +31,7 @@ const getAlcohols = async () => {
   }
 };
 
-const createAlcohols = async (
+const createAlcohol = async (
   name,
   volume_in_ml,
   user_id,
@@ -116,7 +116,7 @@ const getMixers = async () => {
   }
 };
 
-const createMixer = async (name, volume_in_ml, user_id, jwt) => {
+const createMixer = async (name, volume_in_ml, user_id, jwt, success, error) => {
   try {
     const { status, data } = await axios.post(
       "/api/mixers",
@@ -127,15 +127,15 @@ const createMixer = async (name, volume_in_ml, user_id, jwt) => {
       },
       { headers: { Authorization: jwt } }
     );
-
     if (status === 201) {
-      return data;
+      success(data.data, data.message);
     } else {
       return null;
     }
-  } catch (error) {
-    console.error(error);
-    return null;
+  } catch (e) {
+    console.error(e)
+    console.log(e)
+    // return error(e.response.data.error);
   }
 };
 
@@ -281,7 +281,7 @@ const editUserStatus = async (id, is_active, jwt, success, error) => {
 
 export default {
   getAlcohols,
-  createAlcohols,
+  createAlcohol,
   editAlcohol,
   deleteAlcohol,
   getMixers,

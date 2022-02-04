@@ -8,12 +8,15 @@ import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
-import Login from "../login";
 
-const CreateAlcohols = ({ alcohols, setAlcohols }) => {
-  const [error, setError] = useState(null);
+const CreateAlcohols = (props) => {
+  const { alcohols, setAlcohols } = props;
   const { global } = useContext(GlobalContext);
-  const [newAlcohols, setNewAlcohols] = useState({name: "",volume_in_ml: ""});
+  const [error, setError] = useState(null);
+  const [newAlcohols, setNewAlcohols] = useState({
+    name: "",
+    volume_in_ml: "",
+  });
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -23,14 +26,14 @@ const CreateAlcohols = ({ alcohols, setAlcohols }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newAlcohol = await api.createAlcohols(
+    const newAlcohol = await api.createAlcohol(
       newAlcohols.name,
       newAlcohols.volumeInMl,
       global.user.user_id,
       global.user.jwt,
       (newAlcohol) => setAlcohols([...alcohols, newAlcohol]),
       (errorMessage) => setError(errorMessage)
-      );
+    );
 
     setNewAlcohols({ name: "", volumeInMl: "" });
   };
