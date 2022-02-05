@@ -17,6 +17,31 @@ const signin = async (username, password, error) => {
   }
 };
 
+const createUser = async (
+  username,
+  password,
+  password_confirmation,
+  admin,
+  success,
+  error
+) => {
+  try {
+    const { status, data } = await axios.post("api/auth/sign_up", {
+      username,
+      password,
+      password_confirmation,
+      admin,
+    });
+    if (status === 201) {
+      success(data.message, data.data);
+    } else {
+      return error(error);
+    }
+  } catch (e) {
+    return error(e.response.data.error);
+  }
+};
+
 const getAlcohols = async () => {
   try {
     const { status, data } = await axios.get("/api/alcohols");
@@ -299,4 +324,5 @@ export default {
   signin,
   getUsers,
   editUserStatus,
+  createUser,
 };

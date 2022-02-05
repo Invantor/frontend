@@ -26,8 +26,8 @@ const AdminPage = () => {
 
   return (
     <div>
-      <CreateUser />
-      <ShowUsers />
+      <CreateUser users={users} setUsers={setUsers} />
+      <ShowUsers users={users} setUsers={setUsers} />
     </div>
   );
 };

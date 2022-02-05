@@ -14,24 +14,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import UserActiveToggle from "./userActiveToggle";
 
-const ShowUsers = () => {
-  const { global } = useContext(GlobalContext);
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState([]);
-
-  useEffect(async () => {
-    if (global.user.admin != true) {
-      navigate("/");
-    } else {
-      const users = await api.getUsers();
-
-      if (users) {
-        setUsers(users);
-      }
-    }
-  }, []);
-
+const ShowUsers = ({ users }) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
+import Banner from "../banner";
+import api from "../../api/api";
 
 const style = {
   position: "absolute",
@@ -26,16 +28,42 @@ const style = {
   p: 4,
 };
 
-const CreateUser = () => {
+const CreateUser = (props) => {
+  const { users, setUsers } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setBannerOpen(false);
+    setFormData({
+      username: "",
+      password: "",
+      password_confirmation: "",
+      admin: false,
+    });
+  };
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    passwordConfirmation: "",
+    password_confirmation: "",
     admin: false,
   });
+
+  const [bannerOpen, setBannerOpen] = useState(false);
+  const [bannerDisplay, setBannerDisplay] = useState({
+    variant: "outlined",
+    severity: "success",
+    message: "",
+  });
+
+  const handleBannerOpen = (severity, message) => {
+    setBannerDisplay({
+      ...bannerDisplay,
+      severity: severity,
+      message: message,
+    });
+    setBannerOpen(true);
+  };
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -43,8 +71,34 @@ const CreateUser = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleCheckBox = (e) => {};
-  console.log(formData);
+  const handleCheckBox = (e) => {
+    const adminStatus = formData.admin;
+
+    setFormData({ ...formData, admin: !adminStatus });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newUser = await api.createUser(
+      formData.username,
+      formData.password,
+      formData.password_confirmation,
+      formData.admin,
+      (message, data) => {
+        setUsers([...users, data]);
+        handleBannerOpen("success", message);
+      },
+      (errorMessage) => {
+        handleBannerOpen("error", errorMessage);
+        setFormData({
+          username: "",
+          password: "",
+          password_confirmation: "",
+          admin: false,
+        });
+      }
+    );
+  };
 
   return (
     <Container>
@@ -62,44 +116,57 @@ const CreateUser = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={{ ...style, borderRadius: "16px" }}>
-            <FormGroup>
-              <Typography htmlFor="username">Username</Typography>
-              <Input
-                type="text"
-                name="username"
-                placeholder="Username.."
-                value={formData.username}
-                onChange={handleChange}
-              />
-              <Typography htmlFor="password">Password</Typography>
-              <Input
-                type="password"
-                name="password"
-                placeholder="Enter a Password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <Typography htmlFor="passwordConfirmation">
-                Password Confirmation
-              </Typography>
-              <Input
-                type="password"
-                name="passwordConfirmation"
-                placeholder="Confirm your password.."
-                value={formData.passwordConfirmation}
-                onChange={handleChange}
-              />
-              <FormControlLabel
-                control={<Checkbox value={formData.admin} />}
-                label="Admin"
-              />
+            <Banner
+              bannerOpen={bannerOpen}
+              bannerDisplay={bannerDisplay}
+              setBannerOpen={setBannerOpen}
+            />
+            <form onSubmit={handleSubmit}>
+              <FormGroup>
+                <Typography htmlFor="username">Username</Typography>
+                <Input
+                  type="text"
+                  name="username"
+                  placeholder="Username.."
+                  value={formData.username}
+                  onChange={handleChange}
+                />
+                <Typography htmlFor="password">Password</Typography>
+                <Input
+                  type="password"
+                  name="password"
+                  placeholder="Enter a Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <Typography htmlFor="passwordConfirmation">
+                  Password Confirmation
+                </Typography>
+                <Input
+                  type="password"
+                  name="password_confirmation"
+                  placeholder="Confirm your password.."
+                  value={formData.password_confirmation}
+                  onChange={handleChange}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      value={formData.admin}
+                      onChange={handleCheckBox}
+                      name="admin"
+                    />
+                  }
+                  label="Admin"
+                />
 
-              <div>
-                <Button variant="outlined" type="submit">
-                  Submit
-                </Button>
-              </div>
-            </FormGroup>
+                <div>
+                  <Button variant="outlined" type="submit">
+                    Submit
+                  </Button>
+                </div>
+              </FormGroup>
+            </form>
           </Box>
         </Modal>
       </Box>
