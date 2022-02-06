@@ -14,20 +14,16 @@ const UserActiveToggle = (props) => {
     // console.log("in toggle handler");
     // console.log(!isActive);
     await api.editUserStatus(user.id, !isActive);
-    // setIsActive(!isActive);
+    setIsActive(!isActive);
   };
 
   return (
     <>
-      {isActive === true ? (
-        <Switch
-          defaultChecked
-          onChange={switchOnChangeHandler}
-          value={isActive}
-        />
-      ) : (
-        <Switch onChange={switchOnChangeHandler} value={isActive} />
-      )}
+      <Switch
+        checked={isActive ? true : false}
+        onChange={switchOnChangeHandler}
+        value={isActive}
+      />
     </>
   );
 };

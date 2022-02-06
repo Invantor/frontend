@@ -34,7 +34,8 @@ const AdminPage = () => {
       const users = await api.getUsers();
 
       if (users) {
-        setUsers(users);
+        const sorted = users.sort((a, b) => a.id - b.id);
+        setUsers(sorted);
       }
     }
   }, []);
