@@ -18,7 +18,6 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DeleteDrink from "./deleteDrink";
 
 const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
-
   return (
     <>
       <Typography> Drink's List </Typography>
@@ -29,6 +28,7 @@ const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
               <TableCell>Name</TableCell>
               <TableCell>Alcohol amount</TableCell>
               <TableCell>Mixer amount</TableCell>
+              <TableCell>Amount Sold</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -39,14 +39,15 @@ const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
                 <TableCell>{drink.mixer_amount}</TableCell>
                 <Stack spacing={2} direction="row">
                   {/* <EditDrink */}
-                    {/* drink={drink} */}
-                    {/* updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)} */}
+                  {/* drink={drink} */}
+                  {/* updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)} */}
                   {/* /> */}
-                  <DeleteDrink 
-                    drink={drink} 
+                  <DeleteDrink
+                    drink={drink}
                     drinks={drinks}
-                    setDrinks={setDrinks}/>
-                {/* </TableCell> */}
+                    setDrinks={setDrinks}
+                  />
+                  {/* </TableCell> */}
                 </Stack>
               </TableRow>
             ))}

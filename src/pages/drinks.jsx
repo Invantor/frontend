@@ -14,7 +14,7 @@ import api from "../api/api";
 import CreateDrinks from "../components/drinks/createDrink";
 import ShowDrinks from "../components/drinks/showDrinks";
 
-const Drinks = ({alcohols, setAlcohols, mixers, setMixers}) => {
+const Drinks = ({ alcohols, setAlcohols, mixers, setMixers }) => {
   const { global } = useContext(GlobalContext);
   const [drinks, setDrinks] = useState([]);
   const navigate = useNavigate();
@@ -48,10 +48,9 @@ const Drinks = ({alcohols, setAlcohols, mixers, setMixers}) => {
   };
 
   const deleteDrink = (id) => {
-    const toBeDeleted = drinks.find(drink => drink.id === id)
+    const toBeDeleted = drinks.find((drink) => drink.id === id);
     console.log(toBeDeleted);
-    }
-
+  };
 
   return (
     <>
@@ -63,7 +62,14 @@ const Drinks = ({alcohols, setAlcohols, mixers, setMixers}) => {
                 <Typography>Create</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <CreateDrinks drinks={drinks} setDrinks={setDrinks} alcohols={alcohols} setAlcohols={setAlcohols} mixers={mixers} setMixers={setMixers} />
+                <CreateDrinks
+                  drinks={drinks}
+                  setDrinks={setDrinks}
+                  alcohols={alcohols}
+                  setAlcohols={setAlcohols}
+                  mixers={mixers}
+                  setMixers={setMixers}
+                />
               </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -71,8 +77,7 @@ const Drinks = ({alcohols, setAlcohols, mixers, setMixers}) => {
                 <Typography>Show</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <ShowDrinks drinks={drinks} setDrinks={setDrinks}  
-                />
+                <ShowDrinks drinks={drinks} setDrinks={setDrinks} />
               </AccordionDetails>
             </Accordion>
           </>

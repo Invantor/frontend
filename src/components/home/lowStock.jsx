@@ -42,13 +42,8 @@ const LowStock = (props) => {
     });
 
     const combined = lowAlcohol.concat(lowMixer);
-    console.log(combined);
     setState(combined);
   }, [alcohols, mixers]);
-
-  const lowStockStyle = {
-    bgcolor: "grey.main",
-  };
 
   return (
     <Grid container justifyContent="center">
@@ -58,9 +53,9 @@ const LowStock = (props) => {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Volume</TableCell>
-                <TableCell>Critical Volume</TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Volume</TableCell>
+                <TableCell align="center">Critical Volume</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -69,13 +64,13 @@ const LowStock = (props) => {
                   key={i}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell align="center" component="th" scope="row">
                     {item.name}
                   </TableCell>
-                  <TableCell component="th" scope="row">
+                  <TableCell align="center" component="th" scope="row">
                     {item.volume_in_ml}
                   </TableCell>
-                  <TableCell component="th" scope="row">
+                  <TableCell align="center" component="th" scope="row">
                     {item.critical_volume}
                   </TableCell>
                 </TableRow>
