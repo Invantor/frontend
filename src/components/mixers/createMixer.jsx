@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 
 import GlobalContext from "../../context/globalContext";
 import api from "../../api/api";
@@ -12,7 +11,6 @@ import Banner from "../banner";
 const CreateMixers = (props) => {
   const { mixers, setMixers } = props;
   const { global } = useContext(GlobalContext);
-  const [error, setError] = useState(null);
   const [newMixers, setNewMixers] = useState({
     name: "",
     volume_in_ml: "",
