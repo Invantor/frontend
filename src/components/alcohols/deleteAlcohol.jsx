@@ -4,35 +4,75 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
-import { Stack } from "@mui/material";
 import { Input } from "@mui/material";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 
 import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";
+import Banner from "../banner";
 
-const DeleteAlcohol = ({ alcohol, alcohols, deleteAlcohol, setAlcohols }) => {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+};
+
+const DeleteAlcohol = ({ alcohol, alcohols, setAlcohols, updateAlcohol }) => {
   const { global } = useContext(GlobalContext);
   const { id } = alcohol;
+  const [formData, setFormData] = useState({});
+  const [open, setOpen] = useState(false);
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [bannerOpen, setBannerOpen] = useState(false);
+  const [bannerDisplay, setBannerDisplay] = useState({
+    variant: "outlined",
+    severity: "success",
+    message: "",
+  });
+
+  const handleBannerOpen = (severity, message) => {
+    setBannerDisplay({
+      ...bannerDisplay,
+      severity: severity,
+      message: message,
+    });
+    setBannerOpen(true);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setBannerOpen(false);
+    setFormData({});
+  };
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const removeAlcohol = await api.deleteAlcohol(id, global.user.jwt);
+    const removeMixer = await api.deleteAlcohol(id, global.user.jwt);
     setAlcohols(alcohols.filter((a) => a.id != alcohol.id));
   };
 
   return (
-    <>
+    <div>
       <Button
         sx={{ borderRadius: 16, display: "inline" }}
         variant="outlined"
-        color="error"
+        color="success"
         onClick={handleOpen}
       >
         <RemoveOutlinedIcon />
@@ -43,13 +83,19 @@ const DeleteAlcohol = ({ alcohol, alcohols, deleteAlcohol, setAlcohols }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box>
-          <form onSubmit={handleSubmit}>
-            <button>Submit</button>
+        <Box sx={style}>
+          <Banner
+            bannerOpen={bannerOpen}
+            bannerDisplay={bannerDisplay}
+            setBannerOpen={setBannerOpen}
+          />
+          <form className="form" onSubmit={handleSubmit}>
+            <Typography>Are you sure you wish to delete?</Typography>
+            <Button type="submit">Delete</Button>
           </form>
         </Box>
       </Modal>
-    </>
+    </div>
   );
 };
 

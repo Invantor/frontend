@@ -11,10 +11,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { TextField } from "@mui/material";
+import { Stack } from "@mui/material";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 // import EditDrink from "./editDrink";
 import DeleteDrink from "./deleteDrink";
-
 
 const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
 
@@ -36,6 +37,7 @@ const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
                 <TableCell>{drink.name}</TableCell>
                 <TableCell>{drink.alcohol_amount}</TableCell>
                 <TableCell>{drink.mixer_amount}</TableCell>
+                <Stack spacing={2} direction="row">
                   {/* <EditDrink */}
                     {/* drink={drink} */}
                     {/* updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)} */}
@@ -45,6 +47,7 @@ const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
                     drinks={drinks}
                     setDrinks={setDrinks}/>
                 {/* </TableCell> */}
+                </Stack>
               </TableRow>
             ))}
           </TableBody>
