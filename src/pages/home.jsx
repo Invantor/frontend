@@ -1,18 +1,31 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api/api";
 
 import GlobalContext from "../context/globalContext";
 
-const Home = () => {
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+
+const boxStyle = {
+  border: 5,
+  color: "secondary.main",
+  height: 1,
+  width: 0.8,
+  justifyContent: "center",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  borderRadius: "16px",
+  minHeight: "300px",
+};
+
+const Home = (props) => {
   const { global, setGlobal } = useContext(GlobalContext);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const { alcohols } = props;
 
   useEffect(async () => {
     if (!global.user) {
       navigate("/signin");
-      /// QUESTION FOR ANINDHA, why does the return jsx display for a split second before the redirect to signin?
     }
 
     console.log(global);
@@ -21,6 +34,9 @@ const Home = () => {
   return (
     <>
       <div>Home Page</div>
+      <Grid container justifyContent="center">
+        <Box sx={boxStyle}></Box>
+      </Grid>
     </>
   );
 };

@@ -39,7 +39,7 @@ function App() {
       <GlobalContext.Provider value={{ global, setGlobal }}>
         {Object.keys(global).length != 0 && <Nav />}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home alcohols={alcohols} />} />
           <Route
             path="/alcohols"
             element={
