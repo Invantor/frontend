@@ -5,6 +5,7 @@ import GlobalContext from "../../context/globalContext";
 import api from "../../api/api";
 
 import Alert from "@mui/material/Alert";
+import Banner from "../banner";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
@@ -26,13 +27,31 @@ import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
 	const [error, setError] = useState(null);
 	const { global } = useContext(GlobalContext);
+	const [bannerOpen, setBannerOpen] = useState(false);
 	const [newDrinks, setNewDrinks] = useState({
 		name: "",
 		alcohol_id: alcohols[0].id,
 		alcohol_amount: "",
 		mixer_id: mixers[0].id,
 		mixer_amount: "",
-  });
+	});
+	
+  const [bannerDisplay, setBannerDisplay] = useState({
+    variant: "outlined",
+    severity: "success",
+    message: "",
+	});
+	
+	
+
+  const handleBannerOpen = (severity, message) => {
+    setBannerDisplay({
+      ...bannerDisplay,
+      severity: severity,
+      message: message,
+    });
+    setBannerOpen(true);
+  };
   
   const handleChange = (e) => {
     const name = e.target.name;
@@ -50,8 +69,11 @@ const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
 			newDrinks.mixer_amount,
 			global.user.user_id,
 			global.user.jwt,
-			(newDrink) => setDrinks([...drinks, newDrink]),
-      (errorMessage) => setError(errorMessage),
+			(message, data) => {
+				setDrinks([...drinks, data]);
+				handleBannerOpen("success", message)
+			},
+      (errorMessage) => handleBannerOpen("error", errorMessage),
       );
   
   setNewDrinks({
@@ -65,7 +87,11 @@ const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
 
 	return (
 		<>
-			{<Alert severity="error">{error}</Alert>}
+			<Banner
+        bannerOpen={bannerOpen}
+        bannerDisplay={bannerDisplay}
+        setBannerOpen={setBannerOpen}
+      />
 			<Box sx={{ minWidth: 120 }}>
 				<Typography> Add Drink </Typography>
 				{/* <FormControl fullWidth onSubmit={handleSubmit}> */}

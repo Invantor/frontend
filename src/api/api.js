@@ -250,9 +250,8 @@ const createDrink = async (
       },
       { headers: { Authorization: jwt } }
     );
-
     if (status === 201) {
-      success(data);
+      success(data.message, data.data);
     } else {
       return null;
     }
