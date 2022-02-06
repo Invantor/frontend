@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { deepPurple } from "@mui/material/colors";
+import { deepPurple, grey } from "@mui/material/colors";
 
 const invantorTheme = createTheme({
   palette: {
@@ -8,6 +8,9 @@ const invantorTheme = createTheme({
     },
     secondary: {
       main: deepPurple[100],
+    },
+    grey: {
+      main: grey[200],
     },
   },
 });
