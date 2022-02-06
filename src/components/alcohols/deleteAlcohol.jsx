@@ -72,7 +72,7 @@ const DeleteAlcohol = ({ alcohol, alcohols, setAlcohols, updateAlcohol }) => {
       <Button
         sx={{ borderRadius: 16, display: "inline" }}
         variant="outlined"
-        color="success"
+        color="error"
         onClick={handleOpen}
       >
         <RemoveOutlinedIcon />

@@ -72,7 +72,7 @@ const DeleteMixer = ({ mixer, mixers, setMixers, updateMixer }) => {
       <Button
         sx={{ borderRadius: 16, display: "inline" }}
         variant="outlined"
-        color="success"
+        color="error"
         onClick={handleOpen}
       >
         <RemoveOutlinedIcon />
