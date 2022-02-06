@@ -13,7 +13,7 @@ import Grid from "@mui/material/Grid";
 const boxStyle = {
   border: 5,
   color: "secondary.main",
-  height: 1,
+  height: "300px",
   width: 0.8,
   display: "flex",
   justifyContent: "center",
@@ -21,6 +21,8 @@ const boxStyle = {
   flexWrap: "wrap",
   borderRadius: "16px",
   minHeight: "300px",
+  overflow: "hidden",
+  overflowY: "scroll",
 };
 
 const LowStock = (props) => {
