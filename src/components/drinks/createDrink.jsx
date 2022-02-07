@@ -42,7 +42,7 @@ const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
     message: "",
 	});
 	
-	
+
 
   const handleBannerOpen = (severity, message) => {
     setBannerDisplay({

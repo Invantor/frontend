@@ -14,10 +14,10 @@ import { TextField } from "@mui/material";
 import { Stack } from "@mui/material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-// import EditDrink from "./editDrink";
+import EditDrink from "./editDrink";
 import DeleteDrink from "./deleteDrink";
 
-const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
+const ShowDrinks = ({ drinks, updateDrink, setDrinks, alcohols, mixers }) => {
 
   return (
     <>
@@ -38,10 +38,12 @@ const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
                 <TableCell>{drink.alcohol_amount}</TableCell>
                 <TableCell>{drink.mixer_amount}</TableCell>
                 <Stack spacing={2} direction="row">
-                  {/* <EditDrink */}
-                    {/* drink={drink} */}
-                    {/* updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)} */}
-                  {/* /> */}
+                  <EditDrink
+                    drink={drink}
+                    alcohols={alcohols}
+                    mixers={mixers}
+                   updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)}
+                   />
                   <DeleteDrink 
                     drink={drink} 
                     drinks={drinks}
