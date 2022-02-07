@@ -56,13 +56,10 @@ const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
 
   const handleChange = (e) => {
     const name = e.target.name;
-    console.log("name", e.target.name);
     const value = e.target.value;
-    console.log("value", e.target.value);
     setNewDrinks({ ...newDrinks, [name]: value });
   };
 
-  console.log(newDrinks);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newDrink = await api.createDrink(
@@ -155,7 +152,9 @@ const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
             value={newDrinks.mixer_amount ?? ""}
             onChange={handleChange}
           />
-          <Button type="submit">Submit</Button>
+          <Button variant="outlined" type="submit">
+            Submit
+          </Button>
         </Stack>
       </form>
     </>

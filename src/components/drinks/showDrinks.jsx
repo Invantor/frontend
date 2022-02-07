@@ -1,8 +1,3 @@
-import React, { useState, useEffect } from "react";
-import api from "../../api/api";
-import axios from "axios";
-
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,14 +5,14 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { TextField } from "@mui/material";
+import AddToDrinkSold from "./addToDrinkSold";
+
 import { Stack } from "@mui/material";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 // import EditDrink from "./editDrink";
 import DeleteDrink from "./deleteDrink";
 
-const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
+const ShowDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
   return (
     <>
       <Typography> Drink's List </Typography>
@@ -37,7 +32,20 @@ const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
                 <TableCell>{drink.name}</TableCell>
                 <TableCell>{drink.alcohol_amount}</TableCell>
                 <TableCell>{drink.mixer_amount}</TableCell>
-                <TableCell>{drink.number_sold}</TableCell>
+                <TableCell>
+                  <Stack spacing={2} direction="row">
+                    {drink.number_sold}
+                  </Stack>
+                </TableCell>
+                <TableCell>
+                  <Stack spacing={2} direction="row">
+                    <AddToDrinkSold
+                      alcohols={alcohols}
+                      mixers={mixers}
+                      drink={drink}
+                    />
+                  </Stack>
+                </TableCell>
                 <TableCell>
                   <Stack spacing={2} direction="row">
                     {/* <EditDrink
