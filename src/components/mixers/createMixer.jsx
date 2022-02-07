@@ -3,6 +3,8 @@ import { useContext, useState } from "react";
 import GlobalContext from "../../context/globalContext";
 import api from "../../api/api";
 
+import { Stack } from "@mui/material";
+import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
@@ -55,30 +57,34 @@ const CreateMixers = (props) => {
     setNewMixers({ name: "", volumeInMl: "" });
   };
 
-  return (
+return (
     <>
       <Banner
         bannerOpen={bannerOpen}
         bannerDisplay={bannerDisplay}
         setBannerOpen={setBannerOpen}
       />
-      <Typography> Add Mixer </Typography>
-      <form className="form" onSubmit={handleSubmit}>
-        <div>
-          <Typography htmlFor="name">Name</Typography>
-          <Input
+      <Typography> Add Mixer </Typography>     
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>
+          <TextField
+            id="outlined-name"
+            label="Name"
             name="name"
             value={newMixers.name ?? ""}
             onChange={handleChange}
           />
-          <Typography htmlFor="volume in ml">Volume in ml</Typography>
-          <Input
+          <TextField
+            id="outlined-volumeInMl"
+            label="Volume In Ml"
             name="volumeInMl"
             value={newMixers.volumeInMl ?? ""}
             onChange={handleChange}
           />
-        </div>
-        <Button type="submit">Submit</Button>
+          <Button variant="outlined" type="submit">
+            Submit
+          </Button>
+        </Stack>
       </form>
     </>
   );
