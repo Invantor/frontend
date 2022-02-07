@@ -33,22 +33,24 @@ const ShowDrinks = ({ drinks, updateDrink, setDrinks }) => {
           </TableHead>
           <TableBody>
             {drinks.map((drink, i) => (
-              <TableRow key={i}>
+              <TableRow key={i} hover>
                 <TableCell>{drink.name}</TableCell>
                 <TableCell>{drink.alcohol_amount}</TableCell>
                 <TableCell>{drink.mixer_amount}</TableCell>
-                <Stack spacing={2} direction="row">
-                  {/* <EditDrink */}
-                  {/* drink={drink} */}
-                  {/* updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)} */}
-                  {/* /> */}
-                  <DeleteDrink
+                <TableCell>{drink.number_sold}</TableCell>
+                <TableCell>
+                  <Stack spacing={2} direction="row">
+                    {/* <EditDrink
                     drink={drink}
-                    drinks={drinks}
-                    setDrinks={setDrinks}
-                  />
-                  {/* </TableCell> */}
-                </Stack>
+                    updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)}
+                  /> */}
+                    <DeleteDrink
+                      drink={drink}
+                      drinks={drinks}
+                      setDrinks={setDrinks}
+                    />
+                  </Stack>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

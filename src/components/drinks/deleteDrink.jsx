@@ -22,15 +22,12 @@ const DeleteDrink = ({ drink, drinks, deleteDrink, setDrinks }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const removeDrink = await api.deleteDrink(
-      id,
-      global.user.jwt
-    );
-    setDrinks(drinks.filter((d) => d.id != drink.id))
-  }
-  
+    const removeDrink = await api.deleteDrink(id, global.user.jwt);
+    setDrinks(drinks.filter((d) => d.id != drink.id));
+  };
+
   return (
-    <td>
+    <>
       <Button onClick={handleOpen}>Delete</Button>
       <Modal
         open={open}
@@ -44,7 +41,7 @@ const DeleteDrink = ({ drink, drinks, deleteDrink, setDrinks }) => {
           </form>
         </Box>
       </Modal>
-    </td>
+    </>
   );
 };
 
