@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import CreateAlcohols from "../components/alcohols/createAlcohol";
 import ShowAlcohols from "../components/alcohols/showAlcohols";
 
-const Alcohols = ({ alcohols, setAlcohols, loading }) => {
+const Alcohols = ({ alcohols, setAlcohols, loading, updateAlcohol }) => {
   // Loading function from UI (the circle that spins when its still loading)
   const isLoading = () => {
     return (
@@ -21,13 +21,13 @@ const Alcohols = ({ alcohols, setAlcohols, loading }) => {
     );
   };
 
-  const updateAlcohol = (index, updatedAlcohol) => {
-    const updated = alcohols.map((alcohol, i) => {
-      return i === index ? updatedAlcohol : alcohol;
-    });
+  // const updateAlcohol = (index, updatedAlcohol) => {
+  //   const updated = alcohols.map((alcohol, i) => {
+  //     return i === index ? updatedAlcohol : alcohol;
+  //   });
 
-    setAlcohols(updated);
-  };
+  //   setAlcohols(updated);
+  // };
 
   const deleteAlcohol = (id) => {
     const toBeDeleted = alcohols.find((alcohol) => alcohol.id === id);

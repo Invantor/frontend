@@ -34,6 +34,22 @@ function App() {
     }
   }, []);
 
+  const updateMixer = (index, updatedMixer) => {
+    const updated = mixers.map((mixer, i) => {
+      return i === index ? updatedMixer : mixer;
+    });
+
+    setMixers(updated);
+  };
+
+  const updateAlcohol = (index, updatedAlcohol) => {
+    const updated = alcohols.map((alcohol, i) => {
+      return i === index ? updatedAlcohol : alcohol;
+    });
+
+    setAlcohols(updated);
+  };
+
   return (
     <>
       <GlobalContext.Provider value={{ global, setGlobal }}>
@@ -50,13 +66,19 @@ function App() {
                 alcohols={alcohols}
                 setAlcohols={setAlcohols}
                 loading={loading}
+                updateAlcohol={updateAlcohol}
               />
             }
           />
           <Route
             path="/mixers"
             element={
-              <Mixers mixers={mixers} setMixers={setMixers} loading={loading} />
+              <Mixers
+                mixers={mixers}
+                setMixers={setMixers}
+                loading={loading}
+                updateMixer={updateMixer}
+              />
             }
           />
           <Route
@@ -67,6 +89,8 @@ function App() {
                 setAlcohols={setAlcohols}
                 mixers={mixers}
                 setMixers={setMixers}
+                updateMixer={updateMixer}
+                updateAlcohol={updateAlcohol}
               />
             }
           />

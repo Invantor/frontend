@@ -12,7 +12,14 @@ import { Stack } from "@mui/material";
 // import EditDrink from "./editDrink";
 import DeleteDrink from "./deleteDrink";
 
-const ShowDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
+const ShowDrinks = ({
+  drinks,
+  setDrinks,
+  alcohols,
+  mixers,
+  updateMixer,
+  updateAlcohol,
+}) => {
   return (
     <>
       <Typography> Drink's List </Typography>
@@ -43,6 +50,10 @@ const ShowDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
                       alcohols={alcohols}
                       mixers={mixers}
                       drink={drink}
+                      updateMixer={updateMixer}
+                      updateAlcohol={(updatedAlcohol) =>
+                        updateAlcohol(i, updatedAlcohol)
+                      }
                     />
                   </Stack>
                 </TableCell>

@@ -14,7 +14,14 @@ import api from "../api/api";
 import CreateDrinks from "../components/drinks/createDrink";
 import ShowDrinks from "../components/drinks/showDrinks";
 
-const Drinks = ({ alcohols, setAlcohols, mixers, setMixers }) => {
+const Drinks = ({
+  alcohols,
+  setAlcohols,
+  mixers,
+  setMixers,
+  updateMixer,
+  updateAlcohol,
+}) => {
   const { global } = useContext(GlobalContext);
   const [drinks, setDrinks] = useState([]);
   const navigate = useNavigate();
@@ -82,6 +89,8 @@ const Drinks = ({ alcohols, setAlcohols, mixers, setMixers }) => {
                   setDrinks={setDrinks}
                   alcohols={alcohols}
                   mixers={mixers}
+                  updateMixer={updateMixer}
+                  updateAlcohol={updateAlcohol}
                 />
               </AccordionDetails>
             </Accordion>

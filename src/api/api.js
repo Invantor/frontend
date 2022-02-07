@@ -151,7 +151,7 @@ const createMixer = async (
 ) => {
   try {
     const { status, data } = await axios.post(
-      "/api/alcohols",
+      "/api/mixers",
       {
         name: name,
         volume_in_ml: volume_in_ml,

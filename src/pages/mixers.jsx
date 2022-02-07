@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import CreateMixers from "../components/mixers/createMixer";
 import ShowMixers from "../components/mixers/showMixers";
 
-const Mixers = ({ mixers, setMixers, loading }) => {
+const Mixers = ({ mixers, setMixers, loading, updateMixer }) => {
   // Loading function from UI (the circle that spins when its still loading)
 
   const isLoading = () => {
@@ -22,13 +22,13 @@ const Mixers = ({ mixers, setMixers, loading }) => {
     );
   };
 
-  const updateMixer = (index, updatedMixer) => {
-    const updated = mixers.map((mixer, i) => {
-      return i === index ? updatedMixer : mixer;
-    });
+  // const updateMixer = (index, updatedMixer) => {
+  //   const updated = mixers.map((mixer, i) => {
+  //     return i === index ? updatedMixer : mixer;
+  //   });
 
-    setMixers(updated);
-  };
+  //   setMixers(updated);
+  // };
 
   const deleteMixer = (id) => {
     const toBeDeleted = mixers.find((mixer) => mixer.id === id);
