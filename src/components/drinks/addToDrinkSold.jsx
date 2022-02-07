@@ -23,10 +23,10 @@ const AddToDrinkSold = ({
     const matchedAlcohol = alcohols.find(
       (alcohol) => alcohol.id === drink.alcohol_id
     );
-    const matchedMixer = mixers.find((mixer) => mixer.id === drink.mixer_id);
-
     const enoughAlcohol =
       matchedAlcohol && matchedAlcohol.volume_in_ml >= drink.alcohol_amount;
+
+    const matchedMixer = mixers.find((mixer) => mixer.id === drink.mixer_id);
 
     const enoughMixer =
       matchedMixer && matchedMixer.volume_in_ml >= drink.mixer_amount;
@@ -41,6 +41,7 @@ const AddToDrinkSold = ({
 
   const handleClick = async () => {
     const remainingAlcohol = alcohol.volume_in_ml - drink.alcohol_amount;
+    const remainingMixer = mixer.volume_in_ml - drink.mixer_amount;
 
     await api.editAlcohol(
       alcohol.id,
@@ -53,26 +54,16 @@ const AddToDrinkSold = ({
         console.log(data);
         updateAlcohol(data);
       }
-
-      // (data, message) => {
-      //   updateAlcohol(data);
-      //   handleBannerOpen("success", message);
-      // },
-      // (errorMessage) => {
-      //   handleBannerOpen("error", errorMessage);
-      // }
     );
-    // setFormData({});
 
-    // console.log("current alcohol", alcohol.volume_in_ml);
-    // console.log("required alcohol", drink.alcohol_amount);
-
-    // console.log(remainingAlcohol);
-    // console.log("in click");
-
-    // console.log("alcohol required for drink", alcohol);
-    // console.log("mixer required for drink", mixer);
-    // console.log(drink);
+    await api.editMixer(
+      mixer.id,
+      mixer.name,
+      remainingMixer,
+      mixer.critical_volume,
+      global.user_id,
+      global.user.jwt
+    );
   };
 
   return (
