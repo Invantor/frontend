@@ -107,7 +107,6 @@ const editAlcohol = async (
       return error(error);
     }
   } catch (e) {
-    console.log(e)
     return error(e.response.data.error);
   }
 };
@@ -196,7 +195,6 @@ const editMixer = async (
     return error(e.response.data.error);
   }
 };
-
 
 const deleteMixer = async (id, jwt, success, error) => {
   try {

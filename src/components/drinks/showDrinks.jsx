@@ -49,12 +49,12 @@ const ShowDrinks = ({ drinks, updateDrink, setDrinks, alcohols, mixers }) => {
                 </TableCell>
                 <TableCell>
                   <Stack spacing={2} direction="row">
-                    <EditDrink
+                   <EditDrink
                     drink={drink}
                     alcohols={alcohols}
                     mixers={mixers}
                    updateDrink={(updatedDrink) => updateDrink(i, updatedDrink)}
-                   />
+                   /> 
                     <DeleteDrink
                       drink={drink}
                       drinks={drinks}

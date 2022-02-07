@@ -79,12 +79,9 @@ const Drinks = ({ alcohols, setAlcohols, mixers, setMixers }) => {
               <AccordionDetails>
                 <ShowDrinks
                   drinks={drinks}
-<<<<<<< HEAD
-                  setDrinks={setDrinks}
-=======
+                  updateDrink={updateDrink}
                   setDrinks={setDrinks}  
                   updateDrink={updateDrink}
->>>>>>> ef6c124489d2ed748e95d700a6771080790f4abe
                   alcohols={alcohols}
                   mixers={mixers}
                 />
