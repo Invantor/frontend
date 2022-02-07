@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Input } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { Stack } from "@mui/material";
 
 import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";

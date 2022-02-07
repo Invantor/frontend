@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import Banner from "../banner";
+import { Stack } from "@mui/material";
+import { TextField } from "@mui/material";
 
 const CreateAlcohols = (props) => {
   const { alcohols, setAlcohols } = props;
@@ -64,23 +66,27 @@ const CreateAlcohols = (props) => {
         bannerDisplay={bannerDisplay}
         setBannerOpen={setBannerOpen}
       />
-      <Typography> Add Alcohol </Typography>
-      <form className="form" onSubmit={handleSubmit}>
-        <div>
-          <Typography htmlFor="name">Name</Typography>
-          <Input
+      <Typography> Add Alcohol </Typography>     
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>
+          <TextField
+            id="outlined-name"
+            label="Name"
             name="name"
             value={newAlcohols.name ?? ""}
             onChange={handleChange}
           />
-          <Typography htmlFor="volume in ml">Volume in ml</Typography>
-          <Input
+          <TextField
+            id="outlined-volumeInMl"
+            label="Volume In Ml"
             name="volumeInMl"
             value={newAlcohols.volumeInMl ?? ""}
             onChange={handleChange}
           />
-        </div>
-        <Button type="submit">Submit</Button>
+          <Button variant="outlined" type="submit">
+            Submit
+          </Button>
+        </Stack>
       </form>
     </>
   );
