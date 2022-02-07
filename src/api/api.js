@@ -260,6 +260,45 @@ const createDrink = async (
   }
 };
 
+const editDrink = async (
+  id,
+  name,
+  alcohol_id,
+  alcohol_amount,
+  mixer_id,
+  mixer_amount,
+  user_id,
+  number_sold,
+  jwt,
+  success,
+  error
+) => {
+  try {
+    const { status, data } = await axios.put(
+      `/api/drinks/${id}`,
+      {
+        name,
+        alcohol_id,
+        alcohol_amount,
+        mixer_id,
+        mixer_amount,
+        user_id,
+        number_sold,
+      },
+      { headers: { Authorization: jwt } }
+    );
+
+    if (status === 200) {
+      success(data.data, data.message);
+    } else {
+      return error(error);
+    }
+  } catch (e) {
+    console.log(e);
+    return error(e.response.data.error);
+  }
+};
+
 const deleteDrink = async (id, jwt, success, error) => {
   try {
     const { status, data } = await axios.delete(`/api/drinks/${id}`, {
@@ -319,6 +358,7 @@ export default {
   deleteMixer,
   getDrinks,
   createDrink,
+  editDrink,
   deleteDrink,
   signin,
   getUsers,

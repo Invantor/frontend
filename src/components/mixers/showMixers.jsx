@@ -40,8 +40,6 @@ const commonStyles = {
 const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  console.log(mixers);
-
   return (
     <>
       <Typography> Mixers's List </Typography>

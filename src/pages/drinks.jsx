@@ -87,6 +87,7 @@ const Drinks = ({
                 <ShowDrinks
                   drinks={drinks}
                   setDrinks={setDrinks}
+                  updateDrink={updateDrink}
                   alcohols={alcohols}
                   mixers={mixers}
                   updateMixer={updateMixer}

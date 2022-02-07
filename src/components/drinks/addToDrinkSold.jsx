@@ -13,6 +13,7 @@ const AddToDrinkSold = ({
   drink,
   updateMixer,
   updateAlcohol,
+  updateDrink,
 }) => {
   const { global } = useContext(GlobalContext);
   const [alcohol, setAlcohol] = useState({});
@@ -42,16 +43,17 @@ const AddToDrinkSold = ({
   const handleClick = async () => {
     const remainingAlcohol = alcohol.volume_in_ml - drink.alcohol_amount;
     const remainingMixer = mixer.volume_in_ml - drink.mixer_amount;
+    const newNumberSold = drink.number_sold + 1;
 
     await api.editAlcohol(
       alcohol.id,
       alcohol.name,
       remainingAlcohol,
       alcohol.critical_volume,
-      global.user_id,
+      alcohol.user_id,
       global.user.jwt,
       (data, message) => {
-        console.log(data);
+        console.log("alcohol", data);
         updateAlcohol(data);
       }
     );
@@ -61,8 +63,28 @@ const AddToDrinkSold = ({
       mixer.name,
       remainingMixer,
       mixer.critical_volume,
-      global.user_id,
-      global.user.jwt
+      mixer.user_id,
+      global.user.jwt,
+      (data, message) => {
+        console.log("Mixer", data);
+        updateMixer(data);
+      }
+    );
+
+    await api.editDrink(
+      drink.id,
+      drink.name,
+      drink.alcohol_id,
+      drink.alcohol_amount,
+      drink.mixer_id,
+      drink.mixer_amount,
+      drink.user_id,
+      newNumberSold,
+      global.user.jwt,
+      (data, message) => {
+        console.log("drink", data);
+        updateDrink(data);
+      }
     );
   };
 
