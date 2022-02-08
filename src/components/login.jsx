@@ -64,6 +64,7 @@ const Login = () => {
           <Stack spacing={2}>
             <div>
               <TextField
+                inputProps={{ "data-cy": "username-field" }}
                 sx={{ display: "flex", justifyContent: "center" }}
                 id="outlined-basic1"
                 label="Username"
@@ -78,8 +79,9 @@ const Login = () => {
             </div>
             <div>
               <TextField
+                inputProps={{ "data-cy": "password-field" }}
                 sx={{ display: "flex", justifyContent: "center" }}
-                id="outlined-basic"
+                id="password"
                 label="Password"
                 variant="outlined"
                 type="password"
@@ -91,12 +93,13 @@ const Login = () => {
               />
             </div>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Button variant="outlined" type="submit">
+              <Button variant="outlined" type="submit" id="login-button">
                 Login
               </Button>
             </Box>
-            <div>
+            <div id="banner-div">
               <Banner
+                className="potatooo"
                 bannerOpen={bannerOpen}
                 bannerDisplay={bannerDisplay}
                 setBannerOpen={setBannerOpen}
