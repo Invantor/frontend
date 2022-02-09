@@ -3,3 +3,8 @@ from="/api/*"
 to="https://invantor.herokuapp.com/api/:splat"
 status = 200
 force = true
+
+from="/*"
+to="/index.html"
+status = 200
+force= true
