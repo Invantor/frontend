@@ -14,7 +14,6 @@ import ShowAlcohols from "../components/alcohols/showAlcohols";
 const Alcohols = ({ alcohols, setAlcohols, loading, updateAlcohol }) => {
   // Loading function from UI (the circle that spins when its still loading)
 
-  console.log(loading);
   const isLoading = () => {
     return (
       <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -39,33 +38,29 @@ const Alcohols = ({ alcohols, setAlcohols, loading, updateAlcohol }) => {
   return (
     <>
       <div>
-        {!loading ? (
-          <>
-            <Accordion>
-              <AccordionSummary>
-                <Typography>Create</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <CreateAlcohols alcohols={alcohols} setAlcohols={setAlcohols} />
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary>
-                <Typography>Show</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <ShowAlcohols
-                  alcohols={alcohols}
-                  updateAlcohol={updateAlcohol}
-                  deleteAlcohol={deleteAlcohol()}
-                  setAlcohols={setAlcohols}
-                />
-              </AccordionDetails>
-            </Accordion>
-          </>
-        ) : (
-          isLoading()
-        )}
+        <>
+          <Accordion>
+            <AccordionSummary>
+              <Typography>Create</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <CreateAlcohols alcohols={alcohols} setAlcohols={setAlcohols} />
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary>
+              <Typography>Show</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <ShowAlcohols
+                alcohols={alcohols}
+                updateAlcohol={updateAlcohol}
+                deleteAlcohol={deleteAlcohol()}
+                setAlcohols={setAlcohols}
+              />
+            </AccordionDetails>
+          </Accordion>
+        </>
       </div>
     </>
   );

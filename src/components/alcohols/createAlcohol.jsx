@@ -17,7 +17,8 @@ const CreateAlcohols = (props) => {
   const [error, setError] = useState(null);
   const [newAlcohols, setNewAlcohols] = useState({
     name: "",
-    volume_in_ml: "",
+    volumeInMl: "",
+    criticalVolume: "",
   });
 
   const [bannerOpen, setBannerOpen] = useState(false);
@@ -47,6 +48,7 @@ const CreateAlcohols = (props) => {
     const newAlcohol = await api.createAlcohol(
       newAlcohols.name,
       newAlcohols.volumeInMl,
+      newAlcohols.criticalVolume,
       global.user.user_id,
       global.user.jwt,
       (message, data) => {
@@ -66,7 +68,7 @@ const CreateAlcohols = (props) => {
         bannerDisplay={bannerDisplay}
         setBannerOpen={setBannerOpen}
       />
-      <Typography> Add Alcohol </Typography>     
+      <Typography> Add Alcohol </Typography>
       <form onSubmit={handleSubmit}>
         <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>
           <TextField
@@ -81,6 +83,13 @@ const CreateAlcohols = (props) => {
             label="Volume In Ml"
             name="volumeInMl"
             value={newAlcohols.volumeInMl ?? ""}
+            onChange={handleChange}
+          />
+          <TextField
+            id="outlined-criticalVolume"
+            label="Critical Volume"
+            name="criticalVolume"
+            value={newAlcohols.criticalVolume ?? ""}
             onChange={handleChange}
           />
           <Button variant="outlined" type="submit">

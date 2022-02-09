@@ -15,7 +15,8 @@ const CreateMixers = (props) => {
   const { global } = useContext(GlobalContext);
   const [newMixers, setNewMixers] = useState({
     name: "",
-    volume_in_ml: "",
+    volumeInMl: "",
+    criticalVolume: "",
   });
 
   const [bannerOpen, setBannerOpen] = useState(false);
@@ -45,6 +46,7 @@ const CreateMixers = (props) => {
     const newMixer = await api.createMixer(
       newMixers.name,
       newMixers.volumeInMl,
+      newMixers.criticalVolume,
       global.user.user_id,
       global.user.jwt,
       (message, data) => {
@@ -57,14 +59,14 @@ const CreateMixers = (props) => {
     setNewMixers({ name: "", volumeInMl: "" });
   };
 
-return (
+  return (
     <>
       <Banner
         bannerOpen={bannerOpen}
         bannerDisplay={bannerDisplay}
         setBannerOpen={setBannerOpen}
       />
-      <Typography> Add Mixer </Typography>     
+      <Typography> Add Mixer </Typography>
       <form onSubmit={handleSubmit}>
         <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>
           <TextField
@@ -79,6 +81,13 @@ return (
             label="Volume In Ml"
             name="volumeInMl"
             value={newMixers.volumeInMl ?? ""}
+            onChange={handleChange}
+          />
+          <TextField
+            id="outlined-criticalVolume"
+            label="Critical Volume"
+            name="criticalVolume"
+            value={newMixers.criticalVolume ?? ""}
             onChange={handleChange}
           />
           <Button variant="outlined" type="submit">

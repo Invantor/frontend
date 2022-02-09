@@ -22,18 +22,22 @@ function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  console.log("global", global);
+
   useEffect(async () => {
-    if (!global.user) {
+    if (!global || !global.user) {
       navigate("/signin");
     } else {
       // API call that was moved from the showmixers component up to the mixers component to allow for state to be managed in a parent component for children components to use
       const initialAlcohols = await api.getAlcohols();
       const initialMixers = await api.getMixers();
+      console.log("Initial Alcohols", initialAlcohols);
+      console.log("initial Mixers", initialMixers);
       setMixers(initialMixers);
       setAlcohols(initialAlcohols);
-      setLoading(false);
     }
   }, [global]);
+  console.log(mixers, alcohols);
 
   const updateMixer = (index, updatedMixer) => {
     const updated = mixers.map((mixer, i) => {
@@ -51,8 +55,6 @@ function App() {
     setAlcohols(updated);
   };
 
-  console.log("global", global);
-
   return (
     <>
       <CssBaseline />
@@ -61,7 +63,13 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home alcohols={alcohols} mixers={mixers} />}
+            element={
+              <Home
+                alcohols={alcohols}
+                mixers={mixers}
+                setLoading={setLoading}
+              />
+            }
           />
           <Route
             path="/alcohols"
@@ -71,6 +79,7 @@ function App() {
                 setAlcohols={setAlcohols}
                 loading={loading}
                 updateAlcohol={updateAlcohol}
+                setLoading={setLoading}
               />
             }
           />

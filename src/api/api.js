@@ -59,6 +59,7 @@ const getAlcohols = async () => {
 const createAlcohol = async (
   name,
   volume_in_ml,
+  critical_volume,
   user_id,
   jwt,
   success,
@@ -70,6 +71,7 @@ const createAlcohol = async (
       {
         name: name,
         volume_in_ml: volume_in_ml,
+        critical_volume: critical_volume,
         user_id: user_id,
       },
       { headers: { Authorization: jwt } }
@@ -144,6 +146,7 @@ const getMixers = async () => {
 const createMixer = async (
   name,
   volume_in_ml,
+  critical_volume,
   user_id,
   jwt,
   success,
@@ -155,6 +158,7 @@ const createMixer = async (
       {
         name: name,
         volume_in_ml: volume_in_ml,
+        critical_volume: critical_volume,
         user_id: user_id,
       },
       { headers: { Authorization: jwt } }

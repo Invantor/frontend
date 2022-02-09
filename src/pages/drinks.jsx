@@ -63,43 +63,43 @@ const Drinks = ({
   return (
     <>
       <div>
-        {!loading ? (
-          <>
-            <Accordion>
-              <AccordionSummary>
-                <Typography>Create</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <CreateDrinks
-                  drinks={drinks}
-                  setDrinks={setDrinks}
-                  alcohols={alcohols}
-                  setAlcohols={setAlcohols}
-                  mixers={mixers}
-                  setMixers={setMixers}
-                />
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary>
-                <Typography>Show</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <ShowDrinks
-                  drinks={drinks}
-                  setDrinks={setDrinks}
-                  updateDrink={updateDrink}
-                  alcohols={alcohols}
-                  mixers={mixers}
-                  updateMixer={updateMixer}
-                  updateAlcohol={updateAlcohol}
-                />
-              </AccordionDetails>
-            </Accordion>
-          </>
-        ) : (
+        {/* {!loading ? ( */}
+        <>
+          <Accordion>
+            <AccordionSummary>
+              <Typography>Create</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <CreateDrinks
+                drinks={drinks}
+                setDrinks={setDrinks}
+                alcohols={alcohols}
+                setAlcohols={setAlcohols}
+                mixers={mixers}
+                setMixers={setMixers}
+              />
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary>
+              <Typography>Show</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <ShowDrinks
+                drinks={drinks}
+                setDrinks={setDrinks}
+                updateDrink={updateDrink}
+                alcohols={alcohols}
+                mixers={mixers}
+                updateMixer={updateMixer}
+                updateAlcohol={updateAlcohol}
+              />
+            </AccordionDetails>
+          </Accordion>
+        </>
+        {/* ) : (
           isLoading()
-        )}
+        )} */}
       </div>
     </>
   );

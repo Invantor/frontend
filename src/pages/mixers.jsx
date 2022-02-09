@@ -43,33 +43,33 @@ const Mixers = ({ mixers, setMixers, loading, updateMixer }) => {
   // And since ShowMixer's is using this parent component's mixer state, the ShowMixer component will be aware of the state change and thus re-render.
   return (
     <div>
-      {!loading ? (
-        <>
-          <Accordion>
-            <AccordionSummary>
-              <Typography>Create</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <CreateMixers mixers={mixers} setMixers={setMixers} />
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary>
-              <Typography>Show</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <ShowMixers
-                mixers={mixers}
-                updateMixer={updateMixer}
-                deleteMixer={deleteMixer()}
-                setMixers={setMixers}
-              />
-            </AccordionDetails>
-          </Accordion>
-        </>
-      ) : (
+      {/* {!loading ? ( */}
+      <>
+        <Accordion>
+          <AccordionSummary>
+            <Typography>Create</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <CreateMixers mixers={mixers} setMixers={setMixers} />
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary>
+            <Typography>Show</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <ShowMixers
+              mixers={mixers}
+              updateMixer={updateMixer}
+              deleteMixer={deleteMixer()}
+              setMixers={setMixers}
+            />
+          </AccordionDetails>
+        </Accordion>
+      </>
+      {/* ) : (
         isLoading()
-      )}
+      )} */}
     </div>
   );
 };

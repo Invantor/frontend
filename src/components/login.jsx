@@ -99,7 +99,7 @@ const Login = () => {
             </Box>
             <div id="banner-div">
               <Banner
-                // inputProps={{ "data-cy": "banner-field" }}
+                inputProps={{ "data-cy": "username-field" }}
                 data-cy="banner-alert"
                 className="potatooo"
                 bannerOpen={bannerOpen}
