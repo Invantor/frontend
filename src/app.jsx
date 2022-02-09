@@ -11,6 +11,7 @@ import Home from "./pages/home";
 import Mixers from "./pages/mixers";
 import Nav from "./components/nav";
 import Signin from "./pages/signin";
+import CssBaseline from "@mui/material/CssBaseline";
 
 import api from "./api/api";
 
@@ -50,10 +51,13 @@ function App() {
     setAlcohols(updated);
   };
 
+  console.log(alcohols, mixers);
+
   return (
     <>
+      <CssBaseline />
       <GlobalContext.Provider value={{ global, setGlobal }}>
-        {Object.keys(global).length != 0 && <Nav />}
+        <Nav />
         <Routes>
           <Route
             path="/"

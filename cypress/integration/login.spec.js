@@ -9,7 +9,7 @@ describe("invantor application", () => {
   //   // Since we want to visit the same URL at the start of all our tests,
   //   // we include it in our beforeEach function so that it runs before each test
   //   // cy.visit(`${Cypress.config("baseUrl")}`);
-  //   cy.visit("localhost:3001/signin");
+  //   cy.visit("http://localhost:3001/signin");
   // });
 
   // it("Should redirect user to signin page if user is not logged in", () => {
@@ -23,7 +23,8 @@ describe("invantor application", () => {
   // });
 
   it("Login should fail if username is not provided", () => {
-    cy.visit("localhost:3001/signin");
+    cy.clearLocalStorage();
+    cy.visit("http://localhost:3001/signin");
     // cy.get("[data-cy=password-field]").type("password");
     // cy.get("#login-button").click();
     // cy.get("#banner-div")
@@ -33,7 +34,8 @@ describe("invantor application", () => {
   });
 
   it("Login should fail if password is not provided", () => {
-    cy.visit("localhost:3001/signin");
+    cy.clearLocalStorage();
+    cy.visit("http://localhost:3001/signin");
     // cy.get("[data-cy=username-field]").type("USERNAME");
     // cy.get("#login-button").click();
     // cy.get("#banner-div")

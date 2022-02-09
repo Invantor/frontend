@@ -34,6 +34,7 @@ const Drinks = ({
     } else {
       // API call that was moved from the showdrinks component up to the drinks component to allow for state to be managed in a parent component for children components to use
       const initialDrinks = await api.getDrinks();
+      console.log(initialDrinks);
       setDrinks(initialDrinks);
       setLoading(false);
     }

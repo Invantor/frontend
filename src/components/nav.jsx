@@ -15,6 +15,11 @@ const Nav = () => {
     setGlobal({});
     navigate("/signin");
   };
+
+  if (!global || !global.user) {
+    return null;
+  }
+
   return (
     <Box pb="10px">
       <nav>
