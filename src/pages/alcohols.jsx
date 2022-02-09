@@ -13,6 +13,8 @@ import ShowAlcohols from "../components/alcohols/showAlcohols";
 
 const Alcohols = ({ alcohols, setAlcohols, loading, updateAlcohol }) => {
   // Loading function from UI (the circle that spins when its still loading)
+
+  console.log(loading);
   const isLoading = () => {
     return (
       <Box sx={{ display: "flex", justifyContent: "center" }}>

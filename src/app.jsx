@@ -33,7 +33,7 @@ function App() {
       setAlcohols(initialAlcohols);
       setLoading(false);
     }
-  }, []);
+  }, [global]);
 
   const updateMixer = (index, updatedMixer) => {
     const updated = mixers.map((mixer, i) => {
