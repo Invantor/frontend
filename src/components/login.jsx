@@ -66,7 +66,7 @@ const Login = () => {
               <TextField
                 inputProps={{ "data-cy": "username-field" }}
                 sx={{ display: "flex", justifyContent: "center" }}
-                id="outlined-basic1"
+                id="username"
                 label="Username"
                 variant="outlined"
                 type="text"
@@ -99,6 +99,8 @@ const Login = () => {
             </Box>
             <div id="banner-div">
               <Banner
+                // inputProps={{ "data-cy": "banner-field" }}
+                data-cy="banner-alert"
                 className="potatooo"
                 bannerOpen={bannerOpen}
                 bannerDisplay={bannerDisplay}

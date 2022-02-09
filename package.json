@@ -26,6 +26,7 @@
     "use-local-storage": "^2.2.6"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^8.0.2",
     "@vitejs/plugin-react": "^1.0.7",
     "cypress": "^9.4.1",
     "vite": "^2.7.2"

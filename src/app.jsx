@@ -51,7 +51,7 @@ function App() {
     setAlcohols(updated);
   };
 
-  console.log(alcohols, mixers);
+  console.log("global", global);
 
   return (
     <>
