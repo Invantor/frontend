@@ -71,7 +71,7 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
               <TableCell>Stock Status</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody data-cy="table-body">
             {mixers
               .filter((mixer) => {
                 if (searchTerm == "") {
@@ -83,7 +83,7 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
                 }
               })
               .map((mixer, i) => (
-                <TableRow key={i} hover>
+                <TableRow key={i} hover data-cy="table-row">
                   <TableCell>{mixer.name}</TableCell>
                   <TableCell>{mixer.volume_in_ml}</TableCell>
                   <TableCell>{mixer.critical_volume}</TableCell>
