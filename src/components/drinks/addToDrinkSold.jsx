@@ -44,6 +44,10 @@ const AddToDrinkSold = ({
     const remainingAlcohol = alcohol.volume_in_ml - drink.alcohol_amount;
     const remainingMixer = mixer.volume_in_ml - drink.mixer_amount;
     const newNumberSold = drink.number_sold + 1;
+    const alcoholIndex = alcohols.indexOf(alcohol);
+    const mixerIndex = mixers.indexOf(mixer);
+    console.log("Drink Alcohol's Index in State Array", alcoholIndex);
+    console.log("Alcohols Array", alcohols);
 
     await api.editAlcohol(
       alcohol.id,
@@ -53,8 +57,8 @@ const AddToDrinkSold = ({
       alcohol.user_id,
       global.user.jwt,
       (data, message) => {
-        console.log("alcohol", data);
-        updateAlcohol(data);
+        console.log(data);
+        updateAlcohol(alcoholIndex, data);
       }
     );
 
@@ -66,8 +70,8 @@ const AddToDrinkSold = ({
       mixer.user_id,
       global.user.jwt,
       (data, message) => {
-        console.log("Mixer", data);
-        updateMixer(data);
+        // console.log("Mixer", data);
+        updateMixer(mixerIndex, data);
       }
     );
 
@@ -82,7 +86,7 @@ const AddToDrinkSold = ({
       newNumberSold,
       global.user.jwt,
       (data, message) => {
-        console.log("drink", data);
+        // console.log("drink", data);
         updateDrink(data);
       }
     );

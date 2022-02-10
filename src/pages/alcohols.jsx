@@ -30,10 +30,10 @@ const Alcohols = ({ alcohols, setAlcohols, loading, updateAlcohol }) => {
   //   setAlcohols(updated);
   // };
 
-  const deleteAlcohol = (id) => {
-    const toBeDeleted = alcohols.find((alcohol) => alcohol.id === id);
-    console.log(toBeDeleted);
-  };
+  // const deleteAlcohol = (id) => {
+  //   const toBeDeleted = alcohols.find((alcohol) => alcohol.id === id);
+  //   console.log(toBeDeleted);
+  // };
 
   return (
     <>
@@ -55,7 +55,7 @@ const Alcohols = ({ alcohols, setAlcohols, loading, updateAlcohol }) => {
               <ShowAlcohols
                 alcohols={alcohols}
                 updateAlcohol={updateAlcohol}
-                deleteAlcohol={deleteAlcohol()}
+                // deleteAlcohol={deleteAlcohol()}
                 setAlcohols={setAlcohols}
               />
             </AccordionDetails>

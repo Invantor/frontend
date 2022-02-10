@@ -22,8 +22,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  console.log("global", global);
-
   useEffect(async () => {
     if (!global || !global.user) {
       navigate("/signin");
@@ -31,13 +29,10 @@ function App() {
       // API call that was moved from the showmixers component up to the mixers component to allow for state to be managed in a parent component for children components to use
       const initialAlcohols = await api.getAlcohols();
       const initialMixers = await api.getMixers();
-      console.log("Initial Alcohols", initialAlcohols);
-      console.log("initial Mixers", initialMixers);
       setMixers(initialMixers);
       setAlcohols(initialAlcohols);
     }
   }, [global]);
-  console.log(mixers, alcohols);
 
   const updateMixer = (index, updatedMixer) => {
     const updated = mixers.map((mixer, i) => {
@@ -48,12 +43,16 @@ function App() {
   };
 
   const updateAlcohol = (index, updatedAlcohol) => {
+    console.log("index", index);
+    console.log("updated alcohol", updatedAlcohol);
     const updated = alcohols.map((alcohol, i) => {
       return i === index ? updatedAlcohol : alcohol;
     });
 
     setAlcohols(updated);
   };
+
+  // console.log("alcohols state:", alcohols);
 
   return (
     <>

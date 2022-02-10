@@ -71,44 +71,48 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
               <TableCell>Stock Status</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {alcohols
-              .filter((alcohol) => {
-                if (searchTerm == "") {
-                  return alcohol;
-                } else if (
-                  alcohol.name.toLowerCase().includes(searchTerm.toLowerCase())
-                ) {
-                  return alcohol;
-                }
-              })
-              .map((alcohol, i) => (
-                <TableRow key={i} hover>
-                  <TableCell>{alcohol.name}</TableCell>
-                  <TableCell>{alcohol.volume_in_ml}</TableCell>
-                  <TableCell>{alcohol.critical_volume}</TableCell>
-                  <TableCell>
-                    {alcohol.critical_volume > alcohol.volume_in_ml
-                      ? "Low Stock"
-                      : "In Stock"}
-                  </TableCell>
-                  <TableCell>
-                    <Stack spacing={2} direction="row">
-                      <EditAlcohol
-                        alcohol={alcohol}
-                        updateAlcohol={(updatedAlcohol) =>
-                          updateAlcohol(i, updatedAlcohol)
-                        }
-                      />
-                      <DeleteAlcohol
-                        alcohol={alcohol}
-                        alcohols={alcohols}
-                        setAlcohols={setAlcohols}
-                      />
-                    </Stack>
-                  </TableCell>
-                </TableRow>
-              ))}
+          <TableBody data-cy="table-body">
+            {alcohols != null
+              ? alcohols
+                  .filter((alcohol) => {
+                    if (searchTerm == "") {
+                      return alcohol;
+                    } else if (
+                      alcohol.name
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+                    ) {
+                      return alcohol;
+                    }
+                  })
+                  .map((alcohol, i) => (
+                    <TableRow key={i} hover data-cy="table-row">
+                      <TableCell>{alcohol.name}</TableCell>
+                      <TableCell>{alcohol.volume_in_ml}</TableCell>
+                      <TableCell>{alcohol.critical_volume}</TableCell>
+                      <TableCell>
+                        {alcohol.critical_volume > alcohol.volume_in_ml
+                          ? "Low Stock"
+                          : "In Stock"}
+                      </TableCell>
+                      <TableCell>
+                        <Stack spacing={2} direction="row">
+                          <EditAlcohol
+                            alcohol={alcohol}
+                            updateAlcohol={(updatedAlcohol) =>
+                              updateAlcohol(i, updatedAlcohol)
+                            }
+                          />
+                          <DeleteAlcohol
+                            alcohol={alcohol}
+                            alcohols={alcohols}
+                            setAlcohols={setAlcohols}
+                          />
+                        </Stack>
+                      </TableCell>
+                    </TableRow>
+                  ))
+              : null}
           </TableBody>
         </Table>
       </TableContainer>

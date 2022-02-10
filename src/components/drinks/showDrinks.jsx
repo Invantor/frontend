@@ -35,53 +35,51 @@ const ShowDrinks = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {drinks.map((drink, i) => (
-              <TableRow key={i} hover>
-                <TableCell>{drink.name}</TableCell>
-                <TableCell>{drink.alcohol_amount}</TableCell>
-                <TableCell>{drink.mixer_amount}</TableCell>
-                <TableCell>
-                  <Stack spacing={2} direction="row">
-                    {drink.number_sold}
-                  </Stack>
-                </TableCell>
-                <TableCell>
-                  <Stack spacing={2} direction="row">
-                    <AddToDrinkSold
-                      alcohols={alcohols}
-                      mixers={mixers}
-                      drink={drink}
-                      updateMixer={(updatedMixer) =>
-                        updateMixer(i, updatedMixer)
-                      }
-                      updateAlcohol={(updatedAlcohol) =>
-                        updateAlcohol(i, updatedAlcohol)
-                      }
-                      updateDrink={(updatedDrink) =>
-                        updateDrink(i, updatedDrink)
-                      }
-                    />
-                  </Stack>
-                </TableCell>
-                <TableCell>
-                  <Stack spacing={2} direction="row">
-                    <EditDrink
-                      drink={drink}
-                      alcohols={alcohols}
-                      mixers={mixers}
-                      updateDrink={(updatedDrink) =>
-                        updateDrink(i, updatedDrink)
-                      }
-                    />
-                    <DeleteDrink
-                      drink={drink}
-                      drinks={drinks}
-                      setDrinks={setDrinks}
-                    />
-                  </Stack>
-                </TableCell>
-              </TableRow>
-            ))}
+            {drinks != null
+              ? drinks.map((drink, i) => (
+                  <TableRow key={i} hover>
+                    <TableCell>{drink.name}</TableCell>
+                    <TableCell>{drink.alcohol_amount}</TableCell>
+                    <TableCell>{drink.mixer_amount}</TableCell>
+                    <TableCell>
+                      <Stack spacing={2} direction="row">
+                        {drink.number_sold}
+                      </Stack>
+                    </TableCell>
+                    <TableCell>
+                      <Stack spacing={2} direction="row">
+                        <AddToDrinkSold
+                          alcohols={alcohols}
+                          mixers={mixers}
+                          drink={drink}
+                          updateMixer={updateMixer}
+                          updateAlcohol={updateAlcohol}
+                          updateDrink={(updatedDrink) =>
+                            updateDrink(i, updatedDrink)
+                          }
+                        />
+                      </Stack>
+                    </TableCell>
+                    <TableCell>
+                      <Stack spacing={2} direction="row">
+                        <EditDrink
+                          drink={drink}
+                          alcohols={alcohols}
+                          mixers={mixers}
+                          updateDrink={(updatedDrink) =>
+                            updateDrink(i, updatedDrink)
+                          }
+                        />
+                        <DeleteDrink
+                          drink={drink}
+                          drinks={drinks}
+                          setDrinks={setDrinks}
+                        />
+                      </Stack>
+                    </TableCell>
+                  </TableRow>
+                ))
+              : null}
           </TableBody>
         </Table>
       </TableContainer>
