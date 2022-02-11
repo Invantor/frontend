@@ -2,11 +2,6 @@
 
 describe("invantor application", () => {
   beforeEach(() => {
-    // Cypress starts out with a blank slate for each test
-    // so we must tell it to visit our website with the `cy.visit()` command.
-    // Since we want to visit the same URL at the start of all our tests,
-    // we include it in our beforeEach function so that it runs before each test
-    // cy.visit(`${Cypress.config("baseUrl")}`);
     cy.clearLocalStorage();
     cy.visit("http://localhost:3001/signin");
     cy.get("[data-cy=username-field]").type("admin@admin.com");
@@ -77,7 +72,8 @@ describe("invantor application", () => {
       .should("contain", "Successfully Created")
       .and("be.visible");
   });
-  it("Mixer should NOT be created When an mixer with the same name already exists.", () => {
+
+  it("Mixer should NOT be created When an alcohol with the same name already exists.", () => {
     cy.findByRole("button", { name: "Create" }).click();
     cy.findByRole("textbox", { name: "Name" }).type("New_Mixer_Entry");
     cy.findByRole("textbox", { name: "Volume In Ml" }).type("500");
@@ -90,7 +86,7 @@ describe("invantor application", () => {
 
   it("Search function SHOULD return the matching entry", () => {
     cy.findByRole("button", { name: "Show" }).click();
-    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_entry");
+    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_Entry");
     cy.get("[data-cy=table-body]")
       .find("[data-cy=table-row]")
       .should("have.length", 1)
@@ -99,21 +95,21 @@ describe("invantor application", () => {
 
   it("Edit button SHOULD bring up the edit modal when clicked", () => {
     cy.findByRole("button", { name: "Show" }).click();
-    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_entry");
-    cy.get("[data-cy=table-body]")
-      .find("[data-cy=table-row]")
-      .find("[data-cy=edit-button]")
-      .click();
+    cy.contains("td", "New_Mixer_Entry")
+      .parent()
+      .within(($tr) => {
+        cy.get("button").first().click();
+      });
     cy.get("[data-cy=edit-modal]").should("be.visible");
   });
 
   it("Mixer should NOT be successfully edited to a name that already exists in the system", () => {
     cy.findByRole("button", { name: "Show" }).click();
-    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_entry");
-    cy.get("[data-cy=table-body]")
-      .find("[data-cy=table-row]")
-      .find("[data-cy=edit-button]")
-      .click();
+    cy.contains("td", "New_Mixer_Entry")
+      .parent()
+      .within(($tr) => {
+        cy.get("button").first().click();
+      });
     cy.get("[data-cy=edit-name]").clear().type("Jim Beam");
     cy.findByRole("button", { name: "Submit" }).click();
     cy.findByRole("alert")
@@ -123,11 +119,11 @@ describe("invantor application", () => {
 
   it("Mixer should NOT be successfully edited if Name is blank", () => {
     cy.findByRole("button", { name: "Show" }).click();
-    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_entry");
-    cy.get("[data-cy=table-body]")
-      .find("[data-cy=table-row]")
-      .find("[data-cy=edit-button]")
-      .click();
+    cy.contains("td", "New_Mixer_Entry")
+      .parent()
+      .within(($tr) => {
+        cy.get("button").first().click();
+      });
     cy.get("[data-cy=edit-name]").clear();
     cy.findByRole("button", { name: "Submit" }).click();
     cy.findByRole("alert")
@@ -137,11 +133,11 @@ describe("invantor application", () => {
 
   it("Mixer should NOT be successfully edited if Volume in ML is blank", () => {
     cy.findByRole("button", { name: "Show" }).click();
-    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_entry");
-    cy.get("[data-cy=table-body]")
-      .find("[data-cy=table-row]")
-      .find("[data-cy=edit-button]")
-      .click();
+    cy.contains("td", "New_Mixer_Entry")
+      .parent()
+      .within(($tr) => {
+        cy.get("button").first().click();
+      });
     cy.get("[data-cy=edit-volume]").clear();
     cy.findByRole("button", { name: "Submit" }).click();
     cy.findByRole("alert")
@@ -151,11 +147,11 @@ describe("invantor application", () => {
 
   it("Mixer should NOT be successfully edited Critical Volume is blank", () => {
     cy.findByRole("button", { name: "Show" }).click();
-    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_entry");
-    cy.get("[data-cy=table-body]")
-      .find("[data-cy=table-row]")
-      .find("[data-cy=edit-button]")
-      .click();
+    cy.contains("td", "New_Mixer_Entry")
+      .parent()
+      .within(($tr) => {
+        cy.get("button").first().click();
+      });
     cy.get("[data-cy=edit-criticalvolume]").clear();
     cy.findByRole("button", { name: "Submit" }).click();
     cy.findByRole("alert")
@@ -165,11 +161,11 @@ describe("invantor application", () => {
 
   it("Mixer should NOT be successfully edited if volume is not an interger", () => {
     cy.findByRole("button", { name: "Show" }).click();
-    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_entry");
-    cy.get("[data-cy=table-body]")
-      .find("[data-cy=table-row]")
-      .find("[data-cy=edit-button]")
-      .click();
+    cy.contains("td", "New_Mixer_Entry")
+      .parent()
+      .within(($tr) => {
+        cy.get("button").first().click();
+      });
     cy.get("[data-cy=edit-volume]").clear().type("Five Hundred");
     cy.findByRole("button", { name: "Submit" }).click();
     cy.findByRole("alert")
@@ -179,11 +175,11 @@ describe("invantor application", () => {
 
   it("Mixer should NOT be successfully edited if critical volume is not an interger", () => {
     cy.findByRole("button", { name: "Show" }).click();
-    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_entry");
-    cy.get("[data-cy=table-body]")
-      .find("[data-cy=table-row]")
-      .find("[data-cy=edit-button]")
-      .click();
+    cy.contains("td", "New_Mixer_Entry")
+      .parent()
+      .within(($tr) => {
+        cy.get("button").first().click();
+      });
     cy.get("[data-cy=edit-criticalvolume]").clear().type("Five Hundred");
     cy.findByRole("button", { name: "Submit" }).click();
     cy.findByRole("alert")
@@ -193,12 +189,12 @@ describe("invantor application", () => {
 
   it("Mixer SHOULD be successfully edited if correct parameters are provided", () => {
     cy.findByRole("button", { name: "Show" }).click();
-    cy.findByRole("textbox", { name: "Search..." }).type("New_Mixer_entry");
-    cy.get("[data-cy=table-body]")
-      .find("[data-cy=table-row]")
-      .find("[data-cy=edit-button]")
-      .click();
-    cy.get("[data-cy=edit-name]").clear().type("New_Mixer_Entry_V2");
+    cy.contains("td", "New_Mixer_Entry")
+      .parent()
+      .within(($tr) => {
+        cy.get("button").first().click();
+      });
+    cy.get("[data-cy=edit-name]").clear().type("Totally New Mixer");
     cy.get("[data-cy=edit-volume]").clear().type("1000");
     cy.get("[data-cy=edit-criticalvolume]").clear().type("2000");
     cy.findByRole("button", { name: "Submit" }).click();
@@ -206,5 +202,14 @@ describe("invantor application", () => {
       .should("contain", "Successfully Updated")
       .and("be.visible");
   });
+
+  it("Mixer SHOULD be successfully deleted when the delete button is clicked", () => {
+    cy.findByRole("button", { name: "Show" }).click();
+    cy.contains("td", "Totally New Mixer")
+      .parent()
+      .within(($tr) => {
+        cy.get("button").last().click();
+      });
+    cy.contains("td", "Totally New Mixer").should("not.exist");
+  });
 });
-``;
