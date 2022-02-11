@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,7 +11,6 @@ import { Stack } from "@mui/material";
 
 import EditDrink from "./editDrink";
 import DeleteDrink from "./deleteDrink";
-import GlobalContext from "../../context/globalContext";
 
 const ShowDrinks = ({
   drinks,
@@ -23,7 +21,6 @@ const ShowDrinks = ({
   updateMixer,
   updateAlcohol,
 }) => {
-  const { global } = useContext(GlobalContext);
   return (
     <>
       <Typography> Drink's List </Typography>
@@ -73,13 +70,12 @@ const ShowDrinks = ({
                             updateDrink(i, updatedDrink)
                           }
                         />
-                        {global.user.admin ? (
-                          <DeleteDrink
-                            drink={drink}
-                            drinks={drinks}
-                            setDrinks={setDrinks}
-                          />
-                        ) : null}
+
+                        <DeleteDrink
+                          drink={drink}
+                          drinks={drinks}
+                          setDrinks={setDrinks}
+                        />
                       </Stack>
                     </TableCell>
                   </TableRow>

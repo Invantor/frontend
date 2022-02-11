@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../../api/api";
 import axios from "axios";
 
@@ -16,7 +16,6 @@ import { Stack } from "@mui/material";
 
 import EditMixer from "./editMixer";
 import DeleteMixer from "./deleteMixer";
-import GlobalContext from "../../context/globalContext";
 
 const styles = {
   searchContainer: { display: "flex", borderColor: "error.main" },
@@ -40,7 +39,6 @@ const commonStyles = {
 
 const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { global } = useContext(GlobalContext);
 
   return (
     <>
@@ -105,13 +103,11 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
                               updateMixer(i, updatedMixer)
                             }
                           />
-                          {global.user.admin ? (
-                            <DeleteMixer
-                              mixer={mixer}
-                              mixers={mixers}
-                              setMixers={setMixers}
-                            />
-                          ) : null}
+                          <DeleteMixer
+                            mixer={mixer}
+                            mixers={mixers}
+                            setMixers={setMixers}
+                          />
                         </Stack>
                       </TableCell>
                     </TableRow>

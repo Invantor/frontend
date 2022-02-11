@@ -2,11 +2,6 @@
 
 describe("invantor application", () => {
   beforeEach(() => {
-    // Cypress starts out with a blank slate for each test
-    // so we must tell it to visit our website with the `cy.visit()` command.
-    // Since we want to visit the same URL at the start of all our tests,
-    // we include it in our beforeEach function so that it runs before each test
-    // cy.visit(`${Cypress.config("baseUrl")}`);
     cy.clearLocalStorage();
     cy.visit("http://localhost:3001/signin");
     cy.get("[data-cy=username-field]").type("admin@admin.com");
@@ -77,6 +72,7 @@ describe("invantor application", () => {
       .should("contain", "Successfully Created")
       .and("be.visible");
   });
+
   it("Alcohol should NOT be created When an alcohol with the same name already exists.", () => {
     cy.findByRole("button", { name: "Create" }).click();
     cy.findByRole("textbox", { name: "Name" }).type("New_Alcohol_Entry");
@@ -101,8 +97,8 @@ describe("invantor application", () => {
     cy.findByRole("button", { name: "Show" }).click();
     cy.findByRole("textbox", { name: "Search..." }).type("New_Alcohol_entry");
     cy.get("[data-cy=table-body]")
-      .find("[data-cy=table-row]")
-      .find("[data-cy=edit-button]")
+      .get("[data-cy=table-row]")
+      .get("[data-cy=edit-button]")
       .click();
     cy.get("[data-cy=edit-modal]").should("be.visible");
   });
@@ -207,4 +203,3 @@ describe("invantor application", () => {
       .and("be.visible");
   });
 });
-``;
