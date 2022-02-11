@@ -118,14 +118,13 @@ const deleteAlcohol = async (id, jwt, success, error) => {
     const { status, data } = await axios.delete(`/api/alcohols/${id}`, {
       headers: { Authorization: jwt },
     });
-
-    if (status === ok) {
+    if (status === 200) {
       success(data);
     } else {
-      return null;
+      return error(error);
     }
   } catch (e) {
-    return null;
+    return error(e.response.data.error);
   }
 };
 
@@ -205,14 +204,16 @@ const deleteMixer = async (id, jwt, success, error) => {
     const { status, data } = await axios.delete(`/api/mixers/${id}`, {
       headers: { Authorization: jwt },
     });
-
-    if (status === ok) {
+    console.log("in delete Mixer api", status, data);
+    if (status === 200) {
+      console.log("in success");
       success(data);
     } else {
-      return null;
+      error(error);
     }
   } catch (e) {
-    return null;
+    console.log("in catch");
+    return error(e.response.data.error);
   }
 };
 
@@ -308,14 +309,13 @@ const deleteDrink = async (id, jwt, success, error) => {
     const { status, data } = await axios.delete(`/api/drinks/${id}`, {
       headers: { Authorization: jwt },
     });
-
-    if (status === ok) {
+    if (status === 200) {
       success(data);
     } else {
-      return null;
+      error(error);
     }
   } catch (e) {
-    return null;
+    return error(e.response.data.error);
   }
 };
 

@@ -23,48 +23,23 @@ const style = {
   p: 4,
 };
 
-const DeleteMixer = ({ mixer, mixers, setMixers, updateMixer }) => {
+const DeleteMixer = ({ mixer, mixers, setMixers }) => {
   const { global } = useContext(GlobalContext);
   const { id } = mixer;
-  const [formData, setFormData] = useState({});
-  const [open, setOpen] = useState(false);
 
-  const [bannerOpen, setBannerOpen] = useState(false);
-  const [bannerDisplay, setBannerDisplay] = useState({
-    variant: "outlined",
-    severity: "success",
-    message: "",
-  });
-
-  const handleBannerOpen = (severity, message) => {
-    setBannerDisplay({
-      ...bannerDisplay,
-      severity: severity,
-      message: message,
-    });
-    setBannerOpen(true);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setBannerOpen(false);
-    setFormData({});
-  };
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    const removeMixer = await api.deleteMixer(id, global.user.jwt);
-    setMixers(mixers.filter((a) => a.id != mixer.id));
+    const removeMixer = await api.deleteMixer(
+      id,
+      global.user.jwt,
+      (data) => {
+        const newMixerList = [...mixers].filter((m) => m.id != mixer.id);
+        setMixers(newMixerList);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   return (
@@ -73,28 +48,10 @@ const DeleteMixer = ({ mixer, mixers, setMixers, updateMixer }) => {
         sx={{ borderRadius: 16, display: "inline" }}
         variant="outlined"
         color="error"
-        onClick={handleOpen}
+        onClick={handleClick}
       >
         <RemoveOutlinedIcon />
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Banner
-            bannerOpen={bannerOpen}
-            bannerDisplay={bannerDisplay}
-            setBannerOpen={setBannerOpen}
-          />
-          <form className="form" onSubmit={handleSubmit}>
-            <Typography>Are you sure you wish to delete?</Typography>
-            <Button type="submit">Delete</Button>
-          </form>
-        </Box>
-      </Modal>
     </div>
   );
 };

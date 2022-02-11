@@ -11,7 +11,13 @@ import Typography from "@mui/material/Typography";
 import CreateAlcohols from "../components/alcohols/createAlcohol";
 import ShowAlcohols from "../components/alcohols/showAlcohols";
 
-const Alcohols = ({ alcohols, setAlcohols, loading, updateAlcohol }) => {
+const Alcohols = ({
+  alcohols,
+  setAlcohols,
+  loading,
+  updateAlcohol,
+  deleteAlcohol,
+}) => {
   // Loading function from UI (the circle that spins when its still loading)
 
   const isLoading = () => {
@@ -21,19 +27,6 @@ const Alcohols = ({ alcohols, setAlcohols, loading, updateAlcohol }) => {
       </Box>
     );
   };
-
-  // const updateAlcohol = (index, updatedAlcohol) => {
-  //   const updated = alcohols.map((alcohol, i) => {
-  //     return i === index ? updatedAlcohol : alcohol;
-  //   });
-
-  //   setAlcohols(updated);
-  // };
-
-  // const deleteAlcohol = (id) => {
-  //   const toBeDeleted = alcohols.find((alcohol) => alcohol.id === id);
-  //   console.log(toBeDeleted);
-  // };
 
   return (
     <>
@@ -55,8 +48,8 @@ const Alcohols = ({ alcohols, setAlcohols, loading, updateAlcohol }) => {
               <ShowAlcohols
                 alcohols={alcohols}
                 updateAlcohol={updateAlcohol}
-                // deleteAlcohol={deleteAlcohol()}
                 setAlcohols={setAlcohols}
+                deleteAlcohol={deleteAlcohol}
               />
             </AccordionDetails>
           </Accordion>

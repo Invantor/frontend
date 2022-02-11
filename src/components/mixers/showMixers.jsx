@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import api from "../../api/api";
 import axios from "axios";
 
@@ -16,6 +16,7 @@ import { Stack } from "@mui/material";
 
 import EditMixer from "./editMixer";
 import DeleteMixer from "./deleteMixer";
+import GlobalContext from "../../context/globalContext";
 
 const styles = {
   searchContainer: { display: "flex", borderColor: "error.main" },
@@ -39,6 +40,7 @@ const commonStyles = {
 
 const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { global } = useContext(GlobalContext);
 
   return (
     <>
@@ -72,43 +74,49 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {mixers
-              .filter((mixer) => {
-                if (searchTerm == "") {
-                  return mixer;
-                } else if (
-                  mixer.name.toLowerCase().includes(searchTerm.toLowerCase())
-                ) {
-                  return mixer;
-                }
-              })
-              .map((mixer, i) => (
-                <TableRow key={i} hover>
-                  <TableCell>{mixer.name}</TableCell>
-                  <TableCell>{mixer.volume_in_ml}</TableCell>
-                  <TableCell>{mixer.critical_volume}</TableCell>
-                  <TableCell>
-                    {mixer.critical_volume > mixer.volume_in_ml
-                      ? "Low Stock"
-                      : "In Stock"}
-                  </TableCell>
-                  <TableCell>
-                    <Stack spacing={2} direction="row">
-                      <EditMixer
-                        mixer={mixer}
-                        updateMixer={(updatedMixer) =>
-                          updateMixer(i, updatedMixer)
-                        }
-                      />
-                      <DeleteMixer
-                        mixer={mixer}
-                        mixers={mixers}
-                        setMixers={setMixers}
-                      />
-                    </Stack>
-                  </TableCell>
-                </TableRow>
-              ))}
+            {mixers != null
+              ? mixers
+                  .filter((mixer) => {
+                    if (searchTerm == "") {
+                      return mixer;
+                    } else if (
+                      mixer.name
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+                    ) {
+                      return mixer;
+                    }
+                  })
+                  .map((mixer, i) => (
+                    <TableRow key={i} hover>
+                      <TableCell>{mixer.name}</TableCell>
+                      <TableCell>{mixer.volume_in_ml}</TableCell>
+                      <TableCell>{mixer.critical_volume}</TableCell>
+                      <TableCell>
+                        {mixer.critical_volume > mixer.volume_in_ml
+                          ? "Low Stock"
+                          : "In Stock"}
+                      </TableCell>
+                      <TableCell>
+                        <Stack spacing={2} direction="row">
+                          <EditMixer
+                            mixer={mixer}
+                            updateMixer={(updatedMixer) =>
+                              updateMixer(i, updatedMixer)
+                            }
+                          />
+                          {global.user.admin ? (
+                            <DeleteMixer
+                              mixer={mixer}
+                              mixers={mixers}
+                              setMixers={setMixers}
+                            />
+                          ) : null}
+                        </Stack>
+                      </TableCell>
+                    </TableRow>
+                  ))
+              : null}
           </TableBody>
         </Table>
       </TableContainer>

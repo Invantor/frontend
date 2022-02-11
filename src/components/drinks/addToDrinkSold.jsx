@@ -46,8 +46,6 @@ const AddToDrinkSold = ({
     const newNumberSold = drink.number_sold + 1;
     const alcoholIndex = alcohols.indexOf(alcohol);
     const mixerIndex = mixers.indexOf(mixer);
-    console.log("Drink Alcohol's Index in State Array", alcoholIndex);
-    console.log("Alcohols Array", alcohols);
 
     await api.editAlcohol(
       alcohol.id,

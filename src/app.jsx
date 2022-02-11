@@ -43,13 +43,19 @@ function App() {
   };
 
   const updateAlcohol = (index, updatedAlcohol) => {
-    console.log("index", index);
-    console.log("updated alcohol", updatedAlcohol);
     const updated = alcohols.map((alcohol, i) => {
       return i === index ? updatedAlcohol : alcohol;
     });
 
     setAlcohols(updated);
+  };
+
+  const deleteAlcohol = (id) => {
+    const updated = alcohols.map((alcohol, i) => {
+      return i === index ? alcohols.splice(index, 1) : alcohol;
+    });
+    // const updated = alcohols.filter((alcohol) => id != alcohol.id);
+    // setAlcohols(updated);
   };
 
   // console.log("alcohols state:", alcohols);
@@ -76,9 +82,9 @@ function App() {
               <Alcohols
                 alcohols={alcohols}
                 setAlcohols={setAlcohols}
-                loading={loading}
                 updateAlcohol={updateAlcohol}
                 setLoading={setLoading}
+                deleteAlcohol={deleteAlcohol}
               />
             }
           />

@@ -9,9 +9,6 @@ describe("invantor application", () => {
       .children()
       .should("contain", "Invalid Login Details")
       .and("be.visible");
-    cy.findByRole("alert")
-      .should("contain", "Invalid Login Details")
-      .and("be.visible");
   });
 
   it("Login should fail if password is not provided", () => {
@@ -20,9 +17,6 @@ describe("invantor application", () => {
     cy.get("#login-button").click();
     cy.get("#banner-div")
       .children()
-      .should("contain", "Invalid Login Details")
-      .and("be.visible");
-    cy.findByRole("alert")
       .should("contain", "Invalid Login Details")
       .and("be.visible");
   });

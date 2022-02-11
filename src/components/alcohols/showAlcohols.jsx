@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import api from "../../api/api";
 import axios from "axios";
 
@@ -16,6 +16,7 @@ import { Stack } from "@mui/material";
 
 import EditAlcohol from "./editAlcohol";
 import DeleteAlcohol from "./deleteAlcohol";
+import GlobalContext from "../../context/globalContext";
 
 const styles = {
   searchContainer: { display: "flex", borderColor: "error.main" },
@@ -39,6 +40,7 @@ const commonStyles = {
 
 const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { global } = useContext(GlobalContext);
 
   return (
     <>
@@ -86,7 +88,7 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
                     }
                   })
                   .map((alcohol, i) => (
-                    <TableRow key={i} hover data-cy="table-row">
+                    <TableRow key={alcohol.id} hover data-cy="table-row">
                       <TableCell>{alcohol.name}</TableCell>
                       <TableCell>{alcohol.volume_in_ml}</TableCell>
                       <TableCell>{alcohol.critical_volume}</TableCell>
@@ -103,11 +105,13 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
                               updateAlcohol(i, updatedAlcohol)
                             }
                           />
-                          <DeleteAlcohol
-                            alcohol={alcohol}
-                            alcohols={alcohols}
-                            setAlcohols={setAlcohols}
-                          />
+                          {global.user.admin ? (
+                            <DeleteAlcohol
+                              alcohol={alcohol}
+                              alcohols={alcohols}
+                              setAlcohols={setAlcohols}
+                            />
+                          ) : null}
                         </Stack>
                       </TableCell>
                     </TableRow>

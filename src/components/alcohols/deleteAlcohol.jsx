@@ -4,7 +4,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+// import Modal from "@mui/material/Modal";
 import { Input } from "@mui/material";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 
@@ -23,48 +23,24 @@ const style = {
   p: 4,
 };
 
-const DeleteAlcohol = ({ alcohol, alcohols, setAlcohols, updateAlcohol }) => {
+const DeleteAlcohol = ({ alcohol, alcohols, setAlcohols }) => {
   const { global } = useContext(GlobalContext);
   const { id } = alcohol;
-  const [formData, setFormData] = useState({});
-  const [open, setOpen] = useState(false);
 
-  const [bannerOpen, setBannerOpen] = useState(false);
-  const [bannerDisplay, setBannerDisplay] = useState({
-    variant: "outlined",
-    severity: "success",
-    message: "",
-  });
-
-  const handleBannerOpen = (severity, message) => {
-    setBannerDisplay({
-      ...bannerDisplay,
-      severity: severity,
-      message: message,
-    });
-    setBannerOpen(true);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setBannerOpen(false);
-    setFormData({});
-  };
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    const removeMixer = await api.deleteAlcohol(id, global.user.jwt);
-    setAlcohols(alcohols.filter((a) => a.id != alcohol.id));
+    await api.deleteAlcohol(
+      id,
+      global.user.jwt,
+      (data) => {
+        const newAlcoholsList = [...alcohols].filter((a) => a.id != alcohol.id);
+
+        setAlcohols(newAlcoholsList);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   return (
@@ -73,28 +49,10 @@ const DeleteAlcohol = ({ alcohol, alcohols, setAlcohols, updateAlcohol }) => {
         sx={{ borderRadius: 16, display: "inline" }}
         variant="outlined"
         color="error"
-        onClick={handleOpen}
+        onClick={handleClick}
       >
         <RemoveOutlinedIcon />
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Banner
-            bannerOpen={bannerOpen}
-            bannerDisplay={bannerDisplay}
-            setBannerOpen={setBannerOpen}
-          />
-          <form className="form" onSubmit={handleSubmit}>
-            <Typography>Are you sure you wish to delete?</Typography>
-            <Button type="submit">Delete</Button>
-          </form>
-        </Box>
-      </Modal>
     </div>
   );
 };

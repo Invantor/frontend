@@ -28,26 +28,15 @@ const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
 
   useEffect(() => {
     if (alcohols === null || mixers === null) {
-      console.log("error trap");
       setNewDrinks({
         ...newDrinks,
         name: "",
         alcohol_id: alcohols === !null ? alcohols[0].id : "",
         alcohol_amount: "",
-        mixer_id: mixers[0].id ?? "",
+        mixer_id: mixers === !null ? mixers[0].id : "",
         mixer_amount: "",
       });
     }
-    // else {
-    //   setNewDrinks({
-    //     ...newDrinks,
-    //     name: "",
-    //     alcohol_id: alcohols[0].id,
-    //     alcohol_amount: "",
-    //     mixer_id: mixers[0].id,
-    //     mixer_amount: "",
-    //   });
-    // }
   }, [alcohols, mixers]);
 
   const [bannerDisplay, setBannerDisplay] = useState({
@@ -124,7 +113,6 @@ const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
               onChange={handleChange}
               label="Alcohol"
             >
-              {console.log("in create drinks", alcohols)}
               {alcohols != null
                 ? alcohols.map((alcohol, i) => (
                     <MenuItem value={alcohol.id} key={i}>
@@ -152,11 +140,13 @@ const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
               onChange={handleChange}
               label="Mixer"
             >
-              {mixers.map((mixer, i) => (
-                <MenuItem value={mixer.id} key={i}>
-                  {mixer.name}
-                </MenuItem>
-              ))}
+              {mixers != null
+                ? mixers.map((mixer, i) => (
+                    <MenuItem value={mixer.id} key={i}>
+                      {mixer.name}
+                    </MenuItem>
+                  ))
+                : null}
             </Select>
           </FormControl>
           <TextField

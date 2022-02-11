@@ -8,40 +8,52 @@ import { TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { Stack } from "@mui/material";
 import { Input } from "@mui/material";
-
+import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";
+import Banner from "../banner";
 
-const DeleteDrink = ({ drink, drinks, deleteDrink, setDrinks }) => {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+};
+
+const DeleteDrink = ({ drink, drinks, setDrinks }) => {
   const { global } = useContext(GlobalContext);
   const { id } = drink;
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleSubmit = async (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    const removeDrink = await api.deleteDrink(id, global.user.jwt);
-    setDrinks(drinks.filter((d) => d.id != drink.id));
+    const removeDrink = await api.deleteDrink(
+      id,
+      global.user.jwt,
+      (data) => {
+        const newDrinkList = [...drinks].filter((d) => d.id != drink.id);
+        setDrinks(newDrinkList);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   return (
-    <>
-      <Button onClick={handleOpen}>Delete</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+    <div>
+      <Button
+        sx={{ borderRadius: 16, display: "inline" }}
+        variant="outlined"
+        color="error"
+        onClick={handleClick}
       >
-        <Box>
-          <form onSubmit={handleSubmit}>
-            <button>Submit</button>
-          </form>
-        </Box>
-      </Modal>
-    </>
+        <RemoveOutlinedIcon />
+      </Button>
+    </div>
   );
 };
 

@@ -30,16 +30,26 @@ const LowStock = (props) => {
   const [state, setState] = useState([]);
 
   useEffect(() => {
-    const lowAlcohol = alcohols.filter((alcohol) => {
-      if (alcohol.volume_in_ml < alcohol.critical_volume) {
-        return alcohol;
-      }
-    });
-    const lowMixer = mixers.filter((mixer) => {
-      if (mixer.volume_in_ml < mixer.critical_volume) {
-        return mixer;
-      }
-    });
+    console.log(alcohols);
+
+    let lowAlcohol = [];
+    let lowMixer = [];
+
+    alcohols.length > 0
+      ? alcohols.forEach((alcohol) => {
+          if (alcohol.volume_in_ml < alcohol.critical_volume) {
+            lowAlcohol.push(alcohol);
+          }
+        })
+      : null;
+
+    mixers.length > 0
+      ? mixers.forEach((mixer) => {
+          if (mixer.volume_in_ml < mixer.critical_volume) {
+            lowMixer.push(mixer);
+          }
+        })
+      : null;
 
     const combined = lowAlcohol.concat(lowMixer);
     setState(combined);

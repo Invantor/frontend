@@ -42,7 +42,12 @@ const ShowUsers = ({ users }) => {
               <TableCell component="th" scope="row">
                 {`${user.admin}`}
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell
+                component="th"
+                scope="row"
+                data-cy="check-box"
+                id="check-box"
+              >
                 <UserActiveToggle user={user} />
               </TableCell>
             </TableRow>
