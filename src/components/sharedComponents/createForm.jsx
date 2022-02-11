@@ -8,10 +8,10 @@ import Banner from "../banner";
 import { Stack } from "@mui/material";
 import { TextField } from "@mui/material";
 
-const CreateAlcohols = (props) => {
-  const { alcohols, setAlcohols } = props;
+const CreateForm = (props) => {
+  const { items, setItems } = props;
   const { global } = useContext(GlobalContext);
-  const [newAlcohols, setNewAlcohols] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     volumeInMl: "",
     criticalVolume: "",
@@ -36,25 +36,25 @@ const CreateAlcohols = (props) => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setNewAlcohols({ ...newAlcohols, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newAlcohol = await api.createAlcohol(
-      newAlcohols.name,
-      newAlcohols.volumeInMl,
-      newAlcohols.criticalVolume,
+      formData.name,
+      formData.volumeInMl,
+      formData.criticalVolume,
       global.user.user_id,
       global.user.jwt,
       (message, data) => {
-        setAlcohols([...alcohols, data]);
+        setItems([...items, data]);
         handleBannerOpen("success", message);
       },
       (errorMessage) => handleBannerOpen("error", errorMessage)
     );
 
-    setNewAlcohols({ name: "", volumeInMl: "" });
+    setFormData({ name: "", volumeInMl: "" });
   };
 
   return (
@@ -71,21 +71,21 @@ const CreateAlcohols = (props) => {
             id="outlined-name"
             label="Name"
             name="name"
-            value={newAlcohols.name ?? ""}
+            value={formData.name ?? ""}
             onChange={handleChange}
           />
           <TextField
             id="outlined-volumeInMl"
             label="Volume In Ml"
             name="volumeInMl"
-            value={newAlcohols.volumeInMl ?? ""}
+            value={formData.volumeInMl ?? ""}
             onChange={handleChange}
           />
           <TextField
             id="outlined-criticalVolume"
             label="Critical Volume"
             name="criticalVolume"
-            value={newAlcohols.criticalVolume ?? ""}
+            value={formData.criticalVolume ?? ""}
             onChange={handleChange}
           />
           <Button variant="outlined" type="submit">
@@ -97,4 +97,4 @@ const CreateAlcohols = (props) => {
   );
 };
 
-export default CreateAlcohols;
+export default CreateForm;

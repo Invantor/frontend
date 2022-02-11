@@ -8,6 +8,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 
+import CreateForm from "../components/sharedComponents/createForm";
 import CreateAlcohols from "../components/alcohols/createAlcohol";
 import ShowAlcohols from "../components/alcohols/showAlcohols";
 
@@ -18,8 +19,6 @@ const Alcohols = ({
   updateAlcohol,
   deleteAlcohol,
 }) => {
-  // Loading function from UI (the circle that spins when its still loading)
-
   const isLoading = () => {
     return (
       <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -37,7 +36,8 @@ const Alcohols = ({
               <Typography>Create</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <CreateAlcohols alcohols={alcohols} setAlcohols={setAlcohols} />
+              {/* <CreateAlcohols alcohols={alcohols} setAlcohols={setAlcohols} /> */}
+              <CreateForm alcohols={alcohols} setAlcohols={setAlcohols} />
             </AccordionDetails>
           </Accordion>
           <Accordion>

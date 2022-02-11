@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 
 import CreateMixers from "../components/mixers/createMixer";
 import ShowMixers from "../components/mixers/showMixers";
+import CreateForm from "../components/sharedComponents/createForm";
 
 const Mixers = ({ mixers, setMixers, loading, updateMixer }) => {
   // Loading function from UI (the circle that spins when its still loading)
@@ -46,6 +47,7 @@ const Mixers = ({ mixers, setMixers, loading, updateMixer }) => {
           </AccordionSummary>
           <AccordionDetails>
             <CreateMixers mixers={mixers} setMixers={setMixers} />
+            <CreateForm />
           </AccordionDetails>
         </Accordion>
         <Accordion>
