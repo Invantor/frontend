@@ -89,6 +89,7 @@ const EditAlcohol = ({ drink, alcohols, mixers, updateDrink }) => {
   return (
     <div>
       <Button
+        data-cy="edit-button"
         sx={{ borderRadius: 16, display: "inline" }}
         variant="outlined"
         color="success"
@@ -97,6 +98,7 @@ const EditAlcohol = ({ drink, alcohols, mixers, updateDrink }) => {
         <EditOutlinedIcon />
       </Button>
       <Modal
+        data-cy="edit-modal"
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -114,18 +116,21 @@ const EditAlcohol = ({ drink, alcohols, mixers, updateDrink }) => {
               name="name"
               defaultValue={drink.name}
               onChange={handleChange}
+              data-cy="edit-name"
             />
             <Typography htmlFor="alcohol_amount">Alcohol amount</Typography>
             <Input
               name="alcohol_amount"
               defaultValue={drink.alcohol_amount}
               onChange={handleChange}
+              data-cy="edit-alcohol-amount"
             />
             <Typography htmlFor="mixer_amount">Mixer amount</Typography>
             <Input
               name="mixer_amount"
               defaultValue={drink.mixer_amount}
               onChange={handleChange}
+              data-cy="edit-mixer-amount"
             />
             <div>
               <Button type="submit">Submit</Button>
