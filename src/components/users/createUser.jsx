@@ -114,6 +114,7 @@ const CreateUser = (props) => {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          data-cy="create-user"
         >
           <Box sx={{ ...style, borderRadius: "16px" }}>
             <Banner
@@ -130,6 +131,7 @@ const CreateUser = (props) => {
                   placeholder="Username.."
                   value={formData.username}
                   onChange={handleChange}
+                  data-cy="username"
                 />
                 <Typography htmlFor="password">Password</Typography>
                 <Input
@@ -138,6 +140,7 @@ const CreateUser = (props) => {
                   placeholder="Enter a Password"
                   value={formData.password}
                   onChange={handleChange}
+                  data-cy="password"
                 />
                 <Typography htmlFor="passwordConfirmation">
                   Password Confirmation
@@ -148,6 +151,7 @@ const CreateUser = (props) => {
                   placeholder="Confirm your password.."
                   value={formData.password_confirmation}
                   onChange={handleChange}
+                  data-cy="passwordconfirmation"
                 />
                 <FormControlLabel
                   control={

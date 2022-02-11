@@ -20,7 +20,11 @@ describe("invantor application", () => {
     cy.get("#login-button").click();
     cy.findByRole("tab", { name: "Admin" }).click();
     cy.findByRole("button").click();
-    cy.findByRole("text");
+    cy.get("[data-cy=username]").type("NEWUSER2");
+    cy.get("[data-cy=password]").type("PASSWORD");
+    cy.get("[data-cy=passwordconfirmation]").type("PASSWORD");
+    cy.findByRole("button", { name: "Submit" }).click();
+    cy.get("[data-cy=create-user]").parent().click();
   });
 
   // it("Admins SHOULD be able to deactivate users and deactivated users cannot log in.", () => {
