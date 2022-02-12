@@ -21,7 +21,6 @@ const Signin = () => {
       >
         <Grid item xs={3}>
           <Stack spacing={2}>
-            <Typography variant="h4">Sign In</Typography>
             <Login />
           </Stack>
         </Grid>

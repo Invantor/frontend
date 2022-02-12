@@ -1,4 +1,6 @@
-import * as React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,32 +9,36 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import Tab from "@mui/material/Tab";
+import { Link } from "react-router-dom";
+import GlobalContext from "../context/globalContext";
 
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = () => {
+  const logOut = () => {
+    setGlobal({});
+    navigate("/signin");
+  };
+
+  const { global, setGlobal } = useContext(GlobalContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const navigate = useNavigate();
+
+  if (!global || !global.user) {
+    return null;
+  }
 
   return (
     <AppBar position="static">
@@ -44,7 +50,7 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            LOGO
+            INVANTOR
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -76,11 +82,21 @@ const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem key="home" onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Home</Typography>
+              </MenuItem>
+              <MenuItem key="alcohols" onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Alcohols</Typography>
+              </MenuItem>
+              <MenuItem key="mixers" onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Mixers</Typography>
+              </MenuItem>
+              <MenuItem key="drinks" onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Drinks</Typography>
+              </MenuItem>
+              <MenuItem key="admin" onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Admin</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -89,48 +105,25 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            LOGO
+            INVANTOR
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Tab color="red" label="Home" to="/" component={Link} />
+            <Tab color="red" label="Alcohols" to="/alcohols" component={Link} />
+            <Tab color="red" label="Mixers" to="/mixers" component={Link} />
+            <Tab color="red" label="Drinks" to="/drinks" component={Link} />
+            {global.user.admin === true ? (
+              <Tab color="red" label="Admin" to="/admin" component={Link} />
+            ) : null}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          <Box>
+            <Tab
+              color="red"
+              label="Sign Out"
+              to="/signin"
+              component={Link}
+              onClick={logOut}
+            />
           </Box>
         </Toolbar>
       </Container>
