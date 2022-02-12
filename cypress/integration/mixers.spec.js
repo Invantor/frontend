@@ -110,7 +110,7 @@ describe("invantor application", () => {
       .within(($tr) => {
         cy.get("button").first().click();
       });
-    cy.get("[data-cy=edit-name]").clear().type("Jim Beam");
+    cy.get("[data-cy=edit-name]").clear().type("Coke");
     cy.findByRole("button", { name: "Submit" }).click();
     cy.findByRole("alert")
       .should("contain", "Name has already been taken")
