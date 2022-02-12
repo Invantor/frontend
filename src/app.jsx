@@ -9,7 +9,6 @@ import Drinks from "./pages/drinks";
 import GlobalContext from "./context/globalContext";
 import Home from "./pages/home";
 import Mixers from "./pages/mixers";
-import Nav from "./components/nav";
 import ResponsiveAppBar from "./components/responsiveNav";
 import Signin from "./pages/signin";
 import CssBaseline from "@mui/material/CssBaseline";
