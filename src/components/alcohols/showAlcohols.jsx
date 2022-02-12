@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import api from "../../api/api";
-import axios from "axios";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -14,8 +13,8 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import TextField from "@mui/material/TextField";
 import { Stack } from "@mui/material";
 
-import DeleteAlcohol from "./deleteAlcohol";
 import EditButton from "../sharedComponents/editButton";
+import DeleteButton from "../sharedComponents/deleteButton";
 
 const styles = {
   searchContainer: { display: "flex", borderColor: "error.main" },
@@ -39,6 +38,9 @@ const commonStyles = {
 
 const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const editAPI = api.editAlcohol;
+  const deleteAPI = api.deleteAlcohol;
 
   return (
     <>
@@ -102,11 +104,13 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
                             updateItem={(updatedAlcohol) =>
                               updateAlcohol(i, updatedAlcohol)
                             }
+                            editAPI={editAPI}
                           />
-                          <DeleteAlcohol
-                            alcohol={alcohol}
-                            alcohols={alcohols}
-                            setAlcohols={setAlcohols}
+                          <DeleteButton
+                            item={alcohol}
+                            items={alcohols}
+                            setItems={setAlcohols}
+                            deleteAPI={deleteAPI}
                           />
                         </Stack>
                       </TableCell>

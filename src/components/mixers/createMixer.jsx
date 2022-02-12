@@ -71,34 +71,6 @@ const CreateMixers = (props) => {
         setFormdata={setFormData}
         handleChange={handleChange}
       />
-      {/* <form onSubmit={handleSubmit}>
-        <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>
-          <TextField
-            id="outlined-name"
-            label="Name"
-            name="name"
-            value={newMixers.name ?? ""}
-            onChange={handleChange}
-          />
-          <TextField
-            id="outlined-volumeInMl"
-            label="Volume In Ml"
-            name="volumeInMl"
-            value={newMixers.volumeInMl ?? ""}
-            onChange={handleChange}
-          />
-          <TextField
-            id="outlined-criticalVolume"
-            label="Critical Volume"
-            name="criticalVolume"
-            value={newMixers.criticalVolume ?? ""}
-            onChange={handleChange}
-          />
-          <Button variant="outlined" type="submit">
-            Submit
-          </Button>
-        </Stack>
-      </form> */}
     </>
   );
 };

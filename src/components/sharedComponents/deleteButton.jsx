@@ -4,7 +4,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+// import Modal from "@mui/material/Modal";
 import { Input } from "@mui/material";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 
@@ -23,18 +23,19 @@ const style = {
   p: 4,
 };
 
-const DeleteMixer = ({ mixer, mixers, setMixers }) => {
+const DeleteButton = ({ item, items, setItems, deleteAPI }) => {
   const { global } = useContext(GlobalContext);
-  const { id } = mixer;
+  const { id } = item;
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const removeMixer = await api.deleteMixer(
+    await deleteAPI(
       id,
       global.user.jwt,
       (data) => {
-        const newMixerList = [...mixers].filter((m) => m.id != mixer.id);
-        setMixers(newMixerList);
+        const newAlcoholsList = [...items].filter((a) => a.id != item.id);
+
+        setItems(newAlcoholsList);
       },
       (error) => {
         console.log(error);
@@ -56,4 +57,4 @@ const DeleteMixer = ({ mixer, mixers, setMixers }) => {
   );
 };
 
-export default DeleteMixer;
+export default DeleteButton;

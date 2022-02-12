@@ -1,3 +1,5 @@
+import api from "../../api/api";
+
 import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,7 +12,7 @@ import AddToDrinkSold from "./addToDrinkSold";
 import { Stack } from "@mui/material";
 
 import EditDrink from "./editDrink";
-import DeleteDrink from "./deleteDrink";
+import DeleteButton from "../sharedComponents/deleteButton";
 
 const ShowDrinks = ({
   drinks,
@@ -21,6 +23,7 @@ const ShowDrinks = ({
   updateMixer,
   updateAlcohol,
 }) => {
+  const deleteAPI = api.deleteDrink;
   return (
     <>
       <Typography> Drink's List </Typography>
@@ -70,11 +73,11 @@ const ShowDrinks = ({
                             updateDrink(i, updatedDrink)
                           }
                         />
-
-                        <DeleteDrink
-                          drink={drink}
-                          drinks={drinks}
-                          setDrinks={setDrinks}
+                        <DeleteButton
+                          item={drink}
+                          items={drinks}
+                          setItems={setDrinks}
+                          deleteAPI={deleteAPI}
                         />
                       </Stack>
                     </TableCell>

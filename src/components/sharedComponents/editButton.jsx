@@ -25,7 +25,7 @@ const style = {
   p: 4,
 };
 
-const EditButton = ({ item, updateItem }) => {
+const EditButton = ({ item, updateItem, editAPI }) => {
   const { global } = useContext(GlobalContext);
   const { id, name, volume_in_ml, critical_volume, user_id } = item;
   const [formData, setFormData] = useState({});
@@ -65,7 +65,7 @@ const EditButton = ({ item, updateItem }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await api.editAlcohol(
+    await editAPI(
       id,
       formData.name,
       formData.volumeInMl,
