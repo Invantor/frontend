@@ -150,7 +150,20 @@ it("Edit should successfully edit alcohol amount", () => {
       .and("be.visible");
 });
   
-it("Edit SHOULD successfully edit mixer amount", () => {
+  it("Edit SHOULD successfully edit mixer amount", () => {
+    cy.findByRole("button", { name: "Show" }).click();
+    cy.get('[aria-label="simple table"]')
+      .contains('tr', 'New_Drink_Entry')
+      .find("[data-cy=edit-button]")
+      .click();
+    cy.get("[data-cy=edit-mixer-amount]").clear().type("101");
+    cy.findByRole("button", { name: "Submit" }).click();
+    cy.findByRole("alert")
+      .should("contain", "Successfully Updated")
+      .and("be.visible");
+  });
+
+  it("Delete SHOULD successfully edit mixer amount", () => {
   cy.findByRole("button", { name: "Show" }).click();
     cy.get('[aria-label="simple table"]')
       .contains('tr', 'New_Drink_Entry')
@@ -161,18 +174,6 @@ it("Edit SHOULD successfully edit mixer amount", () => {
     cy.findByRole("alert")
       .should("contain", "Successfully Updated")
       .and("be.visible");
-
-  // it("Delete SHOULD successfully edit mixer amount", () => {
-  // cy.findByRole("button", { name: "Show" }).click();
-  //   cy.get('[aria-label="simple table"]')
-  //     .contains('tr', 'New_Drink_Entry')
-  //     .find("[data-cy=edit-button]")
-  //     .click();
-  //  cy.get("[data-cy=edit-mixer-amount]").clear().type("101");
-  //   cy.findByRole("button", { name: "Submit" }).click();
-  //   cy.findByRole("alert")
-  //     .should("contain", "Successfully Updated")
-  //     .and("be.visible");
 });
 });
 ``;
