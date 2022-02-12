@@ -2,22 +2,25 @@ import { useContext, useState } from "react";
 
 import GlobalContext from "../../context/globalContext";
 import api from "../../api/api";
-
-import { Stack } from "@mui/material";
-import { TextField } from "@mui/material";
-import Button from "@mui/material/Button";
-import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
+
 import Banner from "../banner";
+import CreateForm from "../sharedComponents/createForm";
 
 const CreateMixers = (props) => {
   const { mixers, setMixers } = props;
   const { global } = useContext(GlobalContext);
-  const [newMixers, setNewMixers] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     volumeInMl: "",
     criticalVolume: "",
   });
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const [bannerOpen, setBannerOpen] = useState(false);
   const [bannerDisplay, setBannerDisplay] = useState({
@@ -35,18 +38,12 @@ const CreateMixers = (props) => {
     setBannerOpen(true);
   };
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setNewMixers({ ...newMixers, [name]: value });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newMixer = await api.createMixer(
-      newMixers.name,
-      newMixers.volumeInMl,
-      newMixers.criticalVolume,
+      formData.name,
+      formData.volumeInMl,
+      formData.criticalVolume,
       global.user.user_id,
       global.user.jwt,
       (message, data) => {
@@ -56,7 +53,7 @@ const CreateMixers = (props) => {
       (errorMessage) => handleBannerOpen("error", errorMessage)
     );
 
-    setNewMixers({ name: "", volumeInMl: "" });
+    setFormData({ name: "", volumeInMl: "" });
   };
 
   return (
@@ -67,7 +64,14 @@ const CreateMixers = (props) => {
         setBannerOpen={setBannerOpen}
       />
       <Typography> Add Mixer </Typography>
-      <form onSubmit={handleSubmit}>
+
+      <CreateForm
+        handleSubmit={handleSubmit}
+        formData={formData}
+        setFormdata={setFormData}
+        handleChange={handleChange}
+      />
+      {/* <form onSubmit={handleSubmit}>
         <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>
           <TextField
             id="outlined-name"
@@ -94,7 +98,7 @@ const CreateMixers = (props) => {
             Submit
           </Button>
         </Stack>
-      </form>
+      </form> */}
     </>
   );
 };

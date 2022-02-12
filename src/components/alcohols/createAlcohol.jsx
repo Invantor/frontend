@@ -2,20 +2,25 @@ import { useContext, useState } from "react";
 
 import GlobalContext from "../../context/globalContext";
 import api from "../../api/api";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+
 import Banner from "../banner";
-import { Stack } from "@mui/material";
-import { TextField } from "@mui/material";
+import CreateForm from "../sharedComponents/createForm";
 
 const CreateAlcohols = (props) => {
   const { alcohols, setAlcohols } = props;
   const { global } = useContext(GlobalContext);
-  const [newAlcohols, setNewAlcohols] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     volumeInMl: "",
     criticalVolume: "",
   });
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const [bannerOpen, setBannerOpen] = useState(false);
   const [bannerDisplay, setBannerDisplay] = useState({
@@ -33,18 +38,12 @@ const CreateAlcohols = (props) => {
     setBannerOpen(true);
   };
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setNewAlcohols({ ...newAlcohols, [name]: value });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newAlcohol = await api.createAlcohol(
-      newAlcohols.name,
-      newAlcohols.volumeInMl,
-      newAlcohols.criticalVolume,
+      formData.name,
+      formData.volumeInMl,
+      formData.criticalVolume,
       global.user.user_id,
       global.user.jwt,
       (message, data) => {
@@ -54,7 +53,7 @@ const CreateAlcohols = (props) => {
       (errorMessage) => handleBannerOpen("error", errorMessage)
     );
 
-    setNewAlcohols({ name: "", volumeInMl: "" });
+    setFormData({ name: "", volumeInMl: "" });
   };
 
   return (
@@ -65,34 +64,13 @@ const CreateAlcohols = (props) => {
         setBannerOpen={setBannerOpen}
       />
       <Typography> Add Alcohol </Typography>
-      <form onSubmit={handleSubmit}>
-        <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>
-          <TextField
-            id="outlined-name"
-            label="Name"
-            name="name"
-            value={newAlcohols.name ?? ""}
-            onChange={handleChange}
-          />
-          <TextField
-            id="outlined-volumeInMl"
-            label="Volume In Ml"
-            name="volumeInMl"
-            value={newAlcohols.volumeInMl ?? ""}
-            onChange={handleChange}
-          />
-          <TextField
-            id="outlined-criticalVolume"
-            label="Critical Volume"
-            name="criticalVolume"
-            value={newAlcohols.criticalVolume ?? ""}
-            onChange={handleChange}
-          />
-          <Button variant="outlined" type="submit">
-            Submit
-          </Button>
-        </Stack>
-      </form>
+
+      <CreateForm
+        handleSubmit={handleSubmit}
+        formData={formData}
+        setFormdata={setFormData}
+        handleChange={handleChange}
+      />
     </>
   );
 };

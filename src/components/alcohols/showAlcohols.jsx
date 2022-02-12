@@ -14,8 +14,8 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import TextField from "@mui/material/TextField";
 import { Stack } from "@mui/material";
 
-import EditAlcohol from "./editAlcohol";
 import DeleteAlcohol from "./deleteAlcohol";
+import EditButton from "../sharedComponents/editButton";
 
 const styles = {
   searchContainer: { display: "flex", borderColor: "error.main" },
@@ -97,9 +97,9 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
                       </TableCell>
                       <TableCell>
                         <Stack spacing={2} direction="row">
-                          <EditAlcohol
-                            alcohol={alcohol}
-                            updateAlcohol={(updatedAlcohol) =>
+                          <EditButton
+                            item={alcohol}
+                            updateItem={(updatedAlcohol) =>
                               updateAlcohol(i, updatedAlcohol)
                             }
                           />

@@ -14,8 +14,8 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import TextField from "@mui/material/TextField";
 import { Stack } from "@mui/material";
 
-import EditMixer from "./editMixer";
 import DeleteMixer from "./deleteMixer";
+import EditButton from "../sharedComponents/editButton";
 
 const styles = {
   searchContainer: { display: "flex", borderColor: "error.main" },
@@ -97,9 +97,9 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
                       </TableCell>
                       <TableCell>
                         <Stack spacing={2} direction="row">
-                          <EditMixer
-                            mixer={mixer}
-                            updateMixer={(updatedMixer) =>
+                          <EditButton
+                            item={mixer}
+                            updateItem={(updatedMixer) =>
                               updateMixer(i, updatedMixer)
                             }
                           />
