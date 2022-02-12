@@ -83,20 +83,28 @@ const ResponsiveAppBar = () => {
               }}
             >
               <MenuItem key="home" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Home</Typography>
+                <Tab color="red" label="Home" to="/" component={Link} />
               </MenuItem>
               <MenuItem key="alcohols" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Alcohols</Typography>
+                <Tab
+                  color="red"
+                  label="Alcohols"
+                  to="/alcohols"
+                  component={Link}
+                />
               </MenuItem>
               <MenuItem key="mixers" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Mixers</Typography>
+                <Tab color="red" label="Mixers" to="/mixers" component={Link} />
               </MenuItem>
               <MenuItem key="drinks" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Drinks</Typography>
+                <Tab color="red" label="Drinks" to="/drinks" component={Link} />
               </MenuItem>
-              <MenuItem key="admin" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Admin</Typography>
-              </MenuItem>
+              {global.user.admin === true ? (
+                <MenuItem key="admin" onClick={handleCloseNavMenu}>
+                  <Tab color="red" label="Admin" to="/admin" component={Link} />
+                  )
+                </MenuItem>
+              ) : null}
             </Menu>
           </Box>
           <Typography
