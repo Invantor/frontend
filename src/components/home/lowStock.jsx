@@ -9,6 +9,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { CSVLink } from "react-csv";
+import DownloadIcon from "@mui/icons-material/Download";
+import { Button } from "@mui/material";
 
 const LowStock = (props) => {
   const { alcohols, mixers } = props;
@@ -96,7 +98,12 @@ const LowStock = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <CSVLink {...csvExport}>Export to CSV</CSVLink>
+      <Button variant="outlined" sx={{ mt: 1 }}>
+        <DownloadIcon></DownloadIcon>
+        <CSVLink {...csvExport} textDecoration="none">
+          Export to CSV
+        </CSVLink>
+      </Button>
     </Box>
   );
 };
