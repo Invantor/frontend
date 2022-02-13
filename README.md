@@ -2,6 +2,18 @@
 
 ---
 
+## **Links**
+
+---
+
+**Frontend Repo: [Github](https://github.com/Invantor/frontend)**
+
+**Backend Repo: [Github](https://github.com/Invantor/backend)**
+
+**Deployed Site: [invantor.systems](http://invantor.systems/signin)**
+
+---
+
 ## **Purpose**
 
 A light weight and portable inventory management system focusing on the beverage niche to limit wastage, increase profitability and efficiency as well as creating a better ordering cycle for stocks. Most venues that serve hand pour beverages from bars, pubs and even resturants all succumb to discrepancies in their stock, especially in their spirits and tap poured drinks. This most often is due to human error or "freebies" that are given out to customers or overpouring. With spirits, not only is this illegal and violates the RSA but also dangerous as customers that are privvy to these overpours can become intoxicated at a faster pace without them realising it. By utilising Invantor, a business will be able to:
@@ -259,17 +271,104 @@ All data will be stored in a structured sql database using Postgres. This databa
 
 ![Day 6](docs/trello6.png)
 
+### **Day 7**
+
+- Ported over create and read functionality to Mixers model.
+- Edit function on mixers model work in progress
+- Error message for Alcohols complete to be ported to other models
+- Conflict resolution for two feature branch merges.
+- updated user Create render to return userID
+
+![Day 7](docs/trello7.png)
+
+### **Day 8**
+
+- Ported over create and edit error message fucntion from Alcohols in backend to allow for rendering of error messages for front end to consume
+- Finalised functionality of editMixer design WIP
+- Delete Alcohols functionality WIP
+- Finalised presentation to present to class
+
+![Day 8](docs/trello8.png)
+
+### **Day 9**
+
+- Abstracted alert banner out in seperate component
+- Imported banner into login component
+- Changed user Model to remove full_name & include is_active
+- Updated user controller logic to include is_active
+- Updated frontend login logic to include is_active
+- Ported over error message logic from alcohols controller into user controller
+- Logout functionality
+- Admin dashboard WIP
+- Admin able to toggle user active status
+- Cleaned our git tree
+- Ported all func from mixers into alcohols,
+- Added delete func from alcohol to mixer.
+- Restructured the folders
+- Created drinks show list
+- Hooked-up creation backend with successful api connection for drinks creation
+- Beginning of front end drink creation
+
+![Day 9](docs/trello9.png)
+
+### **Day 10**
+
+- Finished Create User Functionality.
+- Added global themes to app.
+- Finished a combined low stock HUD for home page that lists both mixers and alcohols in one table
+
+### **Day 11**
+
+- Fixed createDrinks initial form state issue
+- Changed createDrinks form and fields to be controlled components
+- WIP for button to increase drinks sold
+
+### **Day 12**
+
+- Deployment to Heroku for backend Deployment to Netlify for frontend
+- Re-configured loading logic due to errors picked up in Cypress Tests Started writing tests with cypress
+
+### **Day 13**
+
+- Created shared components for mixers and alcohols and removed duplicate code to try and DRY up code.
+
+### **Day 14**
+
+- implemented CSV download function for low stock
+- added styling
+- added image logo to login page
+
 ---
+
 ## **Starting up and Testing - Rspec and Cypress**
 
 ---
-To begin with the loading of the project it is essetial to create your own set of credentials. This can be achiieved by deleting the credentials.yml.enc in the backend and then typing in the backend: 
+
+Clone both frontend and backend repos to your local machine by running the following commands after you have navigated to a preferred location on your device.
+
+```
+git clone <clone address>
+```
+
+Navigate to the backend repo on your local machine and run the following command to install all dependancies:
+
+```
+bundle i
+```
+
+Navigate to the frontend repo on your local machine and run the following command to install all dependancies:
+
+```
+npm i
+```
+
+To begin with the loading of the project it is essetial to create your own set of credentials. This can be achiieved by deleting the credentials.yml.enc in the backend and then typing in the backend:
 
 ```
 EDITOR="code --wait" rails credentials:edit
 ```
 
-This will populate a new key and then the process is almost up and running. The next step that youll have to do is create the database. If you already have a simularly named database on your database you will have to drop it first before creating, migrating and seeding the database: 
+This will populate a new key and then the process is almost up and running. The next step that youll have to do is create the database. If you already have a simularly named database on your database you will have to drop it first before creating, migrating and seeding the database:
 
 ```
 rails db:drop db:create db:migrate db:seed
@@ -277,7 +376,7 @@ rails db:drop db:create db:migrate db:seed
 
 Before the comencment of testing ensure that the database is up to date and that no changes have been made to it. The line above will ensure that the database is in a ready state.
 
-Next to test the backend database run: 
+Next to test the backend database run:
 
 ```
 be rspec spec
@@ -290,15 +389,56 @@ open coverage/index.html
 ```
 
 To test on the front end you will nedd to spin up the backend and front end, by running:
+
 ```
 rails s
+
+# If you are having port conflicts, you can start up the backend and define a port by typing rails s -p 5000
 ```
+
 On the backend and then on the frontend running:
+
 ```
 npm run dev
 ```
+
 Now that both environment are up and running open up another shell in the front end and run the command:
+
 ```
 npm run cypress:open
 ```
+
 This should prompt you to download, then upon open point the the GUI whereby the tests can be run.
+
+---
+
+## **Testing Specifications**
+
+---
+
+### **End-to-end => Cypress**
+
+### **Backend => Rspec**
+
+**UAT: [Manual Testing](https://docs.google.com/spreadsheets/d/1iyC8HeFDx3LkPsnSmCSpEw4ybCZ7ylOLibtcI7zX4Kk/edit?usp=sharing)**
+
+---
+
+## **Project Changes since Part A**
+
+### **Features**
+
+- Initial implementation quoted a Help Center in the navigation bar -> This was not released due to the time constraint and also the fact that the app itself is very straight forward and will not require a guide.
+
+- Intial Wireframes quoted a "Show" page with an image of each drink, mixer and alcohol. This was later revised as images was not deemed as an MVP feature that would have disadvantaged core app functionality. This will be implemented as a future rendition of the app.
+
+### **UI**
+
+Throughout the project's timeline, layout to the user interface had changed. This is due to the difference in wireframe assumptions and actual UX when using the application. The UI has been changed in order to better tailor to the usability of the app without having to click around too much. This was acheived through agile methodology using very short sprints when developing, redeveloping and implementing UI based on optimum UX.
+
+### **Tech Stack Update**
+
+Additional technologies used for the app are:
+
+- Cypress for end to end testing
+- Rspec for backend testing.
