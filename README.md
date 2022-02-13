@@ -12,6 +12,13 @@
 
 **Deployed Site: [invantor.systems](http://invantor.systems/signin)**
 
+To log in, use the admin account, as an admin you will be able to create additional user accounts and manage them.
+
+```
+username: admin@admin.com
+password: password123
+```
+
 ---
 
 ## **Purpose**
