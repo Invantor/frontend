@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import GlobalContext from "../../context/globalContext";
 import api from "../../api/api";
 import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
 
 import Banner from "../banner";
 import CreateForm from "../sharedComponents/createForm";
@@ -58,19 +59,26 @@ const CreateAlcohols = (props) => {
 
   return (
     <>
-      <Banner
-        bannerOpen={bannerOpen}
-        bannerDisplay={bannerDisplay}
-        setBannerOpen={setBannerOpen}
-      />
-      <Typography> Add Alcohol </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Banner
+          bannerOpen={bannerOpen}
+          bannerDisplay={bannerDisplay}
+          setBannerOpen={setBannerOpen}
+        />
 
-      <CreateForm
-        handleSubmit={handleSubmit}
-        formData={formData}
-        setFormdata={setFormData}
-        handleChange={handleChange}
-      />
+        <CreateForm
+          handleSubmit={handleSubmit}
+          formData={formData}
+          setFormdata={setFormData}
+          handleChange={handleChange}
+        />
+      </Box>
     </>
   );
 };

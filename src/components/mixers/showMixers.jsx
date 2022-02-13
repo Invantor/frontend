@@ -44,7 +44,6 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
 
   return (
     <>
-      <Typography> Mixers's List </Typography>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box sx={{ ...commonStyles, justifyContent: "center" }}>
           <SearchOutlinedIcon sx={styles.searchIcon} />
@@ -60,10 +59,15 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
           />
         </Box>
       </Box>
-      <TableContainer>
+      <TableContainer
+        sx={{
+          height: 500,
+        }}
+      >
         <Table
           sx={{ minWidth: 650, bgcolor: "primary" }}
           aria-label="simple table"
+          stickyHeader
         >
           <TableHead>
             <TableRow>
@@ -71,6 +75,7 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
               <TableCell>Volume in ml</TableCell>
               <TableCell>Critical Volume</TableCell>
               <TableCell>Stock Status</TableCell>
+              <TableCell>Manage</TableCell>
             </TableRow>
           </TableHead>
           <TableBody data-cy="table-body">

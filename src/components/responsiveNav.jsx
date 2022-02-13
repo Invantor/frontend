@@ -14,10 +14,9 @@ import Tab from "@mui/material/Tab";
 import { Link } from "react-router-dom";
 import GlobalContext from "../context/globalContext";
 
-const pages = ["Products", "Pricing", "Blog"];
-
 const ResponsiveAppBar = () => {
   const logOut = () => {
+    handleCloseNavMenu();
     setGlobal({});
     navigate("/signin");
   };
@@ -102,9 +101,16 @@ const ResponsiveAppBar = () => {
               {global.user.admin === true ? (
                 <MenuItem key="admin" onClick={handleCloseNavMenu}>
                   <Tab color="red" label="Admin" to="/admin" component={Link} />
-                  )
                 </MenuItem>
               ) : null}
+              <MenuItem key="drinks" onClick={logOut}>
+                <Tab
+                  color="red"
+                  label="Sign Out"
+                  to="/signin"
+                  component={Link}
+                />
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -115,23 +121,39 @@ const ResponsiveAppBar = () => {
           >
             INVANTOR
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Tab color="red" label="Home" to="/" component={Link} />
-            <Tab color="red" label="Alcohols" to="/alcohols" component={Link} />
-            <Tab color="red" label="Mixers" to="/mixers" component={Link} />
-            <Tab color="red" label="Drinks" to="/drinks" component={Link} />
-            {global.user.admin === true ? (
-              <Tab color="red" label="Admin" to="/admin" component={Link} />
-            ) : null}
-          </Box>
-          <Box>
-            <Tab
-              color="red"
-              label="Sign Out"
-              to="/signin"
-              component={Link}
-              onClick={logOut}
-            />
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: {
+                xs: "none",
+                md: "flex",
+                justifyContent: "space-between",
+              },
+            }}
+          >
+            <Box>
+              <Tab color="red" label="Home" to="/" component={Link} />
+              <Tab
+                color="red"
+                label="Alcohols"
+                to="/alcohols"
+                component={Link}
+              />
+              <Tab color="red" label="Mixers" to="/mixers" component={Link} />
+              <Tab color="red" label="Drinks" to="/drinks" component={Link} />
+              {global.user.admin === true ? (
+                <Tab color="red" label="Admin" to="/admin" component={Link} />
+              ) : null}
+            </Box>
+            <Box>
+              <Tab
+                color="red"
+                label="Sign Out"
+                to="/signin"
+                component={Link}
+                onClick={logOut}
+              />
+            </Box>
           </Box>
         </Toolbar>
       </Container>

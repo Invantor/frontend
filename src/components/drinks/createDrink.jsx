@@ -6,7 +6,7 @@ import api from "../../api/api";
 
 import Banner from "../banner";
 import { Stack } from "@mui/material";
-import { TextField } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
@@ -88,79 +88,92 @@ const CreateDrinks = ({ drinks, setDrinks, alcohols, mixers }) => {
 
   return (
     <>
-      <Banner
-        bannerOpen={bannerOpen}
-        bannerDisplay={bannerDisplay}
-        setBannerOpen={setBannerOpen}
-      />
-      <form onSubmit={handleSubmit}>
-        <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>
-          <TextField
-            id="outlined-name"
-            label="Name"
-            name="name"
-            value={newDrinks.name}
-            onChange={handleChange}
-          />
-          <FormControl>
-            <InputLabel id="alcohol">Alcohol</InputLabel>
-            <Select
-              sx={{ mb: 2 }}
-              labelId="alcohol"
-              id="alcoholid"
-              name="alcohol_id"
-              value={newDrinks.alcohol_id ?? ""}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Banner
+          bannerOpen={bannerOpen}
+          bannerDisplay={bannerDisplay}
+          setBannerOpen={setBannerOpen}
+        />
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>
+            <TextField
+              id="outlined-name"
+              label="Name"
+              name="name"
+              variant="standard"
+              value={newDrinks.name}
               onChange={handleChange}
-              label="Alcohol"
-            >
-              {alcohols != null
-                ? alcohols.map((alcohol, i) => (
-                    <MenuItem value={alcohol.id} key={i}>
-                      {alcohol.name}
-                    </MenuItem>
-                  ))
-                : null}
-            </Select>
-          </FormControl>
-          <TextField
-            id="outlined-alcohol_amount"
-            label="Alcohol Amount"
-            name="alcohol_amount"
-            value={newDrinks.alcohol_amount ?? ""}
-            onChange={handleChange}
-          />
-          <FormControl>
-            <InputLabel id="alcohol">Mixer</InputLabel>
-            <Select
-              sx={{ mb: 2 }}
-              labelId="mixer"
-              id="mixerid"
-              name="mixer_id"
-              value={newDrinks.mixer_id ?? ""}
+            />
+            <FormControl>
+              <InputLabel id="alcohol">Alcohol</InputLabel>
+              <Select
+                sx={{ mb: 2 }}
+                labelId="alcohol"
+                id="alcoholid"
+                name="alcohol_id"
+                variant="standard"
+                value={newDrinks.alcohol_id ?? ""}
+                onChange={handleChange}
+                label="Alcohol"
+              >
+                {alcohols != null
+                  ? alcohols.map((alcohol, i) => (
+                      <MenuItem value={alcohol.id} key={i}>
+                        {alcohol.name}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </FormControl>
+            <TextField
+              id="outlined-alcohol_amount"
+              label="Alcohol Amount"
+              name="alcohol_amount"
+              variant="standard"
+              value={newDrinks.alcohol_amount ?? ""}
               onChange={handleChange}
-              label="Mixer"
-            >
-              {mixers != null
-                ? mixers.map((mixer, i) => (
-                    <MenuItem value={mixer.id} key={i}>
-                      {mixer.name}
-                    </MenuItem>
-                  ))
-                : null}
-            </Select>
-          </FormControl>
-          <TextField
-            id="outlined-mixer_amount"
-            label="Mixer Amount"
-            name="mixer_amount"
-            value={newDrinks.mixer_amount ?? ""}
-            onChange={handleChange}
-          />
-          <Button variant="outlined" type="submit">
-            Submit
-          </Button>
-        </Stack>
-      </form>
+            />
+            <FormControl>
+              <InputLabel id="alcohol">Mixer</InputLabel>
+              <Select
+                sx={{ mb: 2 }}
+                labelId="mixer"
+                id="mixerid"
+                name="mixer_id"
+                variant="standard"
+                value={newDrinks.mixer_id ?? ""}
+                onChange={handleChange}
+                label="Mixer"
+              >
+                {mixers != null
+                  ? mixers.map((mixer, i) => (
+                      <MenuItem value={mixer.id} key={i}>
+                        {mixer.name}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </FormControl>
+            <TextField
+              id="outlined-mixer_amount"
+              label="Mixer Amount"
+              name="mixer_amount"
+              variant="standard"
+              value={newDrinks.mixer_amount ?? ""}
+              onChange={handleChange}
+            />
+            <Button variant="outlined" type="submit">
+              Submit
+            </Button>
+          </Stack>
+        </form>
+      </Box>
     </>
   );
 };

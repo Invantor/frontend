@@ -11,6 +11,7 @@ const CreateForm = ({ handleSubmit, formData, handleChange }) => {
           id="outlined-name"
           label="Name"
           name="name"
+          variant="standard"
           value={formData.name ?? ""}
           onChange={handleChange}
         />
@@ -18,6 +19,7 @@ const CreateForm = ({ handleSubmit, formData, handleChange }) => {
           id="outlined-volumeInMl"
           label="Volume In Ml"
           name="volumeInMl"
+          variant="standard"
           value={formData.volumeInMl ?? ""}
           onChange={handleChange}
         />
@@ -25,6 +27,7 @@ const CreateForm = ({ handleSubmit, formData, handleChange }) => {
           id="outlined-criticalVolume"
           label="Critical Volume"
           name="criticalVolume"
+          variant="standard"
           value={formData.criticalVolume ?? ""}
           onChange={handleChange}
         />

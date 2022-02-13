@@ -63,8 +63,6 @@ const CreateMixers = (props) => {
         bannerDisplay={bannerDisplay}
         setBannerOpen={setBannerOpen}
       />
-      <Typography> Add Mixer </Typography>
-
       <CreateForm
         handleSubmit={handleSubmit}
         formData={formData}

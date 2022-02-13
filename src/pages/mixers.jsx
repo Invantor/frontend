@@ -11,18 +11,26 @@ import CreateForm from "../components/sharedComponents/createForm";
 
 const Mixers = ({ mixers, setMixers, updateMixer }) => {
   return (
-    <div>
+    <>
+      <Box p={3}>
+        <Typography align="center" variant="h5" color="primary">
+          Mixers
+        </Typography>
+      </Box>
       <Accordion>
         <AccordionSummary>
-          <Typography>Create</Typography>
+          <Typography color="primary">Create</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <CreateMixers mixers={mixers} setMixers={setMixers} />
-        </AccordionDetails>
+        <Box display="flex" justifyContent="center">
+          <AccordionDetails>
+            <CreateMixers mixers={mixers} setMixers={setMixers} />
+          </AccordionDetails>
+        </Box>
       </Accordion>
+
       <Accordion>
-        <AccordionSummary>
-          <Typography>Show</Typography>
+        <AccordionSummary justify-justifyContent="center">
+          <Typography color="primary">Show</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <ShowMixers
@@ -32,7 +40,7 @@ const Mixers = ({ mixers, setMixers, updateMixer }) => {
           />
         </AccordionDetails>
       </Accordion>
-    </div>
+    </>
   );
 };
 

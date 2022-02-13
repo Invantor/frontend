@@ -39,14 +39,6 @@ const Drinks = ({
     }
   }, []);
 
-  const isLoading = () => {
-    return (
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <CircularProgress color="secondary" />
-      </Box>
-    );
-  };
-
   const updateDrink = (index, updatedDrink) => {
     const updated = drinks.map((drink, i) => {
       return i === index ? updatedDrink : drink;
@@ -61,45 +53,45 @@ const Drinks = ({
 
   return (
     <>
-      <div>
-        {/* {!loading ? ( */}
-        <>
-          <Accordion>
-            <AccordionSummary>
-              <Typography>Create</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <CreateDrinks
-                drinks={drinks}
-                setDrinks={setDrinks}
-                alcohols={alcohols}
-                setAlcohols={setAlcohols}
-                mixers={mixers}
-                setMixers={setMixers}
-              />
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary>
-              <Typography>Show</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <ShowDrinks
-                drinks={drinks}
-                setDrinks={setDrinks}
-                updateDrink={updateDrink}
-                alcohols={alcohols}
-                mixers={mixers}
-                updateMixer={updateMixer}
-                updateAlcohol={updateAlcohol}
-              />
-            </AccordionDetails>
-          </Accordion>
-        </>
-        {/* ) : (
-          isLoading()
-        )} */}
-      </div>
+      <Box p={3}>
+        <Typography align="center" variant="h5" color="primary">
+          Drinks
+        </Typography>
+      </Box>
+      <Accordion>
+        <AccordionSummary>
+          <Typography color="primary">Create</Typography>
+        </AccordionSummary>
+        <Box display="flex" justifyContent="center">
+          <AccordionDetails>
+            <CreateDrinks
+              drinks={drinks}
+              setDrinks={setDrinks}
+              alcohols={alcohols}
+              setAlcohols={setAlcohols}
+              mixers={mixers}
+              setMixers={setMixers}
+            />
+          </AccordionDetails>
+        </Box>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary justify-justifyContent="center">
+          <Typography color="primary">Show</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <ShowDrinks
+            drinks={drinks}
+            setDrinks={setDrinks}
+            updateDrink={updateDrink}
+            alcohols={alcohols}
+            mixers={mixers}
+            updateMixer={updateMixer}
+            updateAlcohol={updateAlcohol}
+          />
+        </AccordionDetails>
+      </Accordion>
     </>
   );
 };

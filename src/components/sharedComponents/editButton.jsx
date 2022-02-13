@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 import { Input } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 
 import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";
@@ -89,10 +89,9 @@ const EditButton = ({ item, updateItem, editAPI }) => {
         data-cy="edit-button"
         sx={{ borderRadius: 16, display: "inline" }}
         variant="outlined"
-        color="success"
         onClick={handleOpen}
       >
-        <EditOutlinedIcon />
+        <EditTwoToneIcon />
       </Button>
       <EditModal
         open={open}

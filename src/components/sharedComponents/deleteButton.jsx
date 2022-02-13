@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 // import Modal from "@mui/material/Modal";
 import { Input } from "@mui/material";
-import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
+import ClearTwoToneIcon from "@mui/icons-material/ClearTwoTone";
 
 import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";
@@ -48,10 +48,9 @@ const DeleteButton = ({ item, items, setItems, deleteAPI }) => {
       <Button
         sx={{ borderRadius: 16, display: "inline" }}
         variant="outlined"
-        color="error"
         onClick={handleClick}
       >
-        <RemoveOutlinedIcon />
+        <ClearTwoToneIcon />
       </Button>
     </div>
   );

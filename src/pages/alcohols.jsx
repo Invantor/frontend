@@ -1,4 +1,3 @@
-import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -11,30 +10,34 @@ import ShowAlcohols from "../components/alcohols/showAlcohols";
 const Alcohols = ({ alcohols, setAlcohols, updateAlcohol }) => {
   return (
     <>
-      <div>
-        <>
-          <Accordion>
-            <AccordionSummary>
-              <Typography>Create</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <CreateAlcohols alcohols={alcohols} setAlcohols={setAlcohols} />
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary>
-              <Typography>Show</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <ShowAlcohols
-                alcohols={alcohols}
-                updateAlcohol={updateAlcohol}
-                setAlcohols={setAlcohols}
-              />
-            </AccordionDetails>
-          </Accordion>
-        </>
-      </div>
+      <Box p={3}>
+        <Typography align="center" variant="h5" color="primary">
+          Alcohols
+        </Typography>
+      </Box>
+      <Accordion>
+        <AccordionSummary>
+          <Typography color="primary">Create</Typography>
+        </AccordionSummary>
+        <Box display="flex" justifyContent="center">
+          <AccordionDetails>
+            <CreateAlcohols alcohols={alcohols} setAlcohols={setAlcohols} />
+          </AccordionDetails>
+        </Box>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary justify-justifyContent="center">
+          <Typography color="primary">Show</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <ShowAlcohols
+            alcohols={alcohols}
+            updateAlcohol={updateAlcohol}
+            setAlcohols={setAlcohols}
+          />
+        </AccordionDetails>
+      </Accordion>
     </>
   );
 };

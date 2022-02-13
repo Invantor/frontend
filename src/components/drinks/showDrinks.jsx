@@ -26,15 +26,24 @@ const ShowDrinks = ({
   const deleteAPI = api.deleteDrink;
   return (
     <>
-      <Typography> Drink's List </Typography>
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer
+        sx={{
+          height: 500,
+        }}
+      >
+        <Table
+          sx={{ minWidth: 650, bgcolor: "primary", height: "max-content" }}
+          aria-label="simple table"
+          stickyHeader
+        >
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Alcohol amount</TableCell>
               <TableCell>Mixer amount</TableCell>
               <TableCell>Amount Sold</TableCell>
+              <TableCell>Sell</TableCell>
+              <TableCell>Manage</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

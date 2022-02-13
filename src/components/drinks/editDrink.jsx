@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Input } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import { Stack } from "@mui/material";
 
 import api from "../../api/api";
@@ -92,10 +92,9 @@ const EditAlcohol = ({ drink, alcohols, mixers, updateDrink }) => {
         data-cy="edit-button"
         sx={{ borderRadius: 16, display: "inline" }}
         variant="outlined"
-        color="success"
         onClick={handleOpen}
       >
-        <EditOutlinedIcon />
+        <EditTwoToneIcon />
       </Button>
       <Modal
         data-cy="edit-modal"

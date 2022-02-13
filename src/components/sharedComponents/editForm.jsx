@@ -1,32 +1,37 @@
 import React from "react";
-import { Typography, Input, Button } from "@mui/material";
+import { Typography, Input, Button, TextField } from "@mui/material";
 
 const EditForm = ({ handleSubmit, item, handleChange }) => {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <Typography htmlFor="name">Name</Typography>
-      <Input
+      <TextField
         name="name"
         defaultValue={item.name}
         onChange={handleChange}
         data-cy="edit-name"
+        variant="standard"
       />
       <Typography htmlFor="volumeInMl">Volume in ml</Typography>
-      <Input
+      <TextField
         name="volumeInMl"
         defaultValue={item.volume_in_ml}
         onChange={handleChange}
         data-cy="edit-volume"
+        variant="standard"
       />
       <Typography htmlFor="criticalVolume">Critical Volume</Typography>
-      <Input
+      <TextField
         name="criticalVolume"
         defaultValue={item.critical_volume}
         onChange={handleChange}
         data-cy="edit-criticalvolume"
+        variant="standard"
       />
       <div>
-        <Button type="submit">Submit</Button>
+        <Button variant="outlined" type="submit" sx={{ mt: 1 }}>
+          Submit
+        </Button>
       </div>
     </form>
   );

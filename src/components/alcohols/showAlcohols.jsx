@@ -44,7 +44,6 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
 
   return (
     <>
-      <Typography> Alcohols's List </Typography>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box sx={{ ...commonStyles, justifyContent: "center" }}>
           <SearchOutlinedIcon sx={styles.searchIcon} />
@@ -60,10 +59,15 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
           />
         </Box>
       </Box>
-      <TableContainer>
+      <TableContainer
+        sx={{
+          height: 500,
+        }}
+      >
         <Table
-          sx={{ minWidth: 650, bgcolor: "primary" }}
+          sx={{ minWidth: 650, bgcolor: "primary", height: "max-content" }}
           aria-label="simple table"
+          stickyHeader
         >
           <TableHead>
             <TableRow>
@@ -71,6 +75,7 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
               <TableCell>Volume in ml</TableCell>
               <TableCell>Critical Volume</TableCell>
               <TableCell>Stock Status</TableCell>
+              <TableCell>Manage</TableCell>
             </TableRow>
           </TableHead>
           <TableBody data-cy="table-body">
