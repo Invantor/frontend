@@ -410,6 +410,14 @@ npm run cypress:open
 
 This should prompt you to download, then upon open point the the GUI whereby the tests can be run.
 
+Use the following details to log in :
+
+```
+username: admin@admin.com
+password: password123
+
+```
+
 ---
 
 ## **Testing Specifications**
