@@ -11,8 +11,6 @@ const UserActiveToggle = (props) => {
   const [isActive, setIsActive] = useState(user.is_active);
 
   const switchOnChangeHandler = async () => {
-    // console.log("in toggle handler");
-    // console.log(!isActive);
     await api.editUserStatus(user.id, !isActive);
     setIsActive(!isActive);
   };

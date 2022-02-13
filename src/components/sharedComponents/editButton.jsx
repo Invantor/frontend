@@ -1,18 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-
-import { Input } from "@mui/material";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
-
-import api from "../../api/api";
 import GlobalContext from "../../context/globalContext";
 import EditModal from "./editModal";
-import Banner from "../banner";
 
 const style = {
   position: "absolute",

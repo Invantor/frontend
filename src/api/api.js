@@ -204,15 +204,12 @@ const deleteMixer = async (id, jwt, success, error) => {
     const { status, data } = await axios.delete(`/api/mixers/${id}`, {
       headers: { Authorization: jwt },
     });
-    console.log("in delete Mixer api", status, data);
     if (status === 200) {
-      console.log("in success");
       success(data);
     } else {
       error(error);
     }
   } catch (e) {
-    console.log("in catch");
     return error(e.response.data.error);
   }
 };
@@ -299,7 +296,6 @@ const editDrink = async (
       return error(error);
     }
   } catch (e) {
-    console.log(e);
     return error(e.response.data.error);
   }
 };
@@ -342,13 +338,10 @@ const editUserStatus = async (id, is_active, jwt, success, error) => {
     );
 
     if (status === 200) {
-      // console.log(data);
     } else {
       return error(error);
     }
-  } catch (e) {
-    // console.log(e);
-  }
+  } catch (e) {}
 };
 
 export default {

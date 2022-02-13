@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -44,11 +43,6 @@ const Drinks = ({
       return i === index ? updatedDrink : drink;
     });
     setDrinks(updated);
-  };
-
-  const deleteDrink = (id) => {
-    const toBeDeleted = drinks.find((drink) => drink.id === id);
-    console.log(toBeDeleted);
   };
 
   return (

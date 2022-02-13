@@ -1,4 +1,3 @@
-import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -7,7 +6,6 @@ import Typography from "@mui/material/Typography";
 
 import CreateMixers from "../components/mixers/createMixer";
 import ShowMixers from "../components/mixers/showMixers";
-import CreateForm from "../components/sharedComponents/createForm";
 
 const Mixers = ({ mixers, setMixers, updateMixer }) => {
   return (

@@ -55,7 +55,6 @@ const AddToDrinkSold = ({
       alcohol.user_id,
       global.user.jwt,
       (data, message) => {
-        console.log(data);
         updateAlcohol(alcoholIndex, data);
       }
     );
@@ -68,7 +67,6 @@ const AddToDrinkSold = ({
       mixer.user_id,
       global.user.jwt,
       (data, message) => {
-        // console.log("Mixer", data);
         updateMixer(mixerIndex, data);
       }
     );
@@ -84,7 +82,6 @@ const AddToDrinkSold = ({
       newNumberSold,
       global.user.jwt,
       (data, message) => {
-        // console.log("drink", data);
         updateDrink(data);
       }
     );

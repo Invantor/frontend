@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useLocalStorage from "use-local-storage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import AdminPage from "./pages/admin";
@@ -26,7 +26,6 @@ function App() {
     if (!global || !global.user) {
       navigate("/signin");
     } else {
-      // API call that was moved from the showmixers component up to the mixers component to allow for state to be managed in a parent component for children components to use
       const initialAlcohols = await api.getAlcohols();
       const initialMixers = await api.getMixers();
       setMixers(initialMixers);
@@ -54,11 +53,7 @@ function App() {
     const updated = alcohols.map((alcohol, i) => {
       return i === index ? alcohols.splice(index, 1) : alcohol;
     });
-    // const updated = alcohols.filter((alcohol) => id != alcohol.id);
-    // setAlcohols(updated);
   };
-
-  // console.log("alcohols state:", alcohols);
 
   return (
     <>

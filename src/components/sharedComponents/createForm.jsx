@@ -3,7 +3,6 @@ import { Stack } from "@mui/material";
 import { TextField } from "@mui/material";
 
 const CreateForm = ({ handleSubmit, formData, handleChange }) => {
-  console.log(formData);
   return (
     <form onSubmit={handleSubmit}>
       <Stack spacing={3} sx={{ minWidth: 100, maxWidth: 200 }}>

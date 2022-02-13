@@ -63,7 +63,6 @@ const EditAlcohol = ({ drink, alcohols, mixers, updateDrink }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(drink);
     await api.editDrink(
       drink.id,
       formData.name,
@@ -82,7 +81,6 @@ const EditAlcohol = ({ drink, alcohols, mixers, updateDrink }) => {
         handleBannerOpen("error", errorMessage);
       }
     );
-    console.log(formData);
     setFormData({});
   };
 
