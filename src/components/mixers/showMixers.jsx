@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import TextField from "@mui/material/TextField";
 import { Stack } from "@mui/material";
-
+import Divider from "@mui/material/Divider";
 import EditButton from "../sharedComponents/editButton";
 import DeleteButton from "../sharedComponents/deleteButton";
 
@@ -71,11 +71,11 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
         >
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Volume in ml</TableCell>
-              <TableCell>Critical Volume</TableCell>
-              <TableCell>Stock Status</TableCell>
-              <TableCell>Manage</TableCell>
+              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Volume in ml</TableCell>
+              <TableCell align="center">Critical Volume</TableCell>
+              <TableCell align="center">Stock Status</TableCell>
+              <TableCell align="center">Manage</TableCell>
             </TableRow>
           </TableHead>
           <TableBody data-cy="table-body">
@@ -94,30 +94,40 @@ const ShowMixers = ({ mixers, updateMixer, setMixers }) => {
                   })
                   .map((mixer, i) => (
                     <TableRow key={i} hover data-cy="table-row">
-                      <TableCell>{mixer.name}</TableCell>
-                      <TableCell>{mixer.volume_in_ml}</TableCell>
-                      <TableCell>{mixer.critical_volume}</TableCell>
-                      <TableCell>
+                      <TableCell align="center">{mixer.name}</TableCell>
+                      <TableCell align="center">{mixer.volume_in_ml}</TableCell>
+                      <TableCell align="center">
+                        {mixer.critical_volume}
+                      </TableCell>
+                      <TableCell align="center">
                         {mixer.critical_volume > mixer.volume_in_ml
                           ? "Low Stock"
                           : "In Stock"}
                       </TableCell>
                       <TableCell>
-                        <Stack spacing={2} direction="row">
-                          <EditButton
-                            item={mixer}
-                            updateItem={(updatedMixer) =>
-                              updateMixer(i, updatedMixer)
+                        <Box display="flex" justifyContent="center">
+                          <Stack
+                            spacing={2}
+                            direction="row"
+                            divider={
+                              <Divider orientation="vertical" flexItem />
                             }
-                            editAPI={editAPI}
-                          />
-                          <DeleteButton
-                            item={mixer}
-                            items={mixers}
-                            setItems={setMixers}
-                            deleteAPI={deleteAPI}
-                          />
-                        </Stack>
+                          >
+                            <EditButton
+                              item={mixer}
+                              updateItem={(updatedMixer) =>
+                                updateMixer(i, updatedMixer)
+                              }
+                              editAPI={editAPI}
+                            />
+                            <DeleteButton
+                              item={mixer}
+                              items={mixers}
+                              setItems={setMixers}
+                              deleteAPI={deleteAPI}
+                            />
+                          </Stack>
+                        </Box>
                       </TableCell>
                     </TableRow>
                   ))

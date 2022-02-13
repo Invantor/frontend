@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import TextField from "@mui/material/TextField";
 import { Stack } from "@mui/material";
+import Divider from "@mui/material/Divider";
 
 import EditButton from "../sharedComponents/editButton";
 import DeleteButton from "../sharedComponents/deleteButton";
@@ -71,11 +72,11 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
         >
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Volume in ml</TableCell>
-              <TableCell>Critical Volume</TableCell>
-              <TableCell>Stock Status</TableCell>
-              <TableCell>Manage</TableCell>
+              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Volume in ml</TableCell>
+              <TableCell align="center">Critical Volume</TableCell>
+              <TableCell align="center">Stock Status</TableCell>
+              <TableCell align="center">Manage</TableCell>
             </TableRow>
           </TableHead>
           <TableBody data-cy="table-body">
@@ -94,30 +95,42 @@ const ShowAlcohols = ({ alcohols, updateAlcohol, setAlcohols }) => {
                   })
                   .map((alcohol, i) => (
                     <TableRow key={i} hover data-cy="table-row">
-                      <TableCell>{alcohol.name}</TableCell>
-                      <TableCell>{alcohol.volume_in_ml}</TableCell>
-                      <TableCell>{alcohol.critical_volume}</TableCell>
-                      <TableCell>
+                      <TableCell align="center">{alcohol.name}</TableCell>
+                      <TableCell align="center">
+                        {alcohol.volume_in_ml}
+                      </TableCell>
+                      <TableCell align="center">
+                        {alcohol.critical_volume}
+                      </TableCell>
+                      <TableCell align="center">
                         {alcohol.critical_volume > alcohol.volume_in_ml
                           ? "Low Stock"
                           : "In Stock"}
                       </TableCell>
-                      <TableCell>
-                        <Stack spacing={2} direction="row">
-                          <EditButton
-                            item={alcohol}
-                            updateItem={(updatedAlcohol) =>
-                              updateAlcohol(i, updatedAlcohol)
+                      <TableCell align="center">
+                        <Box display="flex" justifyContent="center">
+                          <Stack
+                            spacing={2}
+                            direction="row"
+                            divider={
+                              <Divider orientation="vertical" flexItem />
                             }
-                            editAPI={editAPI}
-                          />
-                          <DeleteButton
-                            item={alcohol}
-                            items={alcohols}
-                            setItems={setAlcohols}
-                            deleteAPI={deleteAPI}
-                          />
-                        </Stack>
+                          >
+                            <EditButton
+                              item={alcohol}
+                              updateItem={(updatedAlcohol) =>
+                                updateAlcohol(i, updatedAlcohol)
+                              }
+                              editAPI={editAPI}
+                            />
+                            <DeleteButton
+                              item={alcohol}
+                              items={alcohols}
+                              setItems={setAlcohols}
+                              deleteAPI={deleteAPI}
+                            />
+                          </Stack>
+                        </Box>
                       </TableCell>
                     </TableRow>
                   ))

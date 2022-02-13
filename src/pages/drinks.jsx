@@ -77,7 +77,7 @@ const Drinks = ({
       </Accordion>
 
       <Accordion>
-        <AccordionSummary justify-justifyContent="center">
+        <AccordionSummary>
           <Typography color="primary">Show</Typography>
         </AccordionSummary>
         <AccordionDetails>

@@ -8,6 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import AddToDrinkSold from "./addToDrinkSold";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 
 import { Stack } from "@mui/material";
 
@@ -24,6 +26,23 @@ const ShowDrinks = ({
   updateAlcohol,
 }) => {
   const deleteAPI = api.deleteDrink;
+
+  const alcoholName = (d) => {
+    if (alcohols.length > 0) {
+      const foundAlcohol = alcohols.find(
+        (alcohol) => alcohol.id === d.alcohol_id
+      );
+      return foundAlcohol.name;
+    }
+  };
+
+  const mixerName = (m) => {
+    if (mixers.length > 0) {
+      const foundMixer = mixers.find((mixer) => mixer.id === m.mixer_id);
+      return foundMixer.name;
+    }
+  };
+
   return (
     <>
       <TableContainer
@@ -38,57 +57,65 @@ const ShowDrinks = ({
         >
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Alcohol amount</TableCell>
-              <TableCell>Mixer amount</TableCell>
-              <TableCell>Amount Sold</TableCell>
-              <TableCell>Sell</TableCell>
-              <TableCell>Manage</TableCell>
+              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Alcohol</TableCell>
+              <TableCell align="center">Alcohol Required</TableCell>
+              <TableCell align="center">Mixer</TableCell>
+              <TableCell align="center">Mixer Required</TableCell>
+              <TableCell align="center">Amount Sold</TableCell>
+              <TableCell align="center">Sell</TableCell>
+              <TableCell align="center">Manage</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {drinks != null
               ? drinks.map((drink, i) => (
                   <TableRow key={i} hover>
-                    <TableCell>{drink.name}</TableCell>
-                    <TableCell>{drink.alcohol_amount}</TableCell>
-                    <TableCell>{drink.mixer_amount}</TableCell>
+                    <TableCell align="center">{drink.name}</TableCell>
+                    <TableCell align="center">{alcoholName(drink)}</TableCell>
+                    <TableCell align="center">{drink.alcohol_amount}</TableCell>
+                    <TableCell align="center">{mixerName(drink)}</TableCell>
+                    <TableCell align="center">{drink.mixer_amount}</TableCell>
+                    <TableCell align="center">{drink.number_sold}</TableCell>
                     <TableCell>
-                      <Stack spacing={2} direction="row">
-                        {drink.number_sold}
-                      </Stack>
+                      <Box display="flex" justifyContent="center">
+                        <Stack spacing={2} direction="row">
+                          <AddToDrinkSold
+                            alcohols={alcohols}
+                            mixers={mixers}
+                            drink={drink}
+                            updateMixer={updateMixer}
+                            updateAlcohol={updateAlcohol}
+                            updateDrink={(updatedDrink) =>
+                              updateDrink(i, updatedDrink)
+                            }
+                          />
+                        </Stack>
+                      </Box>
                     </TableCell>
                     <TableCell>
-                      <Stack spacing={2} direction="row">
-                        <AddToDrinkSold
-                          alcohols={alcohols}
-                          mixers={mixers}
-                          drink={drink}
-                          updateMixer={updateMixer}
-                          updateAlcohol={updateAlcohol}
-                          updateDrink={(updatedDrink) =>
-                            updateDrink(i, updatedDrink)
-                          }
-                        />
-                      </Stack>
-                    </TableCell>
-                    <TableCell>
-                      <Stack spacing={2} direction="row">
-                        <EditDrink
-                          drink={drink}
-                          alcohols={alcohols}
-                          mixers={mixers}
-                          updateDrink={(updatedDrink) =>
-                            updateDrink(i, updatedDrink)
-                          }
-                        />
-                        <DeleteButton
-                          item={drink}
-                          items={drinks}
-                          setItems={setDrinks}
-                          deleteAPI={deleteAPI}
-                        />
-                      </Stack>
+                      <Box display="flex" justifyContent="center">
+                        <Stack
+                          spacing={2}
+                          direction="row"
+                          divider={<Divider orientation="vertical" flexItem />}
+                        >
+                          <EditDrink
+                            drink={drink}
+                            alcohols={alcohols}
+                            mixers={mixers}
+                            updateDrink={(updatedDrink) =>
+                              updateDrink(i, updatedDrink)
+                            }
+                          />
+                          <DeleteButton
+                            item={drink}
+                            items={drinks}
+                            setItems={setDrinks}
+                            deleteAPI={deleteAPI}
+                          />
+                        </Stack>
+                      </Box>
                     </TableCell>
                   </TableRow>
                 ))

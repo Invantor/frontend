@@ -103,7 +103,7 @@ const ResponsiveAppBar = () => {
                   <Tab color="red" label="Admin" to="/admin" component={Link} />
                 </MenuItem>
               ) : null}
-              <MenuItem key="drinks" onClick={logOut}>
+              <MenuItem key="logout" onClick={logOut}>
                 <Tab
                   color="red"
                   label="Sign Out"
